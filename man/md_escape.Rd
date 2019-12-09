@@ -11,7 +11,7 @@ md_escape(x)
 accidentally be considered markdown syntax.}
 }
 \value{
-A character string with all \code{[:punct:]} properly escaped with
+A character string with all \verb{[:punct:]} properly escaped with
 prepended backslashes.
 }
 \description{
@@ -28,16 +28,22 @@ characters are treated as regular characters and do not have their usual
 Markdown meanings.
 }
 \examples{
-hashtag <- "# six seasons and a movie"
-map_md(md_escape(hashtag), md_bold, n = 6)
+md_escape("# six seasons and a movie")
 }
 \seealso{
-Other inline functions: \code{\link{md_autolink}},
-  \code{\link{md_bold}}, \code{\link{md_code}},
-  \code{\link{md_convert}}, \code{\link{md_disallow}},
-  \code{\link{md_hardline}}, \code{\link{md_image}},
-  \code{\link{md_issue}}, \code{\link{md_italic}},
-  \code{\link{md_link}}, \code{\link{md_softline}},
-  \code{\link{md_strike}}, \code{\link{md_text}}
+Other inline functions: 
+\code{\link{md_autolink}()},
+\code{\link{md_bold}()},
+\code{\link{md_code}()},
+\code{\link{md_convert}()},
+\code{\link{md_disallow}()},
+\code{\link{md_hardline}()},
+\code{\link{md_image}()},
+\code{\link{md_issue}()},
+\code{\link{md_italic}()},
+\code{\link{md_link}()},
+\code{\link{md_softline}()},
+\code{\link{md_strike}()},
+\code{\link{md_text}()}
 }
 \concept{inline functions}

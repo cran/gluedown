@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -19,26 +18,27 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -47,9 +47,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -304,56 +304,61 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(gluedown)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(rvest)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(glue)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<p>In literate programming, the typical paradigm of source code is reversed; instead of walls of code with the occasional comment, the user writes human readable text (like this paragraph) with source code interspersed. In the R language, this is primarily done with the [<code>rmarkdown</code>][rmd] package, which takes a plaint text special <code>.Rmd</code> file containing code “chunks” and executes that code when converting to some other format (<code>.md</code>, <code>.html</code>, <code>.pdf</code>, etc).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(gluedown)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(glue)</span></code></pre></div>
+<p>In literate programming, the typical paradigm of source code is reversed; instead of a wall of code with the occasional comment, the user writes <em>human</em> readable text (like this paragraph) with source code interspersed. In the R language, this is primarily done with the <a href="https://rmarkdown.rstudio.com/"><code>rmarkdown</code></a> package, which takes a plaint text <em>R</em> markdown file (<code>.Rmd</code>) containing code “chunks” and executes that code when converting to a regular markdown file (<code>.md</code>) and then possibly some other format (<code>.html</code>, <code>.pdf</code>, etc).</p>
 <p>Markdown is a lightweight plain-text language used to format text. Let’s look at the original description of markdown from John Gruber’s website, the creator of the markdown standard. Using the <code>rvest</code> package, we can programmatically scrape Gruber’s blog, extract HTML paragraph tags, and convert those tags to character vectors.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">markdown_blog &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">read_html</span>(<span class="st">&quot;https://daringfireball.net/projects/markdown/&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>markdown_blog &lt;-<span class="st"> </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw">read_html</span>(<span class="st">&quot;https://daringfireball.net/projects/markdown/&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">html_text</span>()</span></code></pre></div>
 <p>Gruber first explains <em>what</em> exactly his markdown language is.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">md_quote</span>(markdown_blog[<span class="dv">4</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">md_quote</span>(markdown_blog[<span class="dv">4</span>])</span></code></pre></div>
 <blockquote>
 <p>Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).</p>
 </blockquote>
 <p>He continues by outlining <em>why</em> markdown was created, his rationale for it’s format, and some inspiration for it’s syntax.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">md_quote</span>(markdown_blog[<span class="dv">6</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">md_quote</span>(markdown_blog[<span class="dv">6</span>])</span></code></pre></div>
 <blockquote>
 <p>The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.</p>
 </blockquote>
-<p>This entire vignette was written in markdown and converted to HTML using <a href="https://pandoc.org/">pandoc</a>. However, as you may have noticed, I haven’t exactly been conforming to this original desire for markdown to be readable as is. I didn’t copy the text from his blog and past it as text into this vignette. This is where the <code>gluedown</code> package comes in.</p>
-<p>The <code>gluedown</code> package helps ease the transition between the incredibly powerful vector support in R and the readability of markdown. Since this vignette was written in <em>R</em> Markdown, I am able to use the power of packages like <code>rvest</code> to collect, process, or analyze some kind of data and then transition that result to the human readable markdown format. The <code>.Rmd</code> file containing source code is a programming environment, the <code>.md</code> file created by <code>rmarkdown</code> is a human-readable plain text version of that code <em>and</em> findings, and the <code>.html</code> format of this vignette created by <code>pandoc</code> is the final presentation format.</p>
-<p>In the rest of this vignette, I will demonstrate some of the various use cases for <code>gluedown</code>. We will see how easy it is to transition between R vectors and readable results in markdown/HTML.</p>
+<p>This entire vignette was written in markdown and converted to HTML using <a href="https://pandoc.org/">pandoc</a>. However, as you may have noticed, we haven’t exactly been conforming to this original desire for markdown to be readable as is. We didn’t copy the text from his blog and past it as text into this vignette. This is where the <code>gluedown</code> package comes in.</p>
+<p>The <code>gluedown</code> package helps ease the transition between the incredibly powerful vector support in R and the readability of markdown. Since this vignette was written in <em>R</em> Markdown (<code>.Rmd</code>), we are able to (1) use the power of packages like <code>rvest</code> to collect, process, and/or analyze some kind of data and then (2) transition that result to the human readable markdown format.</p>
+<p>When writing this vignette, <em>three</em> kinds of files are used.</p>
+<ol style="list-style-type: decimal">
+<li>The <code>.Rmd</code> file containing source code is a programming environment</li>
+<li>The <code>.md</code> file created by <code>rmarkdown</code> is a human-readable plain text version of that input code also containing the output text.</li>
+<li>The <code>.html</code> format of this vignette created by <code>pandoc</code> is the final presentation format.</li>
+</ol>
+<p>In the rest of this vignette, we will see some of the various use cases for <code>gluedown</code>. We will see how easy it is to transition between R vectors and readable results in markdown/HTML.</p>
 <div id="vector-lists" class="section level2">
 <h2>Vector Lists</h2>
 <p>Printing vectors as markdown lists was the initial inspiration for the package. In R, atomic vectors the fundamental object type that composes more complex objects like lists and dataframes. The <code>state.name</code> vector built into base R is a character vector of all 50 state names.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">mode</span>(state.name)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; [1] &quot;character&quot;</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">length</span>(state.name)</a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; [1] 50</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="kw">sample</span>(state.name, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; [1] &quot;New Mexico&quot; &quot;Wisconsin&quot;  &quot;Hawaii&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">mode</span>(state.name)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; [1] &quot;character&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">length</span>(state.name)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; [1] 50</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">sample</span>(state.name, <span class="dv">3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; [1] &quot;Virginia&quot; &quot;Kansas&quot;   &quot;Utah&quot;</span></span></code></pre></div>
 <p>If we as a user want to use those state names as <em>text</em> in our markdown document we can use the <code>cat()</code> function and tell <code>rmarkdown</code> to print the results of that function “as is” (rather than as code output).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">cat</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">cat</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</span></code></pre></div>
 <p>Alabama Alaska Arizona</p>
 <p>That output obviously isn’t very appealing. We could tweak our use of <code>cat()</code> a little to separate them on new lines.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">cat</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">cat</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <p>Alabama</p>
 <p>Alaska</p>
 <p>Arizona</p>
-<p>This is more readable, but really just prints as a couple lines of the document. With some more work, we can use <code>cat()</code> to print an ordered list.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&quot;. &quot;</span>, state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
+<p>This is more readable, but with some more work, we can use <code>cat()</code> to print an ordered list.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&quot;. &quot;</span>, state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Alabama</li>
 <li>Alaska</li>
 <li>Arizona</li>
 </ol>
 <p>This workflow gets tiresome, although it’s made slightly more simple with the fantastic <a href="https://github.com/tidyverse/glue"><code>glue</code></a> package from Jim Hester.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">glue</span>(<span class="st">&quot;{1:3}. {state.name[1:3]}&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">glue</span>(<span class="st">&quot;{1:3}. {state.name[1:3]}&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Alabama</li>
 <li>Alaska</li>
@@ -361,31 +366,31 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ol>
 <p>This is the technique used in this package. Vector inputs are passed to <code>glue::glue()</code> and the appropriate markdown syntax is implemented.</p>
 <p>The <code>md_order()</code> function simplifies the <code>glue::glue()</code> workflow and allows users to more easily customize the appearance of the list in <em>markdown</em> format.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># markdown only cares about the first number</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">seq =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; 1. Alabama</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; 1. Alaska</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1. Arizona</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co"># markdown ignored padding and allows for use of parentheses</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">seq =</span> <span class="ot">TRUE</span>, <span class="dt">pad =</span> <span class="ot">TRUE</span>, <span class="dt">marker =</span> <span class="st">&quot;)&quot;</span>)</a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 01) Alabama</span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 02) Alaska</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 03) Arizona</span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; 04) Arkansas</span></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; 05) California</span></a>
-<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; 06) Colorado</span></a>
-<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 07) Connecticut</span></a>
-<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 08) Delaware</span></a>
-<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 09) Florida</span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 10) Georgia</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># markdown only cares about the first number</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">seq =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; 1. Alabama</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; 1. Alaska</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 1. Arizona</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># markdown ignored padding and allows for use of parentheses</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">seq =</span> <span class="ot">TRUE</span>, <span class="dt">pad =</span> <span class="ot">TRUE</span>, <span class="dt">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 01) Alabama</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 02) Alaska</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; 03) Arizona</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; 04) Arkansas</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 05) California</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 06) Colorado</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 07) Connecticut</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 08) Delaware</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 09) Florida</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 10) Georgia</span></span></code></pre></div>
 <p>Although, as we can see below, all these different options are rendered as the same kind of HTML <code>&lt;ol&gt;</code> fragment.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">seq =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">seq =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Alabama</li>
 <li>Alaska</li>
 <li>Arizona</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">seq =</span> <span class="ot">TRUE</span>, <span class="dt">pad =</span> <span class="ot">TRUE</span>, <span class="dt">marker =</span> <span class="st">&quot;)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">md_order</span>(state.name[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">seq =</span> <span class="ot">TRUE</span>, <span class="dt">pad =</span> <span class="ot">TRUE</span>, <span class="dt">marker =</span> <span class="st">&quot;)&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Alabama</li>
 <li>Alaska</li>
@@ -403,24 +408,24 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>We can think of a document as a sequence of blocks—structural elements like paragraphs, block quotations, lists, headings, rules, and code blocks. Some blocks (like block quotes and list items) contain other blocks; others (like headings and paragraphs) contain inline content—text, links, emphasized text, images, code spans, and so on.</p>
 </blockquote>
 <p>We can nest <code>md_*()</code> functions to create inline content within a code block. Let’s use some inline functions to create a new vector names <code>inline</code> with five states, each formatted in another syntax. We’ll take a look at what that vector <em>really</em> looks like with a simple <code>print()</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">inlines &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">md_bold</span>(state.name[<span class="dv">4</span>]),</a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">md_code</span>(state.name[<span class="dv">5</span>]),</a>
-<a class="sourceLine" id="cb13-4" title="4">  <span class="kw">md_link</span>(state.name[<span class="dv">6</span>], <span class="st">&quot;https://Colorado.gov&quot;</span>),</a>
-<a class="sourceLine" id="cb13-5" title="5">  <span class="kw">md_italic</span>(state.name[<span class="dv">7</span>]),</a>
-<a class="sourceLine" id="cb13-6" title="6">  <span class="kw">md_strike</span>(state.name[<span class="dv">8</span>])</a>
-<a class="sourceLine" id="cb13-7" title="7">)</a>
-<a class="sourceLine" id="cb13-8" title="8"></a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="kw">mode</span>(inlines)</a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; [1] &quot;character&quot;</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="kw">length</span>(inlines)</a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; [1] 5</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="kw">print</span>(inlines)</a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; [1] &quot;**Arkansas**&quot;                     &quot;`California`&quot;                    </span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; [3] &quot;[Colorado](https://Colorado.gov)&quot; &quot;_Connecticut_&quot;                   </span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt; [5] &quot;~~Delaware~~&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>inlines &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="kw">md_bold</span>(state.name[<span class="dv">4</span>]),</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="kw">md_code</span>(state.name[<span class="dv">5</span>]),</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="kw">md_link</span>(state.name[<span class="dv">6</span>], <span class="st">&quot;https://Colorado.gov&quot;</span>),</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">md_italic</span>(state.name[<span class="dv">7</span>]),</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="kw">md_strike</span>(state.name[<span class="dv">8</span>])</span>
+<span id="cb13-7"><a href="#cb13-7"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="kw">mode</span>(inlines)</span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; [1] &quot;character&quot;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="kw">length</span>(inlines)</span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt; [1] 5</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="kw">print</span>(inlines)</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt; [1] &quot;**Arkansas**&quot;                     &quot;`California`&quot;                    </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt; [3] &quot;[Colorado](https://Colorado.gov)&quot; &quot;_Connecticut_&quot;                   </span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt; [5] &quot;~~Delaware~~&quot;</span></span></code></pre></div>
 <p>Using <code>md_bullet()</code> we will print that vector as a bullet point list container block and each list item will be rendered as a separate inline.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">md_bullet</span>(inlines)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">md_bullet</span>(inlines)</span></code></pre></div>
 <ul>
 <li><strong>Arkansas</strong></li>
 <li><code>California</code></li>
@@ -430,43 +435,26 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ul>
 <p>These functions demonstrate how <code>gluedown</code> can be used to transition between R vectors, simply formatted markdown text, and beautifully formatted HTML text.</p>
 <p>Aside from container blocks and inlines, there is a third type of markdown content. The leaf blocks cannot contain inline content. The thematic break is an example of a leaf block.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">md_rule</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, <span class="dt">n =</span> <span class="dv">80</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">md_rule</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, <span class="dt">n =</span> <span class="dv">80</span>)</span></code></pre></div>
 <hr />
-<p>Code blocks are another type of leaf block. The code I’ve been writing so far is contained within <code>rmarkdown</code> <em>chunks</em>, which execute the code within. By default, those code chunks are then displayed as regular code blocks in the intermediary <code>.md</code> file. Sometimes we might want to use code blocks to display other types of text. Perhaps we want to show the content of a function. The <code>md_fence()</code> function creates a <em>new</em> code fence from the lines created by <code>deparse()</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">lines &lt;-<span class="st"> </span><span class="kw">deparse</span>(md_bullet)</a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">md_fence</span>(lines)</a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="cf">function</span> (x, <span class="dt">marker =</span> <span class="kw">c</span>(<span class="st">&quot;*&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>)) </a>
-<a class="sourceLine" id="cb16-4" title="4">{</a>
-<a class="sourceLine" id="cb16-5" title="5">    marker &lt;-<span class="st"> </span><span class="kw">match.arg</span>(marker)</a>
-<a class="sourceLine" id="cb16-6" title="6">    glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{marker} {x}&quot;</span>)</a>
-<a class="sourceLine" id="cb16-7" title="7">}</a></code></pre></div>
+<p>Code blocks are another type of leaf block. The code we’ve been writing so far is contained within <code>rmarkdown</code> <em>chunks</em>, which execute the code within. By default, those code chunks are then displayed as regular code blocks in the intermediary <code>.md</code> file. Sometimes we might want to use code blocks to display other types of text. Perhaps we want to show the content of a function. The <code>md_fence()</code> function creates a <em>new</em> code fence from the lines created by <code>deparse()</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>lines &lt;-<span class="st"> </span><span class="kw">deparse</span>(md_bullet)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">md_fence</span>(lines)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="cf">function</span> (x, <span class="dt">marker =</span> <span class="kw">c</span>(<span class="st">&quot;*&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>)) </span>
+<span id="cb16-4"><a href="#cb16-4"></a>{</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    marker &lt;-<span class="st"> </span><span class="kw">match.arg</span>(marker)</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{marker} {x}&quot;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>}</span></code></pre></div>
 <p>Or perhaps we want to display some code from another language that isn’t supposed to be executed</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">command &lt;-<span class="st"> &quot;sudo apt install r-base-dev&quot;</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw">md_fence</span>(<span class="kw">paste</span>(<span class="st">&quot;$&quot;</span>, command), <span class="dt">char =</span> <span class="st">&quot;~&quot;</span>, <span class="dt">info =</span> <span class="st">&quot;bash&quot;</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="co">#&gt; ~~~bash</span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; $ sudo apt install r-base-dev</span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; ~~~</span></a></code></pre></div>
-<p>Or maybe we simply want to display some preformatted text that only works in a monospace font like that which is used in code blocks.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">cat &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb18-2" title="2">  <span class="st">&quot; -------------- &quot;</span>, <span class="st">&quot;Gluedown rules!&quot;</span> ,<span class="st">&quot; --------------&quot;</span>,</a>
-<a class="sourceLine" id="cb18-3" title="3">  <span class="st">&quot;    </span><span class="ch">\\</span><span class="st">&quot;</span>, <span class="st">&quot;     </span><span class="ch">\\</span><span class="st">&quot;</span>, <span class="st">&quot;      </span><span class="ch">\\</span><span class="st">&quot;</span>, <span class="st">&quot;         /</span><span class="ch">\\</span><span class="st">_/</span><span class="ch">\\</span><span class="st">&quot;</span>,</a>
-<a class="sourceLine" id="cb18-4" title="4">  <span class="st">&quot;        ( o.o )&quot;</span>, <span class="st">&quot;         &gt; ^ &lt;&quot;</span></a>
-<a class="sourceLine" id="cb18-5" title="5">)</a>
-<a class="sourceLine" id="cb18-6" title="6"></a>
-<a class="sourceLine" id="cb18-7" title="7"><span class="kw">md_indent</span>(cat)</a></code></pre></div>
-<pre><code> -------------- 
-Gluedown rules!
- --------------
-    \
-     \
-      \
-         /\_/\
-        ( o.o )
-         &gt; ^ &lt;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>command &lt;-<span class="st"> &quot;sudo apt install r-base-dev&quot;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">md_fence</span>(<span class="kw">paste</span>(<span class="st">&quot;$&quot;</span>, command), <span class="dt">char =</span> <span class="st">&quot;~&quot;</span>, <span class="dt">info =</span> <span class="st">&quot;bash&quot;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt; ~~~bash</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; $ sudo apt install r-base-dev</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt; ~~~</span></span></code></pre></div>
 </div>
 <div id="pipes" class="section level2">
 <h2>Pipes</h2>
-<p>The package has been designed to fit well in a traditional R workflow so users can seamlessly create content with their code and display that content with <code>gluedown</code>. In that spirit, all functions are designed to fit within the tidyverse ecosystem by working with <a href="https://magrittr.tidyverse.org/reference/pipe.html">pipes</a>. Pipes allow users to pass the results of one function into the beginning of the next. By ending this “pipeline” with <code>md_quote()</code>, chain together five coding steps.</p>
+<p>The package has been designed to fit well in a traditional R workflow so users can seamlessly create content with their code and display that content with <code>gluedown</code>. In that spirit, all functions are designed to fit within the tidyverse ecosystem by working with <a href="https://magrittr.tidyverse.org/reference/pipe.html">pipes</a>. Pipes allow users to pass the results of one function into the beginning of the next. By ending this “pipeline” with <code>md_quote()</code>, we chain together five coding steps:</p>
 <ol style="list-style-type: decimal">
 <li>Read the HTML text of a Wikipedia page</li>
 <li>Extract the first <code>&lt;blockquote&gt;</code> tag</li>
@@ -474,107 +462,118 @@ Gluedown rules!
 <li>Remove Wikipedia’s bracketed note</li>
 <li>Print that vector as a markdown block quote</li>
 </ol>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">read_html</span>(<span class="st">&quot;https://w.wiki/A58&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 1</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 2</span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">html_text</span>(<span class="dt">trim =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 3</span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">[(.*)</span><span class="ch">\\</span><span class="st">]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 4</span></a>
-<a class="sourceLine" id="cb20-5" title="5"><span class="st">  </span><span class="kw">md_quote</span>() <span class="co"># 5</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">read_html</span>(<span class="st">&quot;https://w.wiki/A58&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 1</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 2</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">  </span><span class="kw">html_text</span>(<span class="dt">trim =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 3</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">[(.*)</span><span class="ch">\\</span><span class="st">]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 4</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">  </span><span class="kw">md_quote</span>() <span class="co"># 5</span></span></code></pre></div>
 <blockquote>
 <p>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
 </blockquote>
 </div>
 <div id="extensions" class="section level2">
 <h2>Extensions</h2>
-<p>The package primarily uses <a href="https://github.github.com/gfm/">GitHub Flavored Markdown</a> (GFM), a site-specific version of the <a href="https://spec.commonmark.org/">CommonMark specification</a>, an unambiguous implementation of John Gruber’s <a href="https://daringfireball.net/projects/markdown/">original Markdown</a>. With this flavor, some useful extensions like <a href="https://help.github.com/en/articles/about-task-lists">task lists</a> are supported on GitHub. Elsewhere, like this HTML vignette, a task list will just render as a bullet list.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">legislation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Houses passes&quot;</span>, <span class="st">&quot;Senate concurs&quot;</span>, <span class="st">&quot;President signs&quot;</span>)</a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">md_task</span>(legislation, <span class="dt">check =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<ul>
-<li>[x] Houses passes</li>
-<li>[x] Senate concurs</li>
-<li>[ ] President signs</li>
+<p>The package primarily uses <a href="https://github.github.com/gfm/">GitHub Flavored Markdown</a> (GFM), a site-specific version of the <a href="https://spec.commonmark.org/">CommonMark specification</a>, an unambiguous implementation of John Gruber’s <a href="https://daringfireball.net/projects/markdown/">original Markdown</a>. With this flavor, some useful extensions like <a href="https://help.github.com/en/articles/about-task-lists">task lists</a> are supported on GitHub. Elsewhere, like this HTML vignette, a task list will just render as a bullet list. You can learn more about how GFM us implemented in this package’s other vignette.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>legislation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Houses passes&quot;</span>, <span class="st">&quot;Senate concurs&quot;</span>, <span class="st">&quot;President signs&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">md_task</span>(legislation, <span class="dt">check =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<ul class="task-list">
+<li><input type="checkbox" disabled checked></input>
+Houses passes</li>
+<li><input type="checkbox" disabled checked></input>
+Senate concurs</li>
+<li><input type="checkbox" disabled></input>
+President signs</li>
 </ul>
-<p>Some features aren’t technically supported by GFM, but can be <a href="https://pandoc.org/MANUAL.html#definition-lists">forced by pandoc</a>. For example, the output of <code>md_define()</code> will be rendered as bullet lists on GitHub but appear as formatted definition lists in HTML formats like this.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">terms &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Democracy&quot;</span>, <span class="st">&quot;Monarchy&quot;</span>)</a>
-<a class="sourceLine" id="cb22-2" title="2">definitions &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb22-3" title="3">  <span class="st">&quot;a system of government by all the eligible members of a state.&quot;</span>,</a>
-<a class="sourceLine" id="cb22-4" title="4">  <span class="st">&quot;a form of government with a monarch at the head.&quot;</span></a>
-<a class="sourceLine" id="cb22-5" title="5">)</a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="kw">md_define</span>(terms, definitions)</a></code></pre></div>
-<dl>
-<dt>Democracy</dt>
-<dd>a system of government by all the eligible members of a state.
-</dd>
-<dt>Monarchy</dt>
-<dd>a form of government with a monarch at the head.
-</dd>
-</dl>
 <p>Markdown tables are another extremely useful extension. The <code>md_table()</code> functions wraps around the much more powerful <code>knitr::kable()</code> function, which allows data frames to be printed in a number of alternative formats. Printing data frames is a very typical use case for documenting the process of data science. With small summary tables like the one below, a markdown table is much more readable than the plain text tibble or data frame printed by default.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">mass &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), <span class="dt">mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-5" title="5"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(mass))</a></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">print</span>(mass)</a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="co">#&gt; # A tibble: 8 x 3</span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="co">#&gt;   species      n  mass</span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="co">#&gt; 1 Wookiee      2 124  </span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="co">#&gt; 2 Kaminoan     2  88  </span></a>
-<a class="sourceLine" id="cb24-7" title="7"><span class="co">#&gt; 3 Human       35  82.8</span></a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="co">#&gt; 4 Zabrak       2  80  </span></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="co">#&gt; 5 Gungan       3  74  </span></a>
-<a class="sourceLine" id="cb24-10" title="10"><span class="co">#&gt; 6 Droid        5  69.8</span></a>
-<a class="sourceLine" id="cb24-11" title="11"><span class="co">#&gt; 7 Twi&#39;lek      2  55  </span></a>
-<a class="sourceLine" id="cb24-12" title="12"><span class="co">#&gt; 8 Mirialan     2  53.1</span></a></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">md_table</span>(mass)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">print</span>(<span class="kw">head</span>(state.x77))</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt;            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; Alabama          3615   3624        2.1    69.05   15.1    41.3    20  50708</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; Alaska            365   6315        1.5    69.31   11.3    66.7   152 566432</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt; Arizona          2212   4530        1.8    70.55    7.8    58.1    15 113417</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt; Arkansas         2110   3378        1.9    70.66   10.1    39.9    65  51945</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt; California      21198   5114        1.1    71.71   10.3    62.6    20 156361</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt; Colorado         2541   4884        0.7    72.06    6.8    63.9   166 103766</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">md_table</span>(<span class="kw">head</span>(state.x77), <span class="dt">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">species</th>
-<th align="right">n</th>
-<th align="right">mass</th>
+<th align="left"></th>
+<th align="right">Population</th>
+<th align="right">Income</th>
+<th align="right">Illiteracy</th>
+<th align="right">Life Exp</th>
+<th align="right">Murder</th>
+<th align="right">HS Grad</th>
+<th align="right">Frost</th>
+<th align="right">Area</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Wookiee</td>
-<td align="right">2</td>
-<td align="right">124.00000</td>
+<td align="left">Alabama</td>
+<td align="right">3615</td>
+<td align="right">3624</td>
+<td align="right">2.1</td>
+<td align="right">69.05</td>
+<td align="right">15.1</td>
+<td align="right">41.3</td>
+<td align="right">20</td>
+<td align="right">50708</td>
 </tr>
 <tr class="even">
-<td align="left">Kaminoan</td>
-<td align="right">2</td>
-<td align="right">88.00000</td>
+<td align="left">Alaska</td>
+<td align="right">365</td>
+<td align="right">6315</td>
+<td align="right">1.5</td>
+<td align="right">69.31</td>
+<td align="right">11.3</td>
+<td align="right">66.7</td>
+<td align="right">152</td>
+<td align="right">566432</td>
 </tr>
 <tr class="odd">
-<td align="left">Human</td>
-<td align="right">35</td>
-<td align="right">82.78182</td>
+<td align="left">Arizona</td>
+<td align="right">2212</td>
+<td align="right">4530</td>
+<td align="right">1.8</td>
+<td align="right">70.55</td>
+<td align="right">7.8</td>
+<td align="right">58.1</td>
+<td align="right">15</td>
+<td align="right">113417</td>
 </tr>
 <tr class="even">
-<td align="left">Zabrak</td>
-<td align="right">2</td>
-<td align="right">80.00000</td>
+<td align="left">Arkansas</td>
+<td align="right">2110</td>
+<td align="right">3378</td>
+<td align="right">1.9</td>
+<td align="right">70.66</td>
+<td align="right">10.1</td>
+<td align="right">39.9</td>
+<td align="right">65</td>
+<td align="right">51945</td>
 </tr>
 <tr class="odd">
-<td align="left">Gungan</td>
-<td align="right">3</td>
-<td align="right">74.00000</td>
+<td align="left">California</td>
+<td align="right">21198</td>
+<td align="right">5114</td>
+<td align="right">1.1</td>
+<td align="right">71.71</td>
+<td align="right">10.3</td>
+<td align="right">62.6</td>
+<td align="right">20</td>
+<td align="right">156361</td>
 </tr>
 <tr class="even">
-<td align="left">Droid</td>
-<td align="right">5</td>
-<td align="right">69.75000</td>
-</tr>
-<tr class="odd">
-<td align="left">Twi’lek</td>
-<td align="right">2</td>
-<td align="right">55.00000</td>
-</tr>
-<tr class="even">
-<td align="left">Mirialan</td>
-<td align="right">2</td>
-<td align="right">53.10000</td>
+<td align="left">Colorado</td>
+<td align="right">2541</td>
+<td align="right">4884</td>
+<td align="right">0.7</td>
+<td align="right">72.06</td>
+<td align="right">6.8</td>
+<td align="right">63.9</td>
+<td align="right">166</td>
+<td align="right">103766</td>
 </tr>
 </tbody>
 </table>
@@ -582,11 +581,11 @@ Gluedown rules!
 <div id="inlines" class="section level2">
 <h2>Inlines</h2>
 <p>You can also use <code>gluedown</code> to format R [inline code results][inline]. First, use R to calculate a result.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">rand &lt;-<span class="st"> </span><span class="kw">sample</span>(state.name, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="co"># `r md_bold(rand)`</span></a>
-<a class="sourceLine" id="cb26-3" title="3">var &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">names</span>(starwars), <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="co"># `r md_code(var)`</span></a></code></pre></div>
-<p>Then, you can easily print that result in the middle of regular text with markdown formatting. In this case, our randomly selected state is… <strong>Georgia</strong> and the <code>mass</code> variable was randomly selected from the <code>dplyr::starwars</code> dataframe. Calculating results and using those calculations in the body of a text document increases reproducability.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>rand &lt;-<span class="st"> </span><span class="kw">sample</span>(state.name, <span class="dv">1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># `r md_bold(rand)`</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>var &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colnames</span>(state.x77), <span class="dv">1</span>)</span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># `r md_code(var)`</span></span></code></pre></div>
+<p>Then, you can easily print that result in the middle of regular text with markdown formatting. In this case, our randomly selected state is… <strong>Kansas</strong> and the <code>HS Grad</code> variable was randomly selected from the <code>state.x77</code> dataframe. Calculating results and using those calculations in the body of a text document increases reproducability.</p>
 <p>In a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174372/">meta-study of psychology journals</a>, researchers found that “around 15% of the articles contained at least one statistical conclusion that proved, upon recalculation, to be incorrect.” These errors can be mitigated by using inline printing of results like we did above. With the <code>gluedown</code> package, programmers can <strong>emphasize</strong> those results without worry.</p>
 </div>
 
