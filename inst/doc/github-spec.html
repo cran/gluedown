@@ -1,360 +1,246 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<title>3 Blocks and Inlines</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-<title>GitHub Flavored Markdown</title>
-
-
-
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+};
+</script>
 
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
 </style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
 }
-#header {
-text-align: center;
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
+
+h1 {
+   font-size:2.2em;
 }
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
+
+h2 {
+   font-size:1.8em;
 }
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
+
+h3 {
+   font-size:1.4em;
 }
-#TOC ul ul {
-margin-left: -2em;
+
+h4 {
+   font-size:1.0em;
 }
-#TOC li {
-line-height: 16px;
+
+h5 {
+   font-size:0.9em;
 }
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
+
+h6 {
+   font-size:0.8em;
 }
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
 }
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
+
+pre, img {
+  max-width: 100%;
 }
 pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
+  overflow-x: auto;
 }
-pre:not([class]) {
-background-color: #f7f7f7;
+pre code {
+   display: block; padding: 0.5em;
 }
+
 code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
+  font-size: 92%;
+  border: 1px solid #ccc;
 }
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
 </style>
-
 
 
 
 </head>
 
 <body>
+<pre><code class="r">library(gluedown)
+library(stringr)
+library(rvest)
+</code></pre>
 
+<p>In this vignette, we will explore how the functions in <code>gluedown</code> enable users
+to transition from R vectors to the kind of formatted markdown text used in
+the GitHub Flavored Markdown (GFM) specification. Functions like <code>md_bullet()</code>
+and <code>md_quote()</code> may be used more often, but there are functions for practically
+every section of the GFM spec including, some of which have limited practical
+value (e.g., <code>md_blank()</code> and <code>md_text()</code>). </p>
 
+<p>In each section of this vignette, the GFM spec is quoted first and followed by
+<code>gluedown</code> function usage. For each R code block containing <code>gluedown</code> usage,
+the raw text is shows as <code>#&gt;</code> comments followed by the rendered HTML version,
+which is printed using the <code>results=&#39;asis&#39;</code> option of the <code>knitr</code> package. (To 
+achieve this output, each block is actually repeated twice, with the code of the
+second result printing block hidden via <code>echo=FALSE</code>.)</p>
 
-
-<h1 class="title toc-ignore">GitHub Flavored Markdown</h1>
-
-
-<div id="TOC">
-<ul>
-<li><a href="#blocks-and-inlines">3 Blocks and Inlines</a></li>
-<li><a href="#leaf-blocks">4 Leaf blocks</a>
-<ul>
-<li><a href="#thematic-breaks">4.1 Thematic breaks</a></li>
-<li><a href="#atx-headings">4.2 ATX Headings</a></li>
-<li><a href="#setext-headings">4.3 Setext headings</a></li>
-<li><a href="#indented-code-blocks">4.4 Indented code blocks</a></li>
-<li><a href="#fenced-code-blocks">4.5 Fenced code blocks</a></li>
-<li><a href="#html-blocks">4.6 HTML blocks</a></li>
-<li><a href="#link-reference-definitions">4.7 Link reference definitions</a></li>
-<li><a href="#paragraphs">4.8 Paragraphs</a></li>
-<li><a href="#blank-lines">4.9 Blank lines</a></li>
-<li><a href="#tables-extension">4.10 Tables (extension)</a></li>
-</ul></li>
-<li><a href="#container-blocks">5 Container Blocks</a>
-<ul>
-<li><a href="#block-quotes">5.1 Block quotes</a></li>
-<li><a href="#list-items">5.2 List items</a></li>
-<li><a href="#task-list-items-extension">5.3 Task list items (extension)</a></li>
-<li><a href="#lists">5.4 Lists</a></li>
-</ul></li>
-<li><a href="#inlines">6 Inlines</a>
-<ul>
-<li><a href="#backslash-escapes">6.1 Backslash escapes</a></li>
-<li><a href="#simple-inlines">6.3 - 6.8 Simple inlines</a></li>
-<li><a href="#images">6.7 Images</a></li>
-<li><a href="#line-breaks">6.12 - 6.13 Line breaks</a></li>
-<li><a href="#textual-content">6.14 Textual content</a></li>
-</ul></li>
-</ul>
-</div>
-
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(gluedown)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(rvest)</span></code></pre></div>
-<p>In this vignette, we will explore how the functions in <code>gluedown</code> enable users to transition from R vectors to the kind of formatted markdown text used in the GitHub Flavored Markdown (GFM) specification. Functions like <code>md_bullet()</code> and <code>md_quote()</code> may be used more often, but there are functions for practically every section of the GFM spec including, some of which have limited practical value (e.g., <code>md_blank()</code> and <code>md_text()</code>).</p>
-<p>In each section of this vignette, the GFM spec is quoted first and followed by <code>gluedown</code> function usage. For each R code block containing <code>gluedown</code> usage, the raw text is shows as <code>#&gt;</code> comments followed by the rendered HTML version, which is printed using the <code>results=&#39;asis&#39;</code> option of the <code>knitr</code> package. (To achieve this output, each block is actually repeated twice, with the code of the second result printing block hidden via <code>echo=FALSE</code>.)</p>
-<div id="blocks-and-inlines" class="section level2">
 <h2>3 Blocks and Inlines</h2>
+
 <blockquote>
-<p>We can think of a document as a sequence of blocks—structural elements like paragraphs, block quotations, lists, headings, rules, and code blocks. Some blocks (like block quotes and list items) contain other blocks; others (like headings and paragraphs) contain inline content—text, links, emphasized text, images, code spans, and so on.</p>
+<p>We can think of a document as a sequence of blocks—structural elements like
+paragraphs, block quotations, lists, headings, rules, and code blocks. Some
+blocks (like block quotes and list items) contain other blocks; others (like
+headings and paragraphs) contain inline content—text, links, emphasized text,
+images, code spans, and so on.</p>
+
+<p>We can divide blocks into two types: container blocks, which can contain other
+blocks, and leaf blocks, which cannot.</p>
 </blockquote>
-<blockquote>
-<p>We can divide blocks into two types: container blocks, which can contain other blocks, and leaf blocks, which cannot.</p>
-</blockquote>
-</div>
-<div id="leaf-blocks" class="section level2">
+
 <h2>4 Leaf blocks</h2>
+
 <p>There are nine leaf block functions:</p>
-<ol style="list-style-type: decimal">
+
+<ol>
 <li><code>md_rule()</code></li>
 <li><code>md_heading()</code></li>
 <li><code>md_setext()</code></li>
@@ -366,212 +252,368 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><code>md_blank()</code></li>
 <li><code>md_table()</code></li>
 </ol>
-<div id="thematic-breaks" class="section level3">
+
 <h3>4.1 Thematic breaks</h3>
+
 <blockquote>
-<p>A line consisting of 0-3 spaces of indentation, followed by a sequence of three or more matching <code>-</code>, <code>_</code>, or <code>*</code> characters, each followed optionally by any number of spaces or tabs, forms a thematic break.</p>
+<p>A line consisting of 0-3 spaces of indentation, followed by a sequence of
+three or more matching <code>-</code>, <code>_</code>, or <code>*</code> characters, each followed optionally by
+any number of spaces or tabs, forms a thematic break.</p>
 </blockquote>
-<p>We can create thematic breaks with the <code>md_rule()</code> function, which allows users to define the type and number of valid characters to use. All these options create the same <code>&lt;hr&gt;</code> HTML tag, but look different in the underlying <code>.md</code> document.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">md_rule</span>()</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; ***</span></span></code></pre></div>
-<hr />
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">md_rule</span>(<span class="dt">char =</span> <span class="st">&quot;-&quot;</span>, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">space =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; - - - - - - - - - -</span></span></code></pre></div>
-<hr />
-</div>
-<div id="atx-headings" class="section level3">
+
+<p>We can create thematic breaks with the <code>md_rule()</code> function, which allows users
+to define the type and number of valid characters to use. All these options
+create the same <code>&lt;hr&gt;</code> HTML tag, but look different in the underlying <code>.md</code>
+document.</p>
+
+<pre><code class="r">md_rule()
+#&gt; ***
+</code></pre>
+
+<hr/>
+
+<pre><code class="r">md_rule(char = &quot;-&quot;, n = 10, space = TRUE)
+#&gt; - - - - - - - - - -
+</code></pre>
+
+<hr/>
+
 <h3>4.2 ATX Headings</h3>
+
 <blockquote>
-<p>An ATX heading consists of a string of characters, parsed as inline content, between an opening sequence of 1–6 unescaped <code>#</code> characters and an optional closing sequence of any number of unescaped <code>#</code> characters… The raw contents of the heading are stripped of leading and trailing spaces before being parsed as inline content. The heading level is equal to the number of <code>#</code> characters in the opening sequence.</p>
+<p>An ATX heading consists of a string of characters, parsed as inline content,
+between an opening sequence of 1–6 unescaped <code>#</code> characters and an optional
+closing sequence of any number of unescaped <code>#</code> characters&hellip; The raw contents
+of the heading are stripped of leading and trailing spaces before being parsed
+as inline content. The heading level is equal to the number of <code>#</code> characters in
+the opening sequence.</p>
 </blockquote>
+
 <p>The heading for this section was created with <code>md_heading()</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">md_heading</span>(<span class="st">&quot;4.2 ATX Headings&quot;</span>, <span class="dt">level =</span> <span class="dv">3</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; </span><span class="al">###</span><span class="co"> 4.2 ATX Headings</span></span></code></pre></div>
-</div>
-<div id="setext-headings" class="section level3">
+
+<pre><code class="r">md_heading(&quot;4.2 ATX Headings&quot;, level = 3)
+#&gt; ### 4.2 ATX Headings
+</code></pre>
+
 <h3>4.3 Setext headings</h3>
+
 <blockquote>
-<p>A setext heading consists of one or more lines of text, each containing at least one non-whitespace character, with no more than 3 spaces indentation, followed by a setext heading underline… A setext heading underline is a sequence of <code>=</code> characters or a sequence of <code>-</code> characters, with no more than 3 spaces indentation and any number of trailing spaces… The heading is a level 1 heading if <code>=</code> characters are used in the setext heading underline, and a level 2 heading if <code>-</code> characters are used.</p>
+<p>A setext heading consists of one or more lines of text, each containing at
+least one non-whitespace character, with no more than 3 spaces indentation,
+followed by a setext heading underline&hellip; A setext heading underline is a
+sequence of <code>=</code> characters or a sequence of <code>-</code> characters, with no more than 3
+spaces indentation and any number of trailing spaces&hellip; The heading is a level 1
+heading if <code>=</code> characters are used in the setext heading underline, and a level
+2 heading if <code>-</code> characters are used.</p>
 </blockquote>
-<p>I’m going to forgo printing these headings, just to preserve the structure of this document. The <code>md_setext()</code> function can only be used to create level 1 (<code>&lt;h1&gt;</code>) and level 2 (<code>&lt;h2&gt;</code>) headings. A level 1 Setext heading is sometimes used as the very first, initial title heading.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">md_setext</span>(<span class="st">&quot;Headings&quot;</span>, <span class="dt">level =</span> <span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; Headings</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; ========</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">md_setext</span>(<span class="st">&quot;4.3 Setext headings&quot;</span>, <span class="dt">level =</span> <span class="dv">2</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; 4.3 Setext headings</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; -------------------</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">md_setext</span>(<span class="st">&quot;4.3 Setext headings&quot;</span>, <span class="dt">width =</span> <span class="dv">50</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; 4.3 Setext headings</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; ==================================================</span></span></code></pre></div>
-</div>
-<div id="indented-code-blocks" class="section level3">
+
+<p>I&#39;m going to forgo printing these headings, just to preserve the structure of this document. The
+<code>md_setext()</code> function can only be used to create level 1 (<code>&lt;h1&gt;</code>) and level 2 (<code>&lt;h2&gt;</code>) headings.
+A level 1 Setext heading is sometimes used as the very first, initial title heading.</p>
+
+<pre><code class="r">md_setext(&quot;Headings&quot;, level = 1)
+#&gt; Headings
+#&gt; ========
+</code></pre>
+
+<pre><code class="r">md_setext(&quot;4.3 Setext headings&quot;, level = 2)
+#&gt; 4.3 Setext headings
+#&gt; -------------------
+</code></pre>
+
+<pre><code class="r">md_setext(&quot;4.3 Setext headings&quot;, width = 50)
+#&gt; 4.3 Setext headings
+#&gt; ==================================================
+</code></pre>
+
 <h3>4.4 Indented code blocks</h3>
+
 <blockquote>
-<p>An indented code block is composed of one or more indented chunks separated by blank lines. An indented chunk is a sequence of non-blank lines, each indented four or more spaces. The contents of the code block are the literal contents of the lines, including trailing line endings, minus four spaces of indentation…</p>
+<p>An indented code block is composed of one or more indented chunks separated by
+blank lines. An indented chunk is a sequence of non-blank lines, each indented
+four or more spaces. The contents of the code block are the literal contents of
+the lines, including trailing line endings, minus four spaces of indentation&hellip;</p>
 </blockquote>
-<p>This function, along with the fenced code block alternative, are useful for creating displayed code blocks (as opposed to executed chunks) containing R source code, command line content, or any other pre-formatted fixed-width content.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>rescale01 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  (x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])</span>
-<span id="cb8-4"><a href="#cb8-4"></a>}</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># use deparse() to turn unevaluated expressions into character strings.</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>source &lt;-<span class="st"> </span><span class="kw">deparse</span>(rescale01)</span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># this new object is a regular character vector</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">print</span>(source)</span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; [1] &quot;function (x) &quot;                      &quot;{&quot;                                 </span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; [3] &quot;    rng &lt;- range(x, na.rm = TRUE)&quot;  &quot;    (x - rng[1])/(rng[2] - rng[1])&quot;</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; [5] &quot;}&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">md_indent</span>(source)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;     function (x) </span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;     {</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;         rng &lt;- range(x, na.rm = TRUE)</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;         (x - rng[1])/(rng[2] - rng[1])</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;     }</span></span></code></pre></div>
+
+<p>This function, along with the fenced code block alternative, are useful for
+creating displayed code blocks (as opposed to executed chunks) containing R 
+source code, command line content, or any other pre-formatted fixed-width
+content.</p>
+
+<pre><code class="r">rescale01 &lt;- function(x) {
+  rng &lt;- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+# use deparse() to turn unevaluated expressions into character strings.
+source &lt;- deparse(rescale01)
+# this new object is a regular character vector
+print(source)
+#&gt; [1] &quot;function (x) &quot;                      &quot;{&quot;                                 
+#&gt; [3] &quot;    rng &lt;- range(x, na.rm = TRUE)&quot;  &quot;    (x - rng[1])/(rng[2] - rng[1])&quot;
+#&gt; [5] &quot;}&quot;
+</code></pre>
+
+<pre><code class="r">md_indent(source)
+#&gt;     function (x) 
+#&gt;     {
+#&gt;         rng &lt;- range(x, na.rm = TRUE)
+#&gt;         (x - rng[1])/(rng[2] - rng[1])
+#&gt;     }
+</code></pre>
+
 <pre><code>function (x) 
 {
     rng &lt;- range(x, na.rm = TRUE)
     (x - rng[1])/(rng[2] - rng[1])
-}</code></pre>
-</div>
-<div id="fenced-code-blocks" class="section level3">
+}
+</code></pre>
+
 <h3>4.5 Fenced code blocks</h3>
+
 <blockquote>
-<p>A code fence is a sequence of at least three consecutive backtick characters … or tildes (<code>~</code>). (Tildes and backticks cannot be mixed.) A fenced code block begins with a code fence, indented no more than three spaces…</p>
-<p>The line with the opening code fence may optionally contain some text following the code fence; this is trimmed of leading and trailing whitespace and called the info string…</p>
-<p>The content of the code block consists of all subsequent lines, until a closing code fence of the same type as the code block began with (backticks or tildes), and with at least as many backticks or tildes as the opening code fence….</p>
-<p>The content of a code fence is treated as literal text, not parsed as inlines. The first word of the info string is typically used to specify the language of the code sample, and rendered in the class attribute of the code tag. However, this spec does not mandate any particular treatment of the info string.</p>
+<p>A code fence is a sequence of at least three consecutive backtick characters
+&hellip; or tildes (<code>~</code>). (Tildes and backticks cannot be mixed.) A fenced code
+block begins with a code fence, indented no more than three spaces&hellip;</p>
+
+<p>The line with the opening code fence may optionally contain some text
+following the code fence; this is trimmed of leading and trailing whitespace and
+called the info string&hellip;</p>
+
+<p>The content of the code block consists of all subsequent lines, until a
+closing code fence of the same type as the code block began with (backticks or
+tildes), and with at least as many backticks or tildes as the opening code
+fence&hellip;.</p>
+
+<p>The content of a code fence is treated as literal text, not parsed as inlines.
+The first word of the info string is typically used to specify the language of
+the code sample, and rendered in the class attribute of the code tag. However,
+this spec does not mandate any particular treatment of the info string.</p>
 </blockquote>
-<p>The man feature of <code>md_fence()</code> is the ability to specify the info string which defines the code language used to highlight syntax. Compare the following output to the one produced by <code>md_indent()</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">md_fence</span>(source)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; ```r</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; function (x) </span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; {</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;     rng &lt;- range(x, na.rm = TRUE)</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;     (x - rng[1])/(rng[2] - rng[1])</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; }</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; ```</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">function</span> (x) </span>
-<span id="cb12-2"><a href="#cb12-2"></a>{</span>
-<span id="cb12-3"><a href="#cb12-3"></a>    rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    (x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])<span class="op">/</span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])</span>
-<span id="cb12-5"><a href="#cb12-5"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">md_fence</span>(source, <span class="dt">char =</span> <span class="st">&quot;~&quot;</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; ~~~r</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; function (x) </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; {</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;     rng &lt;- range(x, na.rm = TRUE)</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;     (x - rng[1])/(rng[2] - rng[1])</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; }</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; ~~~</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="cf">function</span> (x) </span>
-<span id="cb14-2"><a href="#cb14-2"></a>{</span>
-<span id="cb14-3"><a href="#cb14-3"></a>    rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb14-4"><a href="#cb14-4"></a>    (x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])<span class="op">/</span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])</span>
-<span id="cb14-5"><a href="#cb14-5"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">md_fence</span>(<span class="st">&quot;$ sudo apt install r-base-dev&quot;</span>, <span class="dt">info =</span> <span class="st">&quot;bash&quot;</span>)</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; ```bash</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt; $ sudo apt install r-base-dev</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; ```</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a>$ <span class="fu">sudo</span> apt install r-base-dev</span></code></pre></div>
-</div>
-<div id="html-blocks" class="section level3">
+
+<p>The man feature of <code>md_fence()</code> is the ability to specify the info string which defines the code
+language used to highlight syntax. Compare the following output to the one produced by 
+<code>md_indent()</code>.</p>
+
+<pre><code class="r">md_fence(source)
+#&gt; ```r
+#&gt; function (x) 
+#&gt; {
+#&gt;     rng &lt;- range(x, na.rm = TRUE)
+#&gt;     (x - rng[1])/(rng[2] - rng[1])
+#&gt; }
+#&gt; ```
+</code></pre>
+
+<pre><code class="r">function (x) 
+{
+    rng &lt;- range(x, na.rm = TRUE)
+    (x - rng[1])/(rng[2] - rng[1])
+}
+</code></pre>
+
+<pre><code class="r">md_fence(source, char = &quot;~&quot;)
+#&gt; ~~~r
+#&gt; function (x) 
+#&gt; {
+#&gt;     rng &lt;- range(x, na.rm = TRUE)
+#&gt;     (x - rng[1])/(rng[2] - rng[1])
+#&gt; }
+#&gt; ~~~
+</code></pre>
+
+<pre><code class="r">function (x) 
+{
+    rng &lt;- range(x, na.rm = TRUE)
+    (x - rng[1])/(rng[2] - rng[1])
+}
+</code></pre>
+
+<pre><code class="r">md_fence(&quot;$ sudo apt install r-base-dev&quot;, info = &quot;bash&quot;)
+#&gt; ```bash
+#&gt; $ sudo apt install r-base-dev
+#&gt; ```
+</code></pre>
+
+<pre><code class="bash">$ sudo apt install r-base-dev
+</code></pre>
+
 <h3>4.6 HTML blocks</h3>
+
 <blockquote>
-<p>An HTML block is a group of lines that is treated as raw HTML (and will not be escaped in HTML output).</p>
+<p>An HTML block is a group of lines that is treated as raw HTML (and will not be
+escaped in HTML output).</p>
 </blockquote>
-<p>Markdown rendering engines (like the one used to convert this <code>.Rmd</code> document to <code>.md</code> and then to <code>.html</code>) allow users to write valid HTML code alongside regular markdown text. This can be useful with R functions like those from the <code>rvest</code> package, which reads web pages.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">read_html</span>(<span class="st">&quot;https://example.com/&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="st">  </span><span class="kw">md_text</span>()</span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co">#&gt; &lt;p&gt;This domain is for use in illustrative examples in documents. You may use this</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt;     domain in literature without prior coordination or asking for permission.&lt;/p&gt;</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt; &lt;p&gt;&lt;a href=&quot;https://www.iana.org/domains/example&quot;&gt;More information...&lt;/a&gt;&lt;/p&gt;</span></span></code></pre></div>
-<p>
-This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.
-</p>
-<p>
-<a href="https://www.iana.org/domains/example">More information…</a>
-</p>
-</div>
-<div id="link-reference-definitions" class="section level3">
+
+<p>Markdown rendering engines (like the one used to convert this <code>.Rmd</code> document
+to <code>.md</code> and then to <code>.html</code>) allow users to write valid HTML code alongside
+regular markdown text.</p>
+
+<pre><code class="r">lines &lt;- c(
+  &quot;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&quot;,
+  &quot;&lt;pre&gt;&quot;,
+  &quot;**Hello**,&quot;,
+  &quot;_world_.&quot;,
+  &quot;&lt;/pre&gt;&quot;,
+  &quot; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;
+)
+md_text(lines)
+#&gt; &lt;table&gt;&lt;tr&gt;&lt;td&gt;
+#&gt; &lt;pre&gt;
+#&gt; **Hello**,
+#&gt; _world_.
+#&gt; &lt;/pre&gt;
+#&gt;  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</code></pre>
+
+<table><tr><td>
+<pre>
+**Hello**,
+_world_.
+</pre>
+ </td></tr></table>
+
 <h3>4.7 Link reference definitions</h3>
+
 <blockquote>
-<p>A link reference definition consists of a link label, indented up to three spaces, followed by a colon (<code>:</code>), optional whitespace (including up to one line ending), a link destination, optional whitespace (including up to one line ending), and an optional link title, which if it is present must be separated from the link destination by whitespace. No further non-whitespace characters may occur on the line.</p>
-<p>A link reference definition does not correspond to a structural element of a document. Instead, it defines a label which can be used in reference links and reference-style images elsewhere in the document. Link reference definitions can come either before or after the links that use them.</p>
+<p>A link reference definition consists of a link label, indented up to three
+spaces, followed by a colon (<code>:</code>), optional whitespace (including up to one line
+ending), a link destination, optional whitespace (including up to one line
+ending), and an optional link title, which if it is present must be separated
+from the link destination by whitespace. No further non-whitespace characters
+may occur on the line.</p>
+
+<p>A link reference definition does not correspond to a structural element of a
+document. Instead, it defines a label which can be used in reference links and
+reference-style images elsewhere in the document. Link reference definitions can
+come either before or after the links that use them.</p>
 </blockquote>
-<p>The <code>md_reference()</code> function is used to create the link reference definition <em>only</em>, which must then be paired with the same label elsewhere in the document. We can put the definitions anywhere in the document, so when I type <code>[CRAN]</code> here in this paragraph (like <a href="https://cran.r-project.org/" title="CRAN Home">CRAN</a>), that text looks for the label created below to create a hyperlink. The reference definition printed to the document actually doesn’t show up anywhere in the rendered <code>.html</code> file.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cran&quot;</span>, <span class="st">&quot;tidy&quot;</span>)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;https://cran.r-project.org/&quot;</span>, <span class="st">&quot;https://www.tidyverse.org/&quot;</span>)</span>
-<span id="cb18-3"><a href="#cb18-3"></a>c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CRAN Home&quot;</span>, <span class="st">&quot;Tidyverse Home&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">md_reference</span>(<span class="dt">label =</span> a, <span class="dt">url =</span> b, <span class="dt">title =</span> c)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; [cran]: https://cran.r-project.org/ &quot;CRAN Home&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; [tidy]: https://www.tidyverse.org/ &quot;Tidyverse Home&quot;</span></span></code></pre></div>
-</div>
-<div id="paragraphs" class="section level3">
+
+<p>The <code>md_reference()</code> function is used to create the link reference definition
+<em>only</em>, which must then be paired with the same label elsewhere in the document.
+We can put the definitions anywhere in the document, so when I type <code>[CRAN]</code>
+here in this paragraph (like <a href="https://cran.r-project.org/" title="CRAN Home">CRAN</a>), that text looks for the label created
+below to create a hyperlink. The reference definition printed to the document
+actually doesn&#39;t show up anywhere in the rendered <code>.html</code> file.</p>
+
+<pre><code class="r">a &lt;- c(&quot;cran&quot;, &quot;tidy&quot;)
+b &lt;- c(&quot;https://cran.r-project.org/&quot;, &quot;https://www.tidyverse.org/&quot;)
+c &lt;- c(&quot;CRAN Home&quot;, &quot;Tidyverse Home&quot;)
+</code></pre>
+
+<pre><code class="r">md_reference(label = a, url = b, title = c)
+#&gt; [cran]: https://cran.r-project.org/ &quot;CRAN Home&quot;
+#&gt; [tidy]: https://www.tidyverse.org/ &quot;Tidyverse Home&quot;
+</code></pre>
+
 <h3>4.8 Paragraphs</h3>
+
 <blockquote>
-<p>A sequence of non-blank lines that cannot be interpreted as other kinds of blocks forms a paragraph. The contents of the paragraph are the result of parsing the paragraph’s raw content as inlines. The paragraph’s raw content is formed by concatenating the lines and removing initial and final whitespace.</p>
+<p>A sequence of non-blank lines that cannot be interpreted as other kinds of
+blocks forms a paragraph. The contents of the paragraph are the result of
+parsing the paragraph’s raw content as inlines. The paragraph’s raw content is
+formed by concatenating the lines and removing initial and final whitespace.</p>
 </blockquote>
-<p>Paragraphs are one instance are where it’s easy for markdown newcomers can have difficulty writing the plain text in the proper format to produce their desired outcome. Words separated by a single newline are rendered as a single paragraph <code>&lt;p&gt;</code> tag. Using <code>md_paragraph()</code>, we can take a vector of character text and output <em>distinct</em> paragraphs.</p>
-<p>In section 6.12 and 6.13 you can compare the output of <code>md_paragraph()</code> with the other line break functions.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>sentences &lt;-<span class="st"> </span><span class="kw">sample</span>(stringr<span class="op">::</span>sentences, <span class="dt">size =</span> <span class="dv">5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">md_paragraph</span>(sentences)</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; The gold ring fits only a pierced ear.</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt; </span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt; He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; The office paint was a dull sad tan.</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="co">#&gt; Our troops are set to strike heavy blows.</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear.</p>
-<p>He offered proof in the form of a lsrge chart.</p>
-<p>The office paint was a dull sad tan.</p>
-<p>Our troops are set to strike heavy blows.</p>
-<p>The horse trotted around the field at a brisk pace.</p>
-</div>
-<div id="blank-lines" class="section level3">
+
+<p>Paragraphs are one instance are where it&#39;s easy for markdown newcomers can have
+difficulty writing the plain text in the proper format to produce their desired
+outcome. Words separated by a single newline are rendered as a single paragraph
+<code>&lt;p&gt;</code> tag. Using <code>md_paragraph()</code>, we can take a vector of character text and
+output <em>distinct</em> paragraphs.</p>
+
+<p>In section 6.12 and 6.13 you can compare the output of <code>md_paragraph()</code> with
+the other line break functions.</p>
+
+<pre><code class="r">sentences &lt;- sample(stringr::sentences, size = 5)
+</code></pre>
+
+<pre><code class="r">md_paragraph(sentences)
+#&gt; The thaw came early and freed the stream.
+#&gt; 
+#&gt; The lease ran out in sixteen weeks.
+#&gt; 
+#&gt; The lure is used to catch trout and flounder.
+#&gt; 
+#&gt; Trample the spark, else the flames will spread.
+#&gt; 
+#&gt; A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream.</p>
+
+<p>The lease ran out in sixteen weeks.</p>
+
+<p>The lure is used to catch trout and flounder.</p>
+
+<p>Trample the spark, else the flames will spread.</p>
+
+<p>A speedy man can beat this track mark.</p>
+
 <h3>4.9 Blank lines</h3>
+
 <blockquote>
-<p>Blank lines between block-level elements are ignored, except for the role they play in determining whether a list is tight or loose.</p>
+<p>Blank lines between block-level elements are ignored, except for the role they
+play in determining whether a list is tight or loose.</p>
+
 <p>Blank lines at the beginning and end of the document are also ignored.</p>
 </blockquote>
-<p>Blank lines are, well, not super useful… but you can create them with <code>md_blank()</code>!</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">md_blank</span>()</span></code></pre></div>
-</div>
-<div id="tables-extension" class="section level3">
+
+<p>Blank lines are, well, not super useful&hellip; but you can create them with 
+<code>md_blank()</code>!</p>
+
+<pre><code class="r">md_blank()
+</code></pre>
+
 <h3>4.10 Tables (extension)</h3>
+
 <blockquote>
 <p>GFM enables the <code>table</code> extension, where an additional leaf block type is available.</p>
-<p>A table is an arrangement of data with rows and columns, consisting of a single header row, a delimiter row separating the header from the data, and zero or more data rows.</p>
-<p>Each row consists of cells containing arbitrary text, in which inlines are parsed, separated by pipes (<code>|</code>). A leading and trailing pipe is also recommended for clarity of reading, and if there’s otherwise parsing ambiguity. Spaces between pipes and cell content are trimmed. Block-level elements cannot be inserted in a table.</p>
-<p>The delimiter row consists of cells whose only content are hyphens (<code>-</code>), and optionally, a leading or trailing colon (<code>:</code>), or both, to indicate left, right, or center alignment respectively.</p>
+
+<p>A table is an arrangement of data with rows and columns, consisting of a
+single header row, a delimiter row separating the header from the data, and zero
+or more data rows.</p>
+
+<p>Each row consists of cells containing arbitrary text, in which inlines are
+parsed, separated by pipes (<code>|</code>). A leading and trailing pipe is also
+recommended for clarity of reading, and if there’s otherwise parsing ambiguity.
+Spaces between pipes and cell content are trimmed. Block-level elements cannot
+be inserted in a table.</p>
+
+<p>The delimiter row consists of cells whose only content are hyphens (<code>-</code>), and
+optionally, a leading or trailing colon (<code>:</code>), or both, to indicate left, right,
+or center alignment respectively.</p>
 </blockquote>
-<p>The <code>md_table()</code> function wraps around <code>knitr::kable()</code> to return R objects (Typically data frames or matrices) as markdown tables. This is useful for presenting data created using R in a format that’s more readable than a plain-text data frame (or tibble) printout.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>states &lt;-<span class="st"> </span><span class="kw">head</span>(state.x77)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">print</span>(states)</span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#&gt;            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt; Alabama          3615   3624        2.1    69.05   15.1    41.3    20  50708</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; Alaska            365   6315        1.5    69.31   11.3    66.7   152 566432</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; Arizona          2212   4530        1.8    70.55    7.8    58.1    15 113417</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; Arkansas         2110   3378        1.9    70.66   10.1    39.9    65  51945</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="co">#&gt; California      21198   5114        1.1    71.71   10.3    62.6    20 156361</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="co">#&gt; Colorado         2541   4884        0.7    72.06    6.8    63.9   166 103766</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">options</span>(<span class="dt">knitr.kable.NA =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">md_table</span>(states, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>)</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="co">#&gt; |           | Population | Income | Illiteracy | Life Exp | Murder | HS Grad | Frost |  Area  |</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#&gt; |:----------|:----------:|:------:|:----------:|:--------:|:------:|:-------:|:-----:|:------:|</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#&gt; |Alabama    |    3615    |  3624  |    2.1     |  69.05   |  15.1  |  41.3   |  20   | 50708  |</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#&gt; |Alaska     |    365     |  6315  |    1.5     |  69.31   |  11.3  |  66.7   |  152  | 566432 |</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a><span class="co">#&gt; |Arizona    |    2212    |  4530  |    1.8     |  70.55   |  7.8   |  58.1   |  15   | 113417 |</span></span>
-<span id="cb24-8"><a href="#cb24-8"></a><span class="co">#&gt; |Arkansas   |    2110    |  3378  |    1.9     |  70.66   |  10.1  |  39.9   |  65   | 51945  |</span></span>
-<span id="cb24-9"><a href="#cb24-9"></a><span class="co">#&gt; |California |   21198    |  5114  |    1.1     |  71.71   |  10.3  |  62.6   |  20   | 156361 |</span></span>
-<span id="cb24-10"><a href="#cb24-10"></a><span class="co">#&gt; |Colorado   |    2541    |  4884  |    0.7     |  72.06   |  6.8   |  63.9   |  166  | 103766 |</span></span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
+
+<p>The <code>md_table()</code> function wraps around <code>knitr::kable()</code> to return R objects
+(Typically data frames or matrices) as markdown tables. This is useful for
+presenting data created using R in a format that&#39;s more readable than a
+plain-text data frame (or tibble) printout.</p>
+
+<pre><code class="r">states &lt;- head(state.x77)
+print(states)
+#&gt;            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area
+#&gt; Alabama          3615   3624        2.1    69.05   15.1    41.3    20  50708
+#&gt; Alaska            365   6315        1.5    69.31   11.3    66.7   152 566432
+#&gt; Arizona          2212   4530        1.8    70.55    7.8    58.1    15 113417
+#&gt; Arkansas         2110   3378        1.9    70.66   10.1    39.9    65  51945
+#&gt; California      21198   5114        1.1    71.71   10.3    62.6    20 156361
+#&gt; Colorado         2541   4884        0.7    72.06    6.8    63.9   166 103766
+</code></pre>
+
+<pre><code class="r">options(knitr.kable.NA = &quot;&quot;)
+md_table(states, align = &quot;c&quot;)
+#&gt; |           | Population | Income | Illiteracy | Life Exp | Murder | HS Grad | Frost |  Area  |
+#&gt; |:----------|:----------:|:------:|:----------:|:--------:|:------:|:-------:|:-----:|:------:|
+#&gt; |Alabama    |    3615    |  3624  |    2.1     |  69.05   |  15.1  |  41.3   |  20   | 50708  |
+#&gt; |Alaska     |    365     |  6315  |    1.5     |  69.31   |  11.3  |  66.7   |  152  | 566432 |
+#&gt; |Arizona    |    2212    |  4530  |    1.8     |  70.55   |  7.8   |  58.1   |  15   | 113417 |
+#&gt; |Arkansas   |    2110    |  3378  |    1.9     |  70.66   |  10.1  |  39.9   |  65   | 51945  |
+#&gt; |California |   21198    |  5114  |    1.1     |  71.71   |  10.3  |  62.6   |  20   | 156361 |
+#&gt; |Colorado   |    2541    |  4884  |    0.7     |  72.06   |  6.8   |  63.9   |  166  | 103766 |
+</code></pre>
+
+<table><thead>
+<tr>
 <th align="left"></th>
 <th align="center">Population</th>
 <th align="center">Income</th>
@@ -582,9 +624,8 @@ This domain is for use in illustrative examples in documents. You may use this d
 <th align="center">Frost</th>
 <th align="center">Area</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
+</thead><tbody>
+<tr>
 <td align="left">Alabama</td>
 <td align="center">3615</td>
 <td align="center">3624</td>
@@ -595,7 +636,7 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">20</td>
 <td align="center">50708</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Alaska</td>
 <td align="center">365</td>
 <td align="center">6315</td>
@@ -606,7 +647,7 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">152</td>
 <td align="center">566432</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Arizona</td>
 <td align="center">2212</td>
 <td align="center">4530</td>
@@ -617,7 +658,7 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">15</td>
 <td align="center">113417</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Arkansas</td>
 <td align="center">2110</td>
 <td align="center">3378</td>
@@ -628,7 +669,7 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">65</td>
 <td align="center">51945</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">California</td>
 <td align="center">21198</td>
 <td align="center">5114</td>
@@ -639,7 +680,7 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">20</td>
 <td align="center">156361</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Colorado</td>
 <td align="center">2541</td>
 <td align="center">4884</td>
@@ -650,290 +691,442 @@ This domain is for use in illustrative examples in documents. You may use this d
 <td align="center">166</td>
 <td align="center">103766</td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="container-blocks" class="section level2">
+</tbody></table>
+
 <h2>5 Container Blocks</h2>
+
 <blockquote>
-<p>A container block is a block that has other blocks as its contents. There are two basic kinds of container blocks: block quotes and list items. Lists are meta-containers for list items.</p>
+<p>A container block is a block that has other blocks as its contents. There are
+two basic kinds of container blocks: block quotes and list items. Lists are
+meta-containers for list items.</p>
 </blockquote>
-<div id="block-quotes" class="section level3">
+
 <h3>5.1 Block quotes</h3>
+
 <blockquote>
-<p>A block quote marker consists of 0-3 spaces of initial indent, plus (a) the character &gt; together with a following space, or (b) a single character &gt; not followed by a space.</p>
+<p>A block quote marker consists of 0-3 spaces of initial indent, plus (a) the
+character &gt; together with a following space, or (b) a single character &gt; not
+followed by a space.</p>
 </blockquote>
-<p>I’ve been copy-pasting block quotes from the GFM spec in this vignette, but we can also use <code>md_quote()</code> to grammatically create or manipulate strings and print them as block quotes.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">read_html</span>(<span class="st">&quot;https://w.wiki/A58&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="st">  </span><span class="kw">html_text</span>(<span class="dt">trim =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">[(.*)</span><span class="ch">\\</span><span class="st">]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="st">  </span><span class="kw">md_quote</span>()</span>
-<span id="cb25-6"><a href="#cb25-6"></a><span class="co">#&gt; &gt; We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</span></span></code></pre></div>
+
+<p>I&#39;ve been copy-pasting block quotes from the GFM spec in this vignette, but we
+can also use <code>md_quote()</code> to grammatically create or manipulate strings and
+print them as block quotes.</p>
+
+<pre><code class="r">read_html(&quot;https://w.wiki/A58&quot;) %&gt;% 
+  html_node(&quot;blockquote&quot;) %&gt;% 
+  html_text(trim = TRUE) %&gt;% 
+  str_remove(&quot;\\[(.*)\\]&quot;) %&gt;% 
+  md_quote()
+#&gt; &gt; We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.
+</code></pre>
+
 <blockquote>
 <p>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
 </blockquote>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">md_quote</span>(sentences)</span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="co">#&gt; &gt; The gold ring fits only a pierced ear.</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="co">#&gt; &gt; He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt; &gt; The office paint was a dull sad tan.</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt; &gt; Our troops are set to strike heavy blows.</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt; &gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
+
+<pre><code class="r">md_quote(sentences)
+#&gt; &gt; The thaw came early and freed the stream.
+#&gt; &gt; The lease ran out in sixteen weeks.
+#&gt; &gt; The lure is used to catch trout and flounder.
+#&gt; &gt; Trample the spark, else the flames will spread.
+#&gt; &gt; A speedy man can beat this track mark.
+</code></pre>
+
 <blockquote>
-<p>The gold ring fits only a pierced ear.</p>
+<p>The thaw came early and freed the stream.</p>
+
+<p>The lease ran out in sixteen weeks.</p>
+
+<p>The lure is used to catch trout and flounder.</p>
+
+<p>Trample the spark, else the flames will spread.</p>
+
+<p>A speedy man can beat this track mark.</p>
 </blockquote>
-<blockquote>
-<p>He offered proof in the form of a lsrge chart.</p>
-</blockquote>
-<blockquote>
-<p>The office paint was a dull sad tan.</p>
-</blockquote>
-<blockquote>
-<p>Our troops are set to strike heavy blows.</p>
-</blockquote>
-<blockquote>
-<p>The horse trotted around the field at a brisk pace.</p>
-</blockquote>
-</div>
-<div id="list-items" class="section level3">
+
 <h3>5.2 List items</h3>
+
 <blockquote>
 <p>A list marker is a bullet list marker or an ordered list marker.</p>
+
 <p>A bullet list marker is a -, +, or * character.</p>
-<p>An ordered list marker is a sequence of 1–9 arabic digits (<code>0-9</code>), followed by either a <code>.</code> character or a <code>)</code> character. (The reason for the length limit is that with 10 digits we start seeing integer overflows in some browsers.)</p>
+
+<p>An ordered list marker is a sequence of 1–9 arabic digits (<code>0-9</code>), followed by
+either a <code>.</code> character or a <code>)</code> character. (The reason for the length limit is
+that with 10 digits we start seeing integer overflows in some browsers.)</p>
 </blockquote>
-<p>List items are automatically created in list blocks (section 5.4) via <code>md_order()</code> and <code>md_bullet()</code>.</p>
-</div>
-<div id="task-list-items-extension" class="section level3">
+
+<p>List items are automatically created in list blocks (section 5.4) via 
+<code>md_order()</code> and <code>md_bullet()</code>.</p>
+
 <h3>5.3 Task list items (extension)</h3>
+
 <blockquote>
-<p>GFM enables the <code>tasklist</code> extension, where an additional processing step is performed on list items.</p>
-<p>A task list item is a list item where the first block in it is a paragraph which begins with a task list item marker and at least one whitespace character before any other content.</p>
-<p>A task list item marker consists of an optional number of spaces, a left bracket (<code>[</code>), either a whitespace character or the letter x in either lowercase or uppercase, and then a right bracket (<code>]</code>).</p>
-<p>When rendered, the task list item marker is replaced with a semantic checkbox element; in an HTML output, this would be an <code>&lt;input type=&quot;checkbox&quot;&gt;</code> element.</p>
-<p>If the character between the brackets is a whitespace character, the checkbox is unchecked. Otherwise, the checkbox is checked.</p>
+<p>GFM enables the <code>tasklist</code> extension, where an additional processing step is
+performed on list items.</p>
+
+<p>A task list item is a list item where the first block in it is a paragraph
+which begins with a task list item marker and at least one whitespace character
+before any other content.</p>
+
+<p>A task list item marker consists of an optional number of spaces, a left
+bracket (<code>[</code>), either a whitespace character or the letter x in either lowercase
+or uppercase, and then a right bracket (<code>]</code>).</p>
+
+<p>When rendered, the task list item marker is replaced with a semantic checkbox
+element; in an HTML output, this would be an <code>&lt;input type=&quot;checkbox&quot;&gt;</code> element.</p>
+
+<p>If the character between the brackets is a whitespace character, the checkbox
+is unchecked. Otherwise, the checkbox is checked.</p>
 </blockquote>
-<p>Markdown extensions like this one are optionally supported on different venues. On GitHub (in <code>README.md</code> files, issues, or comments, etc.) these tasks list are rendered as check boxes, sometimes even interactable. On other venues, like this very HTML vignette, these check boxes just render are bullet lists with weird bracket boxes on each line.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">md_task</span>(sentences, <span class="dt">check =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co">#&gt; * [ ] The gold ring fits only a pierced ear.</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="co">#&gt; * [ ] He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="co">#&gt; * [x] The office paint was a dull sad tan.</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a><span class="co">#&gt; * [x] Our troops are set to strike heavy blows.</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="co">#&gt; * [ ] The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<ul class="task-list">
-<li><input type="checkbox" disabled></input>
-The gold ring fits only a pierced ear.</li>
-<li><input type="checkbox" disabled></input>
-He offered proof in the form of a lsrge chart.</li>
-<li><input type="checkbox" disabled checked></input>
-The office paint was a dull sad tan.</li>
-<li><input type="checkbox" disabled checked></input>
-Our troops are set to strike heavy blows.</li>
-<li><input type="checkbox" disabled></input>
-The horse trotted around the field at a brisk pace.</li>
+
+<p>Markdown extensions like this one are optionally supported on different venues.
+On GitHub (in <code>README.md</code> files, issues, or comments, etc.) these tasks list
+are rendered as check boxes, sometimes even interactable. On other venues, like
+this very HTML vignette, these check boxes just render are bullet lists with
+weird bracket boxes on each line.</p>
+
+<pre><code class="r">md_task(sentences, check = 3:4)
+#&gt; * [ ] The thaw came early and freed the stream.
+#&gt; * [ ] The lease ran out in sixteen weeks.
+#&gt; * [x] The lure is used to catch trout and flounder.
+#&gt; * [x] Trample the spark, else the flames will spread.
+#&gt; * [ ] A speedy man can beat this track mark.
+</code></pre>
+
+<ul>
+<li>[ ] The thaw came early and freed the stream.</li>
+<li>[ ] The lease ran out in sixteen weeks.</li>
+<li>[x] The lure is used to catch trout and flounder.</li>
+<li>[x] Trample the spark, else the flames will spread.</li>
+<li>[ ] A speedy man can beat this track mark.</li>
 </ul>
-</div>
-<div id="lists" class="section level3">
+
 <h3>5.4 Lists</h3>
+
 <blockquote>
-<p>A list is a sequence of one or more list items of the same type. The list items may be separated by any number of blank lines.</p>
-<p>Two list items are of the same type if they begin with a list marker of the same type. Two list &gt; markers are of the same type if (a) they are bullet list markers using the same character (<code>-</code>, <code>+</code>, or <code>*</code>) or (b) they are ordered list numbers with the same delimiter (either <code>.</code> or <code>)</code>).</p>
-<p>A list is an ordered list if its constituent list items begin with ordered list markers, and a &gt; bullet list if its constituent list items begin with bullet list markers.</p>
-<p>The start number of an ordered list is determined by the list number of its initial list item. The numbers of subsequent list items are disregarded.</p>
+<p>A list is a sequence of one or more list items of the same type. The list
+items may be separated by any number of blank lines.</p>
+
+<p>Two list items are of the same type if they begin with a list marker of the
+same type. Two list &gt; markers are of the same type if (a) they are bullet list
+markers using the same character (<code>-</code>, <code>+</code>, or <code>*</code>) or (b) they are ordered list
+numbers with the same delimiter (either <code>.</code> or <code>)</code>).</p>
+
+<p>A list is an ordered list if its constituent list items begin with ordered
+list markers, and a &gt; bullet list if its constituent list items begin with
+bullet list markers.</p>
+
+<p>The start number of an ordered list is determined by the list number of its
+initial list item. The numbers of subsequent list items are disregarded.</p>
 </blockquote>
-<p>The <code>md_order()</code> and <code>md_bullet()</code> functions let users display character vectors as list blocks. The functions let users adjust the which list item markets are used, but all the options are rendered as the same <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> tags in the rendered <code>.html</code> file.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>states &lt;-<span class="st"> </span><span class="kw">sample</span>(state.name, <span class="dt">size =</span> <span class="dv">3</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">md_bullet</span>(states)</span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co">#&gt; * Illinois</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="co">#&gt; * Montana</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="co">#&gt; * Idaho</span></span></code></pre></div>
+
+<p>The <code>md_order()</code> and <code>md_bullet()</code> functions let users display character vectors
+as list blocks. The functions let users adjust the which list item markets are
+used, but all the options are rendered as the same <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> tags in the
+rendered <code>.html</code> file.</p>
+
+<pre><code class="r">states &lt;- sample(state.name, size = 3)
+</code></pre>
+
+<pre><code class="r">md_bullet(states)
+#&gt; * Connecticut
+#&gt; * Alaska
+#&gt; * Massachusetts
+</code></pre>
+
 <ul>
-<li>Illinois</li>
-<li>Montana</li>
-<li>Idaho</li>
+<li>Connecticut</li>
+<li>Alaska</li>
+<li>Massachusetts</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">md_bullet</span>(states, <span class="dt">marker =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="co">#&gt; + Illinois</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="co">#&gt; + Montana</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="co">#&gt; + Idaho</span></span></code></pre></div>
+
+<pre><code class="r">md_bullet(states, marker = &quot;+&quot;)
+#&gt; + Connecticut
+#&gt; + Alaska
+#&gt; + Massachusetts
+</code></pre>
+
 <ul>
-<li>Illinois</li>
-<li>Montana</li>
-<li>Idaho</li>
+<li>Connecticut</li>
+<li>Alaska</li>
+<li>Massachusetts</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">md_order</span>(states)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="co">#&gt; 1. Illinois</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="co">#&gt; 2. Montana</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="co">#&gt; 3. Idaho</span></span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Illinois</li>
-<li>Montana</li>
-<li>Idaho</li>
+
+<pre><code class="r">md_order(states)
+#&gt; 1. Connecticut
+#&gt; 2. Alaska
+#&gt; 3. Massachusetts
+</code></pre>
+
+<ol>
+<li>Connecticut</li>
+<li>Alaska</li>
+<li>Massachusetts</li>
 </ol>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">md_order</span>(states, <span class="dt">seq =</span> <span class="ot">FALSE</span>, <span class="dt">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="co">#&gt; 1) Illinois</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="co">#&gt; 1) Montana</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co">#&gt; 1) Idaho</span></span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Illinois</li>
-<li>Montana</li>
-<li>Idaho</li>
-</ol>
-</div>
-</div>
-<div id="inlines" class="section level2">
+
+<pre><code class="r">md_order(states, seq = FALSE, marker = &quot;)&quot;)
+#&gt; 1) Connecticut
+#&gt; 1) Alaska
+#&gt; 1) Massachusetts
+</code></pre>
+
+<p>1) Connecticut
+1) Alaska
+1) Massachusetts</p>
+
 <h2>6 Inlines</h2>
+
 <blockquote>
-<p>Inlines are parsed sequentially from the beginning of the character stream to the end (left to right, in left-to-right languages). Thus, for example, in</p>
+<p>Inlines are parsed sequentially from the beginning of the character stream to
+the end (left to right, in left-to-right languages). Thus, for example, in</p>
 </blockquote>
-<div id="backslash-escapes" class="section level3">
+
 <h3>6.1 Backslash escapes</h3>
+
 <blockquote>
-<p>Any ASCII punctuation character may be backslash-escaped… Escaped characters are treated as regular characters and do not have their usual Markdown meanings:</p>
+<p>Any ASCII punctuation character may be backslash-escaped&hellip; Escaped characters
+are treated as regular characters and do not have their usual Markdown meanings:</p>
 </blockquote>
-<p>If you want to display markdown syntax without rendering as the corresponding HTML tags, <code>md_escape()</code> can prepend a backslash (actually, two) before every ASCII punctuation character.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>inline &lt;-<span class="st"> </span><span class="kw">md_bold</span>(<span class="st">&quot;example&quot;</span>)</span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="kw">md_escape</span>(inline)</span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="co">#&gt; \*\*example\*\*</span></span></code></pre></div>
+
+<p>If you want to display markdown syntax without rendering as the corresponding
+HTML tags, <code>md_escape()</code> can prepend a backslash (actually, two) before every
+ASCII punctuation character.</p>
+
+<pre><code class="r">inline &lt;- md_bold(&quot;example&quot;)
+md_escape(inline)
+#&gt; \*\*example\*\*
+</code></pre>
+
 <p>**example**</p>
-</div>
-<div id="simple-inlines" class="section level3">
+
 <h3>6.3 - 6.8 Simple inlines</h3>
-<p>Here we are going to demonstrate how various simple inline block functions are used to create text <em>within</em> a container block.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>inlines &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="kw">md_code</span>(<span class="st">&quot;6.3 Code spans&quot;</span>),</span>
-<span id="cb34-3"><a href="#cb34-3"></a>  <span class="kw">md_italic</span>(<span class="st">&quot;6.4 Emphasis&quot;</span>),</span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="kw">md_bold</span>(<span class="st">&quot;6.4 Strong emphasis&quot;</span>),</span>
-<span id="cb34-5"><a href="#cb34-5"></a>  <span class="kw">md_strike</span>(<span class="st">&quot;6.5 Strikethrough (extension)&quot;</span>),</span>
-<span id="cb34-6"><a href="#cb34-6"></a>  <span class="kw">md_link</span>(<span class="st">&quot;6.6 Links&quot;</span>, <span class="st">&quot;https://example.com/&quot;</span>),</span>
-<span id="cb34-7"><a href="#cb34-7"></a>  <span class="kw">md_autolink</span>(<span class="st">&quot;https://example.com/&quot;</span>)</span>
-<span id="cb34-8"><a href="#cb34-8"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">md_bullet</span>(inlines, <span class="dt">marker =</span> <span class="st">&quot;-&quot;</span>)</span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="co">#&gt; - `6.3 Code spans`</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="co">#&gt; - _6.4 Emphasis_</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a><span class="co">#&gt; - **6.4 Strong emphasis**</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="co">#&gt; - ~~6.5 Strikethrough (extension)~~</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="co">#&gt; - [6.6 Links](https://example.com/)</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a><span class="co">#&gt; - &lt;https://example.com/&gt;</span></span></code></pre></div>
+
+<p>Here we are going to demonstrate how various simple inline block functions are
+used to create text <em>within</em> a container block.</p>
+
+<pre><code class="r">inlines &lt;- c(
+  md_code(&quot;6.3 Code spans&quot;),
+  md_italic(&quot;6.4 Emphasis&quot;),
+  md_bold(&quot;6.4 Strong emphasis&quot;),
+  md_strike(&quot;6.5 Strikethrough (extension)&quot;),
+  md_link(&quot;6.6 Links&quot;, &quot;https://example.com/&quot;),
+  md_autolink(&quot;https://example.com/&quot;)
+)
+</code></pre>
+
+<pre><code class="r">md_bullet(inlines, marker = &quot;-&quot;)
+#&gt; - `6.3 Code spans`
+#&gt; - _6.4 Emphasis_
+#&gt; - **6.4 Strong emphasis**
+#&gt; - ~~6.5 Strikethrough (extension)~~
+#&gt; - [6.6 Links](https://example.com/)
+#&gt; - &lt;https://example.com/&gt;
+</code></pre>
+
 <ul>
 <li><code>6.3 Code spans</code></li>
 <li><em>6.4 Emphasis</em></li>
 <li><strong>6.4 Strong emphasis</strong></li>
 <li><del>6.5 Strikethrough (extension)</del></li>
 <li><a href="https://example.com/">6.6 Links</a></li>
-<li><a href="https://example.com/" class="uri">https://example.com/</a></li>
+<li><a href="https://example.com/">https://example.com/</a></li>
 </ul>
-</div>
-<div id="images" class="section level3">
+
 <h3>6.7 Images</h3>
+
 <blockquote>
-<p>Syntax for images is like the syntax for links, with one difference. Instead of link text, we have an image description. The rules for this are the same as for link text, except that (a) an image description starts with <code>![</code> rather than <code>[</code>, and (b) an image description may contain links. An image description has inline elements as its contents. When an image is rendered to HTML, this is standardly used as the image’s <code>alt</code> attribute.</p>
+<p>Syntax for images is like the syntax for links, with one difference. Instead
+of link text, we have an image description. The rules for this are the same as
+for link text, except that (a) an image description starts with <code>![</code> rather than
+<code>[</code>, and (b) an image description may contain links. An image description has
+inline elements as its contents. When an image is rendered to HTML, this is
+standardly used as the image’s <code>alt</code> attribute.</p>
 </blockquote>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">md_image</span>(<span class="st">&quot;https://www.r-project.org/Rlogo.png&quot;</span>, <span class="dt">alt =</span> <span class="st">&quot;R logo&quot;</span>)</span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="co">#&gt; ![R logo](https://www.r-project.org/Rlogo.png)</span></span></code></pre></div>
-<div class="figure">
-<img src="data:image/png;base64,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" alt />
-<p class="caption">R logo</p>
-</div>
-</div>
-<div id="line-breaks" class="section level3">
+
+<pre><code class="r">md_image(&quot;https://www.r-project.org/Rlogo.png&quot;, alt = &quot;R logo&quot;)
+#&gt; ![R logo](https://www.r-project.org/Rlogo.png)
+</code></pre>
+
+<p><img src="https://www.r-project.org/Rlogo.png" alt="R logo"/></p>
+
+<h3>6.11 Disallowed Raw HTML (extension)</h3>
+
+<blockquote>
+<p>GFM enables the tagfilter extension, where the following HTML tags will be
+filtered when rendering HTML output:</p>
+
+<ul>
+<li><code>&lt;title&gt;</code></li>
+<li><code>&lt;textarea&gt;</code></li>
+<li><code>&lt;style&gt;</code></li>
+<li><code>&lt;xmp&gt;</code></li>
+<li><code>&lt;iframe&gt;</code></li>
+<li><code>&lt;noembed&gt;</code></li>
+<li><code>&lt;noframes&gt;</code></li>
+<li><code>&lt;script&gt;</code></li>
+<li><code>&lt;plaintext&gt;</code></li>
+</ul>
+
+<p>Filtering is done by replacing the leading &lt; with the entity &lt;. These tags
+are chosen in particular as they change how HTML is interpreted in a way unique
+to them (i.e. nested HTML is interpreted differently), and this is usually
+undesireable in the context of other rendered Markdown content.</p>
+</blockquote>
+
+<pre><code class="r">lines &lt;- c(
+  &quot;&lt;blockquote&gt;&quot;,
+  &quot;  &lt;xmp&gt; is disallowed.  &lt;XMP&gt; is also disallowed.&quot;,
+  &quot;&lt;/blockquote&gt;&quot;
+)
+md_disallow(lines)
+#&gt; &lt;blockquote&gt;
+#&gt;   &amp;lt;xmp&gt; is disallowed.  &amp;lt;XMP&gt; is also disallowed.
+#&gt; &lt;/blockquote&gt;
+</code></pre>
+
+<blockquote>
+  &lt;xmp> is disallowed.  &lt;XMP> is also disallowed.
+</blockquote>
+
+<p>All other HTML tags are left untouched.</p>
+
 <h3>6.12 - 6.13 Line breaks</h3>
-<p>The difference between <em>hard</em> line breaks, <em>soft</em> line breaks, paragraphs, and regular text can be confusing. New markdown users often struggle with knowing exactly how many invisible newlines or spaces are needed to present each line in the way they want. The line break functions below make it easier.</p>
+
+<p>The difference between <em>hard</em> line breaks, <em>soft</em> line breaks, paragraphs,
+and regular text can be confusing. New markdown users often struggle with
+knowing exactly how many invisible newlines or spaces are needed to present
+each line in the way they want. The line break functions below make it easier.</p>
+
 <blockquote>
-<p>A line break (not in a code span or HTML tag) that is preceded by two or more spaces and does not occur at the end of a block is parsed as a hard line break (rendered in HTML as a <code>&lt;br /&gt;</code> tag):</p>
+<p>A line break (not in a code span or HTML tag) that is preceded by two or more
+spaces and does not occur at the end of a block is parsed as a hard line break
+(rendered in HTML as a <code>&lt;br /&gt;</code> tag):</p>
 </blockquote>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># 6.12 Hard line breaks</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="kw">md_hardline</span>(sentences)</span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="co">#&gt; The gold ring fits only a pierced ear.  </span></span>
-<span id="cb37-4"><a href="#cb37-4"></a><span class="co">#&gt; He offered proof in the form of a lsrge chart.  </span></span>
-<span id="cb37-5"><a href="#cb37-5"></a><span class="co">#&gt; The office paint was a dull sad tan.  </span></span>
-<span id="cb37-6"><a href="#cb37-6"></a><span class="co">#&gt; Our troops are set to strike heavy blows.  </span></span>
-<span id="cb37-7"><a href="#cb37-7"></a><span class="co">#&gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear.<br />
-He offered proof in the form of a lsrge chart.<br />
-The office paint was a dull sad tan.<br />
-Our troops are set to strike heavy blows.<br />
-The horse trotted around the field at a brisk pace.</p>
-<hr />
+
+<pre><code class="r"># 6.12 Hard line breaks
+md_hardline(sentences)
+#&gt; The thaw came early and freed the stream.  
+#&gt; The lease ran out in sixteen weeks.  
+#&gt; The lure is used to catch trout and flounder.  
+#&gt; Trample the spark, else the flames will spread.  
+#&gt; A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream.<br/>
+The lease ran out in sixteen weeks.<br/>
+The lure is used to catch trout and flounder.<br/>
+Trample the spark, else the flames will spread.<br/>
+A speedy man can beat this track mark.  </p>
+
+<hr/>
+
 <blockquote>
-<p>A regular line break (not in a code span or HTML tag) that is not preceded by two or more spaces or a backslash is parsed as a softbreak. (A softbreak may be rendered in HTML either as a line ending or as a space. The result will be the same in browsers. In the examples here, a line ending will be used.)</p>
+<p>A regular line break (not in a code span or HTML tag) that is not preceded by
+two or more spaces or a backslash is parsed as a softbreak. (A softbreak may be
+rendered in HTML either as a line ending or as a space. The result will be the
+same in browsers. In the examples here, a line ending will be used.)</p>
 </blockquote>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># 6.13 Soft line breaks</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="kw">md_softline</span>(sentences)</span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="co">#&gt; The gold ring fits only a pierced ear.</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="co">#&gt; He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="co">#&gt; The office paint was a dull sad tan.</span></span>
-<span id="cb38-6"><a href="#cb38-6"></a><span class="co">#&gt; Our troops are set to strike heavy blows.</span></span>
-<span id="cb38-7"><a href="#cb38-7"></a><span class="co">#&gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear. He offered proof in the form of a lsrge chart. The office paint was a dull sad tan. Our troops are set to strike heavy blows. The horse trotted around the field at a brisk pace.</p>
-<hr />
-<p>You can see how both hard line and soft line breaks are different from the paragraphs as created using <code>md_paragraph()</code></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">md_paragraph</span>(sentences)</span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="co">#&gt; The gold ring fits only a pierced ear.</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="co">#&gt; </span></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="co">#&gt; He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="co">#&gt; </span></span>
-<span id="cb39-6"><a href="#cb39-6"></a><span class="co">#&gt; The office paint was a dull sad tan.</span></span>
-<span id="cb39-7"><a href="#cb39-7"></a><span class="co">#&gt; </span></span>
-<span id="cb39-8"><a href="#cb39-8"></a><span class="co">#&gt; Our troops are set to strike heavy blows.</span></span>
-<span id="cb39-9"><a href="#cb39-9"></a><span class="co">#&gt; </span></span>
-<span id="cb39-10"><a href="#cb39-10"></a><span class="co">#&gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear.</p>
-<p>He offered proof in the form of a lsrge chart.</p>
-<p>The office paint was a dull sad tan.</p>
-<p>Our troops are set to strike heavy blows.</p>
-<p>The horse trotted around the field at a brisk pace.</p>
-</div>
-<div id="textual-content" class="section level3">
+
+<pre><code class="r"># 6.13 Soft line breaks
+md_softline(sentences)
+#&gt; The thaw came early and freed the stream.
+#&gt; The lease ran out in sixteen weeks.
+#&gt; The lure is used to catch trout and flounder.
+#&gt; Trample the spark, else the flames will spread.
+#&gt; A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream.
+The lease ran out in sixteen weeks.
+The lure is used to catch trout and flounder.
+Trample the spark, else the flames will spread.
+A speedy man can beat this track mark.</p>
+
+<hr/>
+
+<p>You can see how both hard line and soft line breaks are different from the
+paragraphs as created using <code>md_paragraph()</code></p>
+
+<pre><code class="r">md_paragraph(sentences)
+#&gt; The thaw came early and freed the stream.
+#&gt; 
+#&gt; The lease ran out in sixteen weeks.
+#&gt; 
+#&gt; The lure is used to catch trout and flounder.
+#&gt; 
+#&gt; Trample the spark, else the flames will spread.
+#&gt; 
+#&gt; A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream.</p>
+
+<p>The lease ran out in sixteen weeks.</p>
+
+<p>The lure is used to catch trout and flounder.</p>
+
+<p>Trample the spark, else the flames will spread.</p>
+
+<p>A speedy man can beat this track mark.</p>
+
 <h3>6.14 Textual content</h3>
+
 <blockquote>
-<p>Any characters not given an interpretation by the above rules will be parsed as plain textual content.</p>
+<p>Any characters not given an interpretation by the above rules will be parsed
+as plain textual content.</p>
 </blockquote>
-<p>The <code>md_text()</code> function is a catch-all wrapper around <code>glue::as_glue()</code> with simply converts any character string into a <code>glue</code> object, which when used in an <code>.Rmd.</code> document alongside the <code>results=&#39;asis&#39;</code> allows users to simply print text to the body of the document.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># 6.14 Textual content</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="kw">md_text</span>(sentences)</span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="co">#&gt; The gold ring fits only a pierced ear.</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a><span class="co">#&gt; He offered proof in the form of a lsrge chart.</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a><span class="co">#&gt; The office paint was a dull sad tan.</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a><span class="co">#&gt; Our troops are set to strike heavy blows.</span></span>
-<span id="cb40-7"><a href="#cb40-7"></a><span class="co">#&gt; The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear. He offered proof in the form of a lsrge chart. The office paint was a dull sad tan. Our troops are set to strike heavy blows. The horse trotted around the field at a brisk pace.</p>
-<hr />
+
+<p>The <code>md_text()</code> function is a catch-all wrapper around <code>glue::as_glue()</code> with
+simply converts any character string into a <code>glue</code> object, which when used in
+an <code>.Rmd.</code> document alongside the <code>results=&#39;asis&#39;</code> allows users to simply print
+text to the body of the document.</p>
+
+<pre><code class="r"># 6.14 Textual content
+md_text(sentences)
+#&gt; The thaw came early and freed the stream.
+#&gt; The lease ran out in sixteen weeks.
+#&gt; The lure is used to catch trout and flounder.
+#&gt; Trample the spark, else the flames will spread.
+#&gt; A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream.
+The lease ran out in sixteen weeks.
+The lure is used to catch trout and flounder.
+Trample the spark, else the flames will spread.
+A speedy man can beat this track mark.</p>
+
+<hr/>
+
 <p>Compare this to the regular handling of character strings.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">print</span>(sentences)</span>
-<span id="cb41-2"><a href="#cb41-2"></a><span class="co">#&gt; [1] &quot;The gold ring fits only a pierced ear.&quot;             </span></span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="co">#&gt; [2] &quot;He offered proof in the form of a lsrge chart.&quot;     </span></span>
-<span id="cb41-4"><a href="#cb41-4"></a><span class="co">#&gt; [3] &quot;The office paint was a dull sad tan.&quot;               </span></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="co">#&gt; [4] &quot;Our troops are set to strike heavy blows.&quot;          </span></span>
-<span id="cb41-6"><a href="#cb41-6"></a><span class="co">#&gt; [5] &quot;The horse trotted around the field at a brisk pace.&quot;</span></span></code></pre></div>
-<p>[1] “The gold ring fits only a pierced ear.”<br />
-[2] “He offered proof in the form of a lsrge chart.”<br />
-[3] “The office paint was a dull sad tan.”<br />
-[4] “Our troops are set to strike heavy blows.”<br />
-[5] “The horse trotted around the field at a brisk pace.”</p>
-<hr />
-<p>The <code>md_text()</code> function creates strings with the <code>glue</code> S3 class. This class works in the same way as the <code>cat()</code> functions.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">cat</span>(sentences)</span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="co">#&gt; The gold ring fits only a pierced ear. He offered proof in the form of a lsrge chart. The office paint was a dull sad tan. Our troops are set to strike heavy blows. The horse trotted around the field at a brisk pace.</span></span></code></pre></div>
-<p>The gold ring fits only a pierced ear. He offered proof in the form of a lsrge chart. The office paint was a dull sad tan. Our troops are set to strike heavy blows. The horse trotted around the field at a brisk pace.</p>
-</div>
-</div>
 
+<pre><code class="r">print(sentences)
+#&gt; [1] &quot;The thaw came early and freed the stream.&quot;      
+#&gt; [2] &quot;The lease ran out in sixteen weeks.&quot;            
+#&gt; [3] &quot;The lure is used to catch trout and flounder.&quot;  
+#&gt; [4] &quot;Trample the spark, else the flames will spread.&quot;
+#&gt; [5] &quot;A speedy man can beat this track mark.&quot;
+</code></pre>
 
+<p>[1] &ldquo;The thaw came early and freed the stream.&rdquo;<br/>
+[2] &ldquo;The lease ran out in sixteen weeks.&rdquo;<br/>
+[3] &ldquo;The lure is used to catch trout and flounder.&rdquo;<br/>
+[4] &ldquo;Trample the spark, else the flames will spread.&rdquo;
+[5] &ldquo;A speedy man can beat this track mark.&rdquo;         </p>
 
-<!-- code folding -->
+<hr/>
 
+<p>The <code>md_text()</code> function creates strings with the <code>glue</code> S3 class. This class
+works in the same way as the <code>cat()</code> functions.</p>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
+<pre><code class="r">cat(sentences)
+#&gt; The thaw came early and freed the stream. The lease ran out in sixteen weeks. The lure is used to catch trout and flounder. Trample the spark, else the flames will spread. A speedy man can beat this track mark.
+</code></pre>
+
+<p>The thaw came early and freed the stream. The lease ran out in sixteen weeks. The lure is used to catch trout and flounder. Trample the spark, else the flames will spread. A speedy man can beat this track mark.</p>
 
 </body>
+
 </html>

@@ -1,3 +1,9 @@
+# gluedown 1.0.2
+
+* Suggest `markdown` dependency and warn for `md_convert()` (#22).
+* Suggest `knitr` dependency and write fallback for `md_table()` (#20).
+* Enable named vector support for `md_link()`.
+
 # gluedown 1.0.1
 
 * Remove `md_define()` to avoid pandoc issue (#16, #17).

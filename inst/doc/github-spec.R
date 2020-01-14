@@ -72,14 +72,26 @@ md_fence("$ sudo apt install r-base-dev", info = "bash")
 md_fence("$ sudo apt install r-base-dev", info = "bash")
 
 ## -----------------------------------------------------------------------------
-read_html("https://example.com/") %>% 
-  html_nodes("p") %>%
-  md_text()
+lines <- c(
+  "<table><tr><td>",
+  "<pre>",
+  "**Hello**,",
+  "_world_.",
+  "</pre>",
+  " </td></tr></table>"
+)
+md_text(lines)
 
 ## ----echo=FALSE, results='asis'-----------------------------------------------
-read_html("https://example.com/") %>% 
-  html_nodes("p") %>%
-  md_text()
+lines <- c(
+  "<table><tr><td>",
+  "<pre>",
+  "**Hello**,",
+  "_world_.",
+  "</pre>",
+  " </td></tr></table>"
+)
+md_text(lines)
 
 ## -----------------------------------------------------------------------------
 a <- c("cran", "tidy")
@@ -200,6 +212,22 @@ md_image("https://www.r-project.org/Rlogo.png", alt = "R logo")
 
 ## ----echo=FALSE, results='asis'-----------------------------------------------
 md_image("https://www.r-project.org/Rlogo.png", alt = "R logo")
+
+## -----------------------------------------------------------------------------
+lines <- c(
+  "<blockquote>",
+  "  <xmp> is disallowed.  <XMP> is also disallowed.",
+  "</blockquote>"
+)
+md_disallow(lines)
+
+## ----echo=FALSE, results='asis'-----------------------------------------------
+lines <- c(
+  "<blockquote>",
+  "  <xmp> is disallowed.  <XMP> is also disallowed.",
+  "</blockquote>"
+)
+md_disallow(lines)
 
 ## -----------------------------------------------------------------------------
 # 6.12 Hard line breaks

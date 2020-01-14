@@ -32,7 +32,7 @@ Install the release version from
 install.packages("gluedown")
 ```
 
-To install the development version from
+Install the development version from
 [GitHub](https://github.com/kiernann/gluedown):
 
 ``` r
@@ -42,28 +42,49 @@ remotes::install_github("kiernann/gluedown")
 
 ## Usage
 
-Use the `results='asis'` chunk option to print the formatted output from
-a code chunk to the body of a document.
-
 ``` r
 library(gluedown)
 library(stringr)
 library(rvest)
 ```
 
+Use the `results='asis'` chunk option to print the formatted output to
+the body of a document.
+
+```` markdown
+```{r results='asis'}
+md_order(x = c("Legislative", "Executive", "Judicial"))
+```
+````
+
+1.  Legislative
+2.  Executive
+3.  Judicial
+
 ### Lists
 
 Printing vectors as markdown lists was the initial inspiration for the
-package.
+package. Here, we use five different functions to create five elements
+of a new vector.
 
 ``` r
 inlines <- c(
   md_bold("Alabama"),
   md_code("Alaska"),
-  md_link("Arizona", "https://az.gov"),
+  md_link(c("Arizona" = "https://az.gov")),
   md_italic("Arkansas"),
   md_strike("California")
 )
+print(inlines)
+#> [1] "**Alabama**"               "`Alaska`"                 
+#> [3] "[Arizona](https://az.gov)" "_Arkansas_"               
+#> [5] "~~California~~"
+```
+
+Then we can print that new vector as a list, including the inline
+formatting.
+
+``` r
 md_bullet(inlines)
 ```
 
@@ -72,6 +93,21 @@ md_bullet(inlines)
   - [Arizona](https://az.gov)
   - *Arkansas*
   - ~~California~~
+
+### Inline
+
+You can also use `gluedown` to format R [inline code
+results](https://rmarkdown.rstudio.com/lesson-4.html).
+
+``` r
+name <- sample(state.name, size = 1)
+abb <- state.abb[match(name, state.name)]
+# `r md_bold(name)`
+# `r md_italic(abb)`
+```
+
+In this case, our randomly selected state is **Indiana**, which has the
+abbreviation *IN*.
 
 ### Pipes
 
@@ -82,7 +118,7 @@ work with [pipes](https://magrittr.tidyverse.org/reference/pipe.html).
 read_html("https://w.wiki/A58") %>% 
   html_node("blockquote") %>% 
   html_text(trim = TRUE) %>% 
-  str_remove("\\[(.*)\\]") %>% 
+  str_remove("\\[.*\\]") %>% 
   md_quote()
 ```
 
@@ -107,21 +143,6 @@ md_task(legislation, check = 1:2)
   - [x] Houses passes
   - [x] Senate concurs
   - [ ] President signs
-
-### Inline
-
-You can also use `gluedown` to format R [inline code
-results](https://rmarkdown.rstudio.com/lesson-4.html).
-
-``` r
-name <- sample(state.name, size = 1)
-abb <- state.abb[match(name, state.name)]
-# `r md_bold(name)`
-# `r md_italic(abb)`
-```
-
-In this case, our randomly selected state is **Virginia**, which has the
-abbreviation *VA*.
 
 ## Contribute
 
