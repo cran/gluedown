@@ -6,14 +6,14 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+experimental](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/gluedown)](https://CRAN.R-project.org/package=gluedown)
-[![Travis build
-status](https://travis-ci.org/kiernann/gluedown.svg?branch=master)](https://travis-ci.org/kiernann/gluedown)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gluedown)
 [![Codecov test
 coverage](https://img.shields.io/codecov/c/github/kiernann/gluedown/master.svg)](https://codecov.io/gh/kiernann/gluedown?branch=master')
-![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gluedown)
+[![R build
+status](https://github.com/kiernann/gluedown/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/gluedown/actions)
 <!-- badges: end -->
 
 The goal of `gluedown` is to ease the transition from R’s powerful
@@ -32,7 +32,7 @@ Install the release version from
 install.packages("gluedown")
 ```
 
-Install the development version from
+The development version can be installed from \[GitHub\]
 [GitHub](https://github.com/kiernann/gluedown):
 
 ``` r
@@ -71,7 +71,7 @@ of a new vector.
 inlines <- c(
   md_bold("Alabama"),
   md_code("Alaska"),
-  md_link(c("Arizona" = "https://az.gov")),
+  md_link("Arizona" = "https://az.gov"),
   md_italic("Arkansas"),
   md_strike("California")
 )
@@ -88,11 +88,11 @@ formatting.
 md_bullet(inlines)
 ```
 
-  - **Alabama**
-  - `Alaska`
-  - [Arizona](https://az.gov)
-  - *Arkansas*
-  - ~~California~~
+-   **Alabama**
+-   `Alaska`
+-   [Arizona](https://az.gov)
+-   *Arkansas*
+-   ~~California~~
 
 ### Inline
 
@@ -106,8 +106,8 @@ abb <- state.abb[match(name, state.name)]
 # `r md_italic(abb)`
 ```
 
-In this case, our randomly selected state is **Indiana**, which has the
-abbreviation *IN*.
+In this case, our randomly selected state is **Kentucky**, which has the
+abbreviation *KY*.
 
 ### Pipes
 
@@ -140,9 +140,9 @@ legislation <- c("Houses passes", "Senate concurs", "President signs")
 md_task(legislation, check = 1:2)
 ```
 
-  - [x] Houses passes
-  - [x] Senate concurs
-  - [ ] President signs
+-   [x] Houses passes
+-   [x] Senate concurs
+-   [ ] President signs
 
 ## Contribute
 
@@ -151,5 +151,4 @@ Code of Conduct](https://kiernann.com/gluedown/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
 <!-- links: start -->
-
 <!-- links: end -->

@@ -4,16 +4,21 @@
 \alias{md_link}
 \title{Markdown inline link (6.6)}
 \usage{
-md_link(x, url = NULL, title = NULL)
+md_link(text, url, title = NULL, ..., .name = FALSE)
 }
 \arguments{
-\item{x}{either: (1) A \emph{named} vector, with names set to the hyperlink text
-and elements set to the accompanying URL; or (2) a simple character
-vector of text with another vector of URLs passed to the \code{url} argument.}
+\item{text}{A character vector of text with another vector of URLs passed to
+the \code{url} argument.}
 
-\item{url}{The URL to lead to.}
+\item{url}{A character vector of URLs.}
 
 \item{title}{The optional title of the link.}
+
+\item{...}{A sequence of \code{text = "/url"} named vector pairs. If any such
+pairs are provided, \code{.name} will be considered \code{TRUE}.}
+
+\item{.name}{logical; if \code{TRUE}, the pairs in \code{...} will be used instead of
+any values supplied to \code{x} and \code{url}.}
 }
 \value{
 A \code{glue} vector of collapsed display text and associated URLs.
@@ -43,8 +48,8 @@ above. The link’s title consists of the link title, excluding its enclosing
 delimiters, with backslash-escapes in effect as described above.
 }
 \examples{
-md_link("tidyverse", "https://www.tidyverse.org/")
-md_link(c(CRAN = "https://cran.r-project.org/"))
+md_link(1:5, glue::glue("https://{state.abb[1:5]}.gov"), state.name[1:5])
+md_link(CRAN = "https://cran.r-project.org/")
 }
 \seealso{
 Other inline functions: 

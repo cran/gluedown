@@ -211,7 +211,14 @@ md_bullet(inlines, marker = "-")
 md_image("https://www.r-project.org/Rlogo.png", alt = "R logo")
 
 ## ----echo=FALSE, results='asis'-----------------------------------------------
-md_image("https://www.r-project.org/Rlogo.png", alt = "R logo")
+tmp <- tempfile(fileext = ".png")
+try <- tryCatch(
+  expr = download.file("https://www.r-project.org/Rlogo.png", tmp),
+  error = function(e) return(NULL)
+)
+if (!is.null(try)) {
+  md_image(tmp, alt = "R logo")
+}
 
 ## -----------------------------------------------------------------------------
 lines <- c(

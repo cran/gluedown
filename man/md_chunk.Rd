@@ -30,7 +30,6 @@ nested HTML \verb{<code>} and \verb{<pre>} tags. This function either calls
 }
 \examples{
 md_chunk("$ sudo apt install r-base-dev", info = "bash")
-md_chunk(c("library(ggplot2)", "ggplot(mpg)+", "geom_point(aes(displ, hwy))"), type = "tilde")
 md_indent(
   n = c(4, 4, 6),
   x = c(
@@ -46,6 +45,7 @@ Other leaf block functions:
 \code{\link{md_fence}()},
 \code{\link{md_heading}()},
 \code{\link{md_indent}()},
+\code{\link{md_label}()},
 \code{\link{md_paragraph}()},
 \code{\link{md_reference}()},
 \code{\link{md_rule}()},

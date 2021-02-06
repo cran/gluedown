@@ -23,9 +23,7 @@ md_quote(markdown_blog[4])
 md_quote(markdown_blog[6])
 
 ## ----state.name---------------------------------------------------------------
-mode(state.name)
-length(state.name)
-sample(state.name, 3)
+str(state.name, vec.len = 3)
 
 ## ----cat_plain, results='asis'------------------------------------------------
 cat(state.name[1:3])
@@ -58,9 +56,7 @@ inlines <- c(
   md_strike(state.name[8])
 )
 
-mode(inlines)
-length(inlines)
-print(inlines)
+str(inlines, vec.len = 3)
 
 ## ----bullet_list, results='asis'----------------------------------------------
 md_bullet(inlines)
@@ -78,10 +74,10 @@ md_fence(paste("$", command), char = "~", info = "bash")
 
 ## ----blockquote, results='asis'-----------------------------------------------
 read_html("https://w.wiki/A58") %>% # 1
-  html_node("blockquote") %>% # 2
-  html_text(trim = TRUE) %>% # 3
-  str_remove("\\[(.*)\\]") %>% # 4
-  md_quote() # 5
+  html_node("blockquote") %>%       # 2
+  html_text(trim = TRUE) %>%        # 3
+  str_remove("\\[(.*)\\]") %>%      # 4
+  md_quote()                        # 5
 
 ## ----ex_task, results='asis'--------------------------------------------------
 legislation <- c("Houses passes", "Senate concurs", "President signs")

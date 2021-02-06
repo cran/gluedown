@@ -4,25 +4,6 @@ library(stringr)
 library(rvest)
 library(glue)
 
-find_nodes <- function(md, node) {
-  md %>%
-    md_convert() %>%
-    read_html() %>%
-    html_nodes(node)
-}
-
-expect_empty <- function(object) {
-  expect_true(length(object) == 0)
-}
-
-expect_full <- function(object) {
-  expect_true(length(object) != 0)
-}
-
-expect_nchar <- function(object, n) {
-  expect_true(nchar(object) == n)
-}
-
 test_that("md_table creates a single <table> tag (ex. 198)", {
   # https://github.github.com/gfm/#example-198
   df <- data.frame(
@@ -34,7 +15,8 @@ test_that("md_table creates a single <table> tag (ex. 198)", {
     md_convert() %>%
     read_html() %>%
     html_node("table") %>%
-    html_table()
+    html_table() %>%
+    as.data.frame()
   expect_equal(node, df)
 })
 
@@ -49,6 +31,47 @@ test_that("md_table can create a table with no body (ex. 205)", {
     md_convert() %>%
     read_html() %>%
     html_node("table") %>%
-    html_table()
+    html_table() %>%
+    as.data.frame()
+  expect_equal(node, df)
+})
+
+test_that("md_table works without knitr", {
+  df <- data.frame(
+    foo = "baz",
+    bar = "bim",
+    stringsAsFactors = FALSE
+  )
+  md <- mockr::with_mock(
+    .env = as.environment("package:gluedown"),
+    `has_knitr` = function() FALSE,
+    md_table(df)
+  )
+  node <- md %>%
+    md_convert() %>%
+    read_html() %>%
+    html_node("table") %>%
+    html_table() %>%
+    as.data.frame()
+  expect_equal(node, df)
+})
+
+test_that("md_table works without knitr and no body", {
+  df <- data.frame(
+    foo = logical(),
+    bar = logical(),
+    stringsAsFactors = FALSE
+  )
+  md <- mockr::with_mock(
+    .env = as.environment("package:gluedown"),
+    `has_knitr` = function() FALSE,
+    md_table(df)
+  )
+  node <- md %>%
+    md_convert() %>%
+    read_html() %>%
+    html_node("table") %>%
+    html_table() %>%
+    as.data.frame()
   expect_equal(node, df)
 })
