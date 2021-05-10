@@ -1,6 +1,6 @@
 Package: gluedown
 Title: Wrap Vectors in Markdown Formatting
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: 
     person(given = "Kiernan",
            family = "Nicholls",
@@ -26,11 +26,10 @@ Suggests: covr (>= 3.3.2), dplyr (>= 0.8.3), httr (>= 1.4.1), knitr (>=
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
-LazyData: true
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-02-06 02:06:22 UTC; kiernan
+Packaged: 2021-05-04 17:32:50 UTC; kiernan
 Author: Kiernan Nicholls [aut, cre]
 Maintainer: Kiernan Nicholls <kiernann@protonmail.com>
 Repository: CRAN
-Date/Publication: 2021-02-06 05:20:02 UTC
+Date/Publication: 2021-05-10 16:10:15 UTC

@@ -10,11 +10,22 @@ library(stringr)
 library(rvest)
 library(glue)
 
-## ----markdown_desc------------------------------------------------------------
-markdown_blog <- 
-  read_html("https://daringfireball.net/projects/markdown/") %>% 
-  html_nodes("p") %>% 
-  html_text()
+## ----markdown_desc, eval=FALSE------------------------------------------------
+#  markdown_blog <-
+#    read_html("https://daringfireball.net/projects/markdown/") %>%
+#    html_elements("p") %>%
+#    html_text()
+
+## ----echo=FALSE---------------------------------------------------------------
+x <- tryCatch(
+  expr = read_html("https://daringfireball.net/projects/markdown/"),
+  error = function(e) NULL
+)
+if (!is.null(x)) {
+ markdown_blog <- html_text(html_elements(x, "p"))
+} else {
+  markdown_blog <- LETTERS
+}
 
 ## ----quote_what, results='asis'-----------------------------------------------
 md_quote(markdown_blog[4])
@@ -72,12 +83,26 @@ md_fence(lines)
 command <- "sudo apt install r-base-dev"
 md_fence(paste("$", command), char = "~", info = "bash")
 
-## ----blockquote, results='asis'-----------------------------------------------
-read_html("https://w.wiki/A58") %>% # 1
-  html_node("blockquote") %>%       # 2
-  html_text(trim = TRUE) %>%        # 3
-  str_remove("\\[(.*)\\]") %>%      # 4
-  md_quote()                        # 5
+## ----blockquote, results='asis', eval=FALSE-----------------------------------
+#  read_html("https://w.wiki/A58") %>% # 1
+#    html_element("blockquote") %>%    # 2
+#    html_text(trim = TRUE) %>%        # 3
+#    str_remove("\\[(.*)\\]") %>%      # 4
+#    md_quote()                        # 5
+
+## ----results='asis', echo=FALSE-----------------------------------------------
+w <- "https://en.wikipedia.org/wiki/Preamble_to_the_United_States_Constitution"
+x <- tryCatch(
+  expr = read_html(w),
+  error = function(e) NULL
+)
+if (!is.null(x)) {
+  x %>%
+    html_element("blockquote") %>%
+    html_text(trim = TRUE) %>%
+    str_remove("\\[(.*)\\]") %>%
+    md_quote() 
+}  
 
 ## ----ex_task, results='asis'--------------------------------------------------
 legislation <- c("Houses passes", "Senate concurs", "President signs")

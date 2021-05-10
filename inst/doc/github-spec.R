@@ -131,19 +131,26 @@ md_table(states, align = "c")
 options(knitr.kable.NA = "")
 md_table(states, align = "c")
 
-## -----------------------------------------------------------------------------
-read_html("https://w.wiki/A58") %>% 
-  html_node("blockquote") %>% 
-  html_text(trim = TRUE) %>% 
-  str_remove("\\[(.*)\\]") %>% 
-  md_quote()
+## ----eval=FALSE---------------------------------------------------------------
+#  read_html("https://w.wiki/A58") %>%
+#    html_element("blockquote") %>%
+#    html_text(trim = TRUE) %>%
+#    str_remove("\\[(.*)\\]") %>%
+#    md_quote()
 
 ## ----echo=FALSE, results='asis'-----------------------------------------------
-read_html("https://w.wiki/A58") %>% 
-  html_node("blockquote") %>% 
-  html_text(trim = TRUE) %>% 
-  str_remove("\\[(.*)\\]") %>% 
-  md_quote()
+w <- "https://en.wikipedia.org/wiki/Preamble_to_the_United_States_Constitution"
+x <- tryCatch(
+  expr = read_html(w),
+  error = function(e) NULL
+)
+if (!is.null(x)) {
+  x %>% 
+    html_element("blockquote") %>% 
+    html_text(trim = TRUE) %>% 
+    str_remove("\\[(.*)\\]") %>% 
+    md_quote()
+}
 
 ## -----------------------------------------------------------------------------
 md_quote(sentences)
@@ -212,13 +219,13 @@ md_image("https://www.r-project.org/Rlogo.png", alt = "R logo")
 
 ## ----echo=FALSE, results='asis'-----------------------------------------------
 tmp <- tempfile(fileext = ".png")
-try <- tryCatch(
-  expr = download.file("https://www.r-project.org/Rlogo.png", tmp),
-  error = function(e) return(NULL)
-)
-if (!is.null(try)) {
-  md_image(tmp, alt = "R logo")
-}
+  try <- tryCatch(
+    expr = download.file("https://www.r-project.org/Rlogo.png", tmp),
+    error = function(e) return(NULL)
+  )
+  if (!is.null(try)) {
+    md_image(tmp, alt = "R logo")
+  }
 
 ## -----------------------------------------------------------------------------
 lines <- c(

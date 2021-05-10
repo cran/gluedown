@@ -26,11 +26,19 @@
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -303,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ```bash</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sudo apt install r-base-dev</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ```</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>$ <span class="fu">sudo</span> apt install r-base-dev</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo apt install r-base-dev</span></code></pre></div>
 </div>
 <div id="html-blocks" class="section level3">
 <h3>4.6 HTML blocks</h3>
@@ -360,20 +368,20 @@ _world_.
 <p>In section 6.12 and 6.13 you can compare the output of <code>md_paragraph()</code> with the other line break functions.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="ot">&lt;-</span> <span class="fu">sample</span>(stringr<span class="sc">::</span>sentences, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choose between the high road and the low.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Torn scraps littered the stone floor.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The purple tie was ten years old.</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around.</p>
-<p>Choose between the high road and the low.</p>
-<p>Torn scraps littered the stone floor.</p>
-<p>The purple tie was ten years old.</p>
-<p>She flaps her cape as she parades the street.</p>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun.</p>
+<p>A force equal to that would move the earth.</p>
+<p>Breathe deep and smell the piny air.</p>
+<p>These coins will be needed to pay his debt.</p>
+<p>Rake the rubbish up and then burn it.</p>
 </div>
 <div id="blank-lines" class="section level3">
 <h3>4.9 Blank lines</h3>
@@ -509,34 +517,33 @@ _world_.
 </blockquote>
 <p>I’ve been copy-pasting block quotes from the GFM spec in this vignette, but we can also use <code>md_quote()</code> to grammatically create or manipulate strings and print them as block quotes.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_html</span>(<span class="st">&quot;https://w.wiki/A58&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">[(.*)</span><span class="sc">\\</span><span class="st">]&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_quote</span>()</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</span></span></code></pre></div>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_quote</span>()</span></code></pre></div>
 <blockquote>
 <p>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
 </blockquote>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_quote</span>(sentences)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Gray paint stretched for miles around.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Choose between the high road and the low.</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Torn scraps littered the stone floor.</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The purple tie was ten years old.</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The wide road shimmered in the hot sun.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; A force equal to that would move the earth.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Breathe deep and smell the piny air.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; These coins will be needed to pay his debt.</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
 <blockquote>
-<p>Gray paint stretched for miles around.</p>
+<p>The wide road shimmered in the hot sun.</p>
 </blockquote>
 <blockquote>
-<p>Choose between the high road and the low.</p>
+<p>A force equal to that would move the earth.</p>
 </blockquote>
 <blockquote>
-<p>Torn scraps littered the stone floor.</p>
+<p>Breathe deep and smell the piny air.</p>
 </blockquote>
 <blockquote>
-<p>The purple tie was ten years old.</p>
+<p>These coins will be needed to pay his debt.</p>
 </blockquote>
 <blockquote>
-<p>She flaps her cape as she parades the street.</p>
+<p>Rake the rubbish up and then burn it.</p>
 </blockquote>
 </div>
 <div id="list-items" class="section level3">
@@ -559,22 +566,22 @@ _world_.
 </blockquote>
 <p>Markdown extensions like this one are optionally supported on different venues. On GitHub (in <code>README.md</code> files, issues, or comments, etc.) these tasks list are rendered as check boxes, sometimes even interactable. On other venues, like this very HTML vignette, these check boxes just render are bullet lists with weird bracket boxes on each line.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_task</span>(sentences, <span class="at">check =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Gray paint stretched for miles around.</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Choose between the high road and the low.</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] Torn scraps littered the stone floor.</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] The purple tie was ten years old.</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] She flaps her cape as she parades the street.</span></span></code></pre></div>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] The wide road shimmered in the hot sun.</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] A force equal to that would move the earth.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] Breathe deep and smell the piny air.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] These coins will be needed to pay his debt.</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Rake the rubbish up and then burn it.</span></span></code></pre></div>
 <ul class="task-list">
 <li><input type="checkbox" disabled></input>
-Gray paint stretched for miles around.</li>
+The wide road shimmered in the hot sun.</li>
 <li><input type="checkbox" disabled></input>
-Choose between the high road and the low.</li>
+A force equal to that would move the earth.</li>
 <li><input type="checkbox" disabled checked></input>
-Torn scraps littered the stone floor.</li>
+Breathe deep and smell the piny air.</li>
 <li><input type="checkbox" disabled checked></input>
-The purple tie was ten years old.</li>
+These coins will be needed to pay his debt.</li>
 <li><input type="checkbox" disabled></input>
-She flaps her cape as she parades the street.</li>
+Rake the rubbish up and then burn it.</li>
 </ul>
 </div>
 <div id="lists" class="section level3">
@@ -588,40 +595,40 @@ She flaps her cape as she parades the street.</li>
 <p>The <code>md_order()</code> and <code>md_bullet()</code> functions let users display character vectors as list blocks. The functions let users adjust the which list item markets are used, but all the options are rendered as the same <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> tags in the rendered <code>.html</code> file.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">sample</span>(state.name, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Pennsylvania</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Maine</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Connecticut</span></span></code></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Idaho</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Colorado</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Tennessee</span></span></code></pre></div>
 <ul>
-<li>Pennsylvania</li>
-<li>Maine</li>
-<li>Connecticut</li>
+<li>Idaho</li>
+<li>Colorado</li>
+<li>Tennessee</li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states, <span class="at">marker =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Pennsylvania</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Maine</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Connecticut</span></span></code></pre></div>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Idaho</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Colorado</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Tennessee</span></span></code></pre></div>
 <ul>
-<li>Pennsylvania</li>
-<li>Maine</li>
-<li>Connecticut</li>
+<li>Idaho</li>
+<li>Colorado</li>
+<li>Tennessee</li>
 </ul>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Pennsylvania</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Maine</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Connecticut</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Idaho</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Colorado</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Tennessee</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Pennsylvania</li>
-<li>Maine</li>
-<li>Connecticut</li>
+<li>Idaho</li>
+<li>Colorado</li>
+<li>Tennessee</li>
 </ol>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states, <span class="at">seq =</span> <span class="cn">FALSE</span>, <span class="at">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Pennsylvania</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Maine</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Connecticut</span></span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Idaho</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Colorado</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Tennessee</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Pennsylvania</li>
-<li>Maine</li>
-<li>Connecticut</li>
+<li>Idaho</li>
+<li>Colorado</li>
+<li>Tennessee</li>
 </ol>
 </div>
 </div>
@@ -719,45 +726,45 @@ She flaps her cape as she parades the street.</li>
 </blockquote>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.12 Hard line breaks</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_hardline</span>(sentences)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around.  </span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choose between the high road and the low.  </span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Torn scraps littered the stone floor.  </span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The purple tie was ten years old.  </span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around.<br />
-Choose between the high road and the low.<br />
-Torn scraps littered the stone floor.<br />
-The purple tie was ten years old.<br />
-She flaps her cape as she parades the street.</p>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.  </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.  </span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.  </span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.  </span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun.<br />
+A force equal to that would move the earth.<br />
+Breathe deep and smell the piny air.<br />
+These coins will be needed to pay his debt.<br />
+Rake the rubbish up and then burn it.</p>
 <hr />
 <blockquote>
 <p>A regular line break (not in a code span or HTML tag) that is not preceded by two or more spaces or a backslash is parsed as a softbreak. (A softbreak may be rendered in HTML either as a line ending or as a space. The result will be the same in browsers. In the examples here, a line ending will be used.)</p>
 </blockquote>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.13 Soft line breaks</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_softline</span>(sentences)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around.</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choose between the high road and the low.</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Torn scraps littered the stone floor.</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The purple tie was ten years old.</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around. Choose between the high road and the low. Torn scraps littered the stone floor. The purple tie was ten years old. She flaps her cape as she parades the street.</p>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
 <hr />
 <p>You can see how both hard line and soft line breaks are different from the paragraphs as created using <code>md_paragraph()</code></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around.</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choose between the high road and the low.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Torn scraps littered the stone floor.</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The purple tie was ten years old.</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around.</p>
-<p>Choose between the high road and the low.</p>
-<p>Torn scraps littered the stone floor.</p>
-<p>The purple tie was ten years old.</p>
-<p>She flaps her cape as she parades the street.</p>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun.</p>
+<p>A force equal to that would move the earth.</p>
+<p>Breathe deep and smell the piny air.</p>
+<p>These coins will be needed to pay his debt.</p>
+<p>Rake the rubbish up and then burn it.</p>
 </div>
 <div id="textual-content" class="section level3">
 <h3>6.14 Textual content</h3>
@@ -767,30 +774,28 @@ She flaps her cape as she parades the street.</p>
 <p>The <code>md_text()</code> function is a catch-all wrapper around <code>glue::as_glue()</code> with simply converts any character string into a <code>glue</code> object, which when used in an <code>.Rmd.</code> document alongside the <code>results=&#39;asis&#39;</code> allows users to simply print text to the body of the document.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.14 Textual content</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_text</span>(sentences)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around.</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choose between the high road and the low.</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Torn scraps littered the stone floor.</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The purple tie was ten years old.</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around. Choose between the high road and the low. Torn scraps littered the stone floor. The purple tie was ten years old. She flaps her cape as she parades the street.</p>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
 <hr />
 <p>Compare this to the regular handling of character strings.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sentences)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Gray paint stretched for miles around.&quot;       </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Choose between the high road and the low.&quot;    </span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;Torn scraps littered the stone floor.&quot;        </span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;The purple tie was ten years old.&quot;            </span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;She flaps her cape as she parades the street.&quot;</span></span></code></pre></div>
-<p>[1] “Gray paint stretched for miles around.”<br />
-[2] “Choose between the high road and the low.”<br />
-[3] “Torn scraps littered the stone floor.”<br />
-[4] “The purple tie was ten years old.”<br />
-[5] “She flaps her cape as she parades the street.”</p>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The wide road shimmered in the hot sun.&quot;    </span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;A force equal to that would move the earth.&quot;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;Breathe deep and smell the piny air.&quot;       </span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;These coins will be needed to pay his debt.&quot;</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;Rake the rubbish up and then burn it.&quot;</span></span></code></pre></div>
+<p>[1] “The wide road shimmered in the hot sun.”<br />
+[2] “A force equal to that would move the earth.” [3] “Breathe deep and smell the piny air.”<br />
+[4] “These coins will be needed to pay his debt.” [5] “Rake the rubbish up and then burn it.”</p>
 <hr />
 <p>The <code>md_text()</code> function creates strings with the <code>glue</code> S3 class. This class works in the same way as the <code>cat()</code> functions.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sentences)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gray paint stretched for miles around. Choose between the high road and the low. Torn scraps littered the stone floor. The purple tie was ten years old. She flaps her cape as she parades the street.</span></span></code></pre></div>
-<p>Gray paint stretched for miles around. Choose between the high road and the low. Torn scraps littered the stone floor. The purple tie was ten years old. She flaps her cape as she parades the street.</p>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
 </div>
 </div>
 
