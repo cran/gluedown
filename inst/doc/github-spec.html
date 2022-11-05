@@ -14,7 +14,19 @@
 
 <title>GitHub Flavored Markdown</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -24,6 +36,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -107,13 +120,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -125,7 +145,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -142,35 +342,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="TOC">
 <ul>
-<li><a href="#blocks-and-inlines">3 Blocks and Inlines</a></li>
-<li><a href="#leaf-blocks">4 Leaf blocks</a>
+<li><a href="#blocks-and-inlines" id="toc-blocks-and-inlines">3 Blocks
+and Inlines</a></li>
+<li><a href="#leaf-blocks" id="toc-leaf-blocks">4 Leaf blocks</a>
 <ul>
-<li><a href="#thematic-breaks">4.1 Thematic breaks</a></li>
-<li><a href="#atx-headings">4.2 ATX Headings</a></li>
-<li><a href="#setext-headings">4.3 Setext headings</a></li>
-<li><a href="#indented-code-blocks">4.4 Indented code blocks</a></li>
-<li><a href="#fenced-code-blocks">4.5 Fenced code blocks</a></li>
-<li><a href="#html-blocks">4.6 HTML blocks</a></li>
-<li><a href="#link-reference-definitions">4.7 Link reference definitions</a></li>
-<li><a href="#paragraphs">4.8 Paragraphs</a></li>
-<li><a href="#blank-lines">4.9 Blank lines</a></li>
-<li><a href="#tables-extension">4.10 Tables (extension)</a></li>
+<li><a href="#thematic-breaks" id="toc-thematic-breaks">4.1 Thematic
+breaks</a></li>
+<li><a href="#atx-headings" id="toc-atx-headings">4.2 ATX
+Headings</a></li>
+<li><a href="#setext-headings" id="toc-setext-headings">4.3 Setext
+headings</a></li>
+<li><a href="#indented-code-blocks" id="toc-indented-code-blocks">4.4
+Indented code blocks</a></li>
+<li><a href="#fenced-code-blocks" id="toc-fenced-code-blocks">4.5 Fenced
+code blocks</a></li>
+<li><a href="#html-blocks" id="toc-html-blocks">4.6 HTML blocks</a></li>
+<li><a href="#link-reference-definitions" id="toc-link-reference-definitions">4.7 Link reference
+definitions</a></li>
+<li><a href="#paragraphs" id="toc-paragraphs">4.8 Paragraphs</a></li>
+<li><a href="#blank-lines" id="toc-blank-lines">4.9 Blank lines</a></li>
+<li><a href="#tables-extension" id="toc-tables-extension">4.10 Tables
+(extension)</a></li>
 </ul></li>
-<li><a href="#container-blocks">5 Container Blocks</a>
+<li><a href="#container-blocks" id="toc-container-blocks">5 Container
+Blocks</a>
 <ul>
-<li><a href="#block-quotes">5.1 Block quotes</a></li>
-<li><a href="#list-items">5.2 List items</a></li>
-<li><a href="#task-list-items-extension">5.3 Task list items (extension)</a></li>
-<li><a href="#lists">5.4 Lists</a></li>
+<li><a href="#block-quotes" id="toc-block-quotes">5.1 Block
+quotes</a></li>
+<li><a href="#list-items" id="toc-list-items">5.2 List items</a></li>
+<li><a href="#task-list-items-extension" id="toc-task-list-items-extension">5.3 Task list items
+(extension)</a></li>
+<li><a href="#lists" id="toc-lists">5.4 Lists</a></li>
 </ul></li>
-<li><a href="#inlines">6 Inlines</a>
+<li><a href="#inlines" id="toc-inlines">6 Inlines</a>
 <ul>
-<li><a href="#backslash-escapes">6.1 Backslash escapes</a></li>
-<li><a href="#simple-inlines">6.3 - 6.8 Simple inlines</a></li>
-<li><a href="#images">6.7 Images</a></li>
-<li><a href="#disallowed-raw-html-extension">6.11 Disallowed Raw HTML (extension)</a></li>
-<li><a href="#line-breaks">6.12 - 6.13 Line breaks</a></li>
-<li><a href="#textual-content">6.14 Textual content</a></li>
+<li><a href="#backslash-escapes" id="toc-backslash-escapes">6.1
+Backslash escapes</a></li>
+<li><a href="#simple-inlines" id="toc-simple-inlines">6.3 - 6.8 Simple
+inlines</a></li>
+<li><a href="#images" id="toc-images">6.7 Images</a></li>
+<li><a href="#disallowed-raw-html-extension" id="toc-disallowed-raw-html-extension">6.11 Disallowed Raw HTML
+(extension)</a></li>
+<li><a href="#line-breaks" id="toc-line-breaks">6.12 - 6.13 Line
+breaks</a></li>
+<li><a href="#textual-content" id="toc-textual-content">6.14 Textual
+content</a></li>
 </ul></li>
 </ul>
 </div>
@@ -178,15 +394,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gluedown)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
-<p>In this vignette, we will explore how the functions in <code>gluedown</code> enable users to transition from R vectors to the kind of formatted markdown text used in the GitHub Flavored Markdown (GFM) specification. Functions like <code>md_bullet()</code> and <code>md_quote()</code> may be used more often, but there are functions for practically every section of the GFM spec including, some of which have limited practical value (e.g., <code>md_blank()</code> and <code>md_text()</code>).</p>
-<p>In each section of this vignette, the GFM spec is quoted first and followed by <code>gluedown</code> function usage. For each R code block containing <code>gluedown</code> usage, the raw text is shows as <code>#&gt;</code> comments followed by the rendered HTML version, which is printed using the <code>results=&#39;asis&#39;</code> option of the <code>knitr</code> package. (To achieve this output, each block is actually repeated twice, with the code of the second result printing block hidden via <code>echo=FALSE</code>.)</p>
+<p>In this vignette, we will explore how the functions in
+<code>gluedown</code> enable users to transition from R vectors to the
+kind of formatted markdown text used in the GitHub Flavored Markdown
+(GFM) specification. Functions like <code>md_bullet()</code> and
+<code>md_quote()</code> may be used more often, but there are functions
+for practically every section of the GFM spec including, some of which
+have limited practical value (e.g., <code>md_blank()</code> and
+<code>md_text()</code>).</p>
+<p>In each section of this vignette, the GFM spec is quoted first and
+followed by <code>gluedown</code> function usage. For each R code block
+containing <code>gluedown</code> usage, the raw text is shows as
+<code>#&gt;</code> comments followed by the rendered HTML version, which
+is printed using the <code>results=&#39;asis&#39;</code> option of the
+<code>knitr</code> package. (To achieve this output, each block is
+actually repeated twice, with the code of the second result printing
+block hidden via <code>echo=FALSE</code>.)</p>
 <div id="blocks-and-inlines" class="section level2">
 <h2>3 Blocks and Inlines</h2>
 <blockquote>
-<p>We can think of a document as a sequence of blocks—structural elements like paragraphs, block quotations, lists, headings, rules, and code blocks. Some blocks (like block quotes and list items) contain other blocks; others (like headings and paragraphs) contain inline content—text, links, emphasized text, images, code spans, and so on.</p>
+<p>We can think of a document as a sequence of blocks—structural
+elements like paragraphs, block quotations, lists, headings, rules, and
+code blocks. Some blocks (like block quotes and list items) contain
+other blocks; others (like headings and paragraphs) contain inline
+content—text, links, emphasized text, images, code spans, and so on.</p>
 </blockquote>
 <blockquote>
-<p>We can divide blocks into two types: container blocks, which can contain other blocks, and leaf blocks, which cannot.</p>
+<p>We can divide blocks into two types: container blocks, which can
+contain other blocks, and leaf blocks, which cannot.</p>
 </blockquote>
 </div>
 <div id="leaf-blocks" class="section level2">
@@ -207,9 +442,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="thematic-breaks" class="section level3">
 <h3>4.1 Thematic breaks</h3>
 <blockquote>
-<p>A line consisting of 0-3 spaces of indentation, followed by a sequence of three or more matching <code>-</code>, <code>_</code>, or <code>*</code> characters, each followed optionally by any number of spaces or tabs, forms a thematic break.</p>
+<p>A line consisting of 0-3 spaces of indentation, followed by a
+sequence of three or more matching <code>-</code>, <code>_</code>, or
+<code>*</code> characters, each followed optionally by any number of
+spaces or tabs, forms a thematic break.</p>
 </blockquote>
-<p>We can create thematic breaks with the <code>md_rule()</code> function, which allows users to define the type and number of valid characters to use. All these options create the same <code>&lt;hr&gt;</code> HTML tag, but look different in the underlying <code>.md</code> document.</p>
+<p>We can create thematic breaks with the <code>md_rule()</code>
+function, which allows users to define the type and number of valid
+characters to use. All these options create the same
+<code>&lt;hr&gt;</code> HTML tag, but look different in the underlying
+<code>.md</code> document.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_rule</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ***</span></span></code></pre></div>
 <hr />
@@ -220,18 +462,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="atx-headings" class="section level3">
 <h3>4.2 ATX Headings</h3>
 <blockquote>
-<p>An ATX heading consists of a string of characters, parsed as inline content, between an opening sequence of 1–6 unescaped <code>#</code> characters and an optional closing sequence of any number of unescaped <code>#</code> characters… The raw contents of the heading are stripped of leading and trailing spaces before being parsed as inline content. The heading level is equal to the number of <code>#</code> characters in the opening sequence.</p>
+<p>An ATX heading consists of a string of characters, parsed as inline
+content, between an opening sequence of 1–6 unescaped <code>#</code>
+characters and an optional closing sequence of any number of unescaped
+<code>#</code> characters… The raw contents of the heading are stripped
+of leading and trailing spaces before being parsed as inline content.
+The heading level is equal to the number of <code>#</code> characters in
+the opening sequence.</p>
 </blockquote>
-<p>The heading for this section was created with <code>md_heading()</code>.</p>
+<p>The heading for this section was created with
+<code>md_heading()</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_heading</span>(<span class="st">&quot;4.2 ATX Headings&quot;</span>, <span class="at">level =</span> <span class="dv">3</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span><span class="al">###</span><span class="co"> 4.2 ATX Headings</span></span></code></pre></div>
 </div>
 <div id="setext-headings" class="section level3">
 <h3>4.3 Setext headings</h3>
 <blockquote>
-<p>A setext heading consists of one or more lines of text, each containing at least one non-whitespace character, with no more than 3 spaces indentation, followed by a setext heading underline… A setext heading underline is a sequence of <code>=</code> characters or a sequence of <code>-</code> characters, with no more than 3 spaces indentation and any number of trailing spaces… The heading is a level 1 heading if <code>=</code> characters are used in the setext heading underline, and a level 2 heading if <code>-</code> characters are used.</p>
+<p>A setext heading consists of one or more lines of text, each
+containing at least one non-whitespace character, with no more than 3
+spaces indentation, followed by a setext heading underline… A setext
+heading underline is a sequence of <code>=</code> characters or a
+sequence of <code>-</code> characters, with no more than 3 spaces
+indentation and any number of trailing spaces… The heading is a level 1
+heading if <code>=</code> characters are used in the setext heading
+underline, and a level 2 heading if <code>-</code> characters are
+used.</p>
 </blockquote>
-<p>I’m going to forgo printing these headings, just to preserve the structure of this document. The <code>md_setext()</code> function can only be used to create level 1 (<code>&lt;h1&gt;</code>) and level 2 (<code>&lt;h2&gt;</code>) headings. A level 1 Setext heading is sometimes used as the very first, initial title heading.</p>
+<p>I’m going to forgo printing these headings, just to preserve the
+structure of this document. The <code>md_setext()</code> function can
+only be used to create level 1 (<code>&lt;h1&gt;</code>) and level 2
+(<code>&lt;h2&gt;</code>) headings. A level 1 Setext heading is
+sometimes used as the very first, initial title heading.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_setext</span>(<span class="st">&quot;Headings&quot;</span>, <span class="at">level =</span> <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Headings</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ========</span></span></code></pre></div>
@@ -245,9 +506,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="indented-code-blocks" class="section level3">
 <h3>4.4 Indented code blocks</h3>
 <blockquote>
-<p>An indented code block is composed of one or more indented chunks separated by blank lines. An indented chunk is a sequence of non-blank lines, each indented four or more spaces. The contents of the code block are the literal contents of the lines, including trailing line endings, minus four spaces of indentation…</p>
+<p>An indented code block is composed of one or more indented chunks
+separated by blank lines. An indented chunk is a sequence of non-blank
+lines, each indented four or more spaces. The contents of the code block
+are the literal contents of the lines, including trailing line endings,
+minus four spaces of indentation…</p>
 </blockquote>
-<p>This function, along with the fenced code block alternative, are useful for creating displayed code blocks (as opposed to executed chunks) containing R source code, command line content, or any other pre-formatted fixed-width content.</p>
+<p>This function, along with the fenced code block alternative, are
+useful for creating displayed code blocks (as opposed to executed
+chunks) containing R source code, command line content, or any other
+pre-formatted fixed-width content.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rescale01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  rng <span class="ot">&lt;-</span> <span class="fu">range</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> rng[<span class="dv">1</span>]) <span class="sc">/</span> (rng[<span class="dv">2</span>] <span class="sc">-</span> rng[<span class="dv">1</span>])</span>
@@ -275,12 +543,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fenced-code-blocks" class="section level3">
 <h3>4.5 Fenced code blocks</h3>
 <blockquote>
-<p>A code fence is a sequence of at least three consecutive backtick characters … or tildes (<code>~</code>). (Tildes and backticks cannot be mixed.) A fenced code block begins with a code fence, indented no more than three spaces…</p>
-<p>The line with the opening code fence may optionally contain some text following the code fence; this is trimmed of leading and trailing whitespace and called the info string…</p>
-<p>The content of the code block consists of all subsequent lines, until a closing code fence of the same type as the code block began with (backticks or tildes), and with at least as many backticks or tildes as the opening code fence….</p>
-<p>The content of a code fence is treated as literal text, not parsed as inlines. The first word of the info string is typically used to specify the language of the code sample, and rendered in the class attribute of the code tag. However, this spec does not mandate any particular treatment of the info string.</p>
+<p>A code fence is a sequence of at least three consecutive backtick
+characters … or tildes (<code>~</code>). (Tildes and backticks cannot be
+mixed.) A fenced code block begins with a code fence, indented no more
+than three spaces…</p>
+<p>The line with the opening code fence may optionally contain some text
+following the code fence; this is trimmed of leading and trailing
+whitespace and called the info string…</p>
+<p>The content of the code block consists of all subsequent lines, until
+a closing code fence of the same type as the code block began with
+(backticks or tildes), and with at least as many backticks or tildes as
+the opening code fence….</p>
+<p>The content of a code fence is treated as literal text, not parsed as
+inlines. The first word of the info string is typically used to specify
+the language of the code sample, and rendered in the class attribute of
+the code tag. However, this spec does not mandate any particular
+treatment of the info string.</p>
 </blockquote>
-<p>The man feature of <code>md_fence()</code> is the ability to specify the info string which defines the code language used to highlight syntax. Compare the following output to the one produced by <code>md_indent()</code>.</p>
+<p>The man feature of <code>md_fence()</code> is the ability to specify
+the info string which defines the code language used to highlight
+syntax. Compare the following output to the one produced by
+<code>md_indent()</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_fence</span>(source)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ```r</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; function (x) </span></span>
@@ -316,9 +599,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="html-blocks" class="section level3">
 <h3>4.6 HTML blocks</h3>
 <blockquote>
-<p>An HTML block is a group of lines that is treated as raw HTML (and will not be escaped in HTML output).</p>
+<p>An HTML block is a group of lines that is treated as raw HTML (and
+will not be escaped in HTML output).</p>
 </blockquote>
-<p>Markdown rendering engines (like the one used to convert this <code>.Rmd</code> document to <code>.md</code> and then to <code>.html</code>) allow users to write valid HTML code alongside regular markdown text.</p>
+<p>Markdown rendering engines (like the one used to convert this
+<code>.Rmd</code> document to <code>.md</code> and then to
+<code>.html</code>) allow users to write valid HTML code alongside
+regular markdown text.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&quot;</span>,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;&lt;pre&gt;&quot;</span>,</span>
@@ -348,10 +635,27 @@ _world_.
 <div id="link-reference-definitions" class="section level3">
 <h3>4.7 Link reference definitions</h3>
 <blockquote>
-<p>A link reference definition consists of a link label, indented up to three spaces, followed by a colon (<code>:</code>), optional whitespace (including up to one line ending), a link destination, optional whitespace (including up to one line ending), and an optional link title, which if it is present must be separated from the link destination by whitespace. No further non-whitespace characters may occur on the line.</p>
-<p>A link reference definition does not correspond to a structural element of a document. Instead, it defines a label which can be used in reference links and reference-style images elsewhere in the document. Link reference definitions can come either before or after the links that use them.</p>
+<p>A link reference definition consists of a link label, indented up to
+three spaces, followed by a colon (<code>:</code>), optional whitespace
+(including up to one line ending), a link destination, optional
+whitespace (including up to one line ending), and an optional link
+title, which if it is present must be separated from the link
+destination by whitespace. No further non-whitespace characters may
+occur on the line.</p>
+<p>A link reference definition does not correspond to a structural
+element of a document. Instead, it defines a label which can be used in
+reference links and reference-style images elsewhere in the document.
+Link reference definitions can come either before or after the links
+that use them.</p>
 </blockquote>
-<p>The <code>md_reference()</code> function is used to create the link reference definition <em>only</em>, which must then be paired with the same label elsewhere in the document. We can put the definitions anywhere in the document, so when I type <code>[CRAN]</code> here in this paragraph (like <a href="https://cran.r-project.org/" title="CRAN Home">CRAN</a>), that text looks for the label created below to create a hyperlink. The reference definition printed to the document actually doesn’t show up anywhere in the rendered <code>.html</code> file.</p>
+<p>The <code>md_reference()</code> function is used to create the link
+reference definition <em>only</em>, which must then be paired with the
+same label elsewhere in the document. We can put the definitions
+anywhere in the document, so when I type <code>[CRAN]</code> here in
+this paragraph (like <a href="https://cran.r-project.org/" title="CRAN Home">CRAN</a>), that text looks for the label created below
+to create a hyperlink. The reference definition printed to the document
+actually doesn’t show up anywhere in the rendered <code>.html</code>
+file.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;cran&quot;</span>, <span class="st">&quot;tidy&quot;</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://cran.r-project.org/&quot;</span>, <span class="st">&quot;https://www.tidyverse.org/&quot;</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CRAN Home&quot;</span>, <span class="st">&quot;Tidyverse Home&quot;</span>)</span></code></pre></div>
@@ -362,45 +666,72 @@ _world_.
 <div id="paragraphs" class="section level3">
 <h3>4.8 Paragraphs</h3>
 <blockquote>
-<p>A sequence of non-blank lines that cannot be interpreted as other kinds of blocks forms a paragraph. The contents of the paragraph are the result of parsing the paragraph’s raw content as inlines. The paragraph’s raw content is formed by concatenating the lines and removing initial and final whitespace.</p>
+<p>A sequence of non-blank lines that cannot be interpreted as other
+kinds of blocks forms a paragraph. The contents of the paragraph are the
+result of parsing the paragraph’s raw content as inlines. The
+paragraph’s raw content is formed by concatenating the lines and
+removing initial and final whitespace.</p>
 </blockquote>
-<p>Paragraphs are one instance are where it’s easy for markdown newcomers can have difficulty writing the plain text in the proper format to produce their desired outcome. Words separated by a single newline are rendered as a single paragraph <code>&lt;p&gt;</code> tag. Using <code>md_paragraph()</code>, we can take a vector of character text and output <em>distinct</em> paragraphs.</p>
-<p>In section 6.12 and 6.13 you can compare the output of <code>md_paragraph()</code> with the other line break functions.</p>
+<p>Paragraphs are one instance are where it’s easy for markdown
+newcomers can have difficulty writing the plain text in the proper
+format to produce their desired outcome. Words separated by a single
+newline are rendered as a single paragraph <code>&lt;p&gt;</code> tag.
+Using <code>md_paragraph()</code>, we can take a vector of character
+text and output <em>distinct</em> paragraphs.</p>
+<p>In section 6.12 and 6.13 you can compare the output of
+<code>md_paragraph()</code> with the other line break functions.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="ot">&lt;-</span> <span class="fu">sample</span>(stringr<span class="sc">::</span>sentences, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun.</p>
-<p>A force equal to that would move the earth.</p>
-<p>Breathe deep and smell the piny air.</p>
-<p>These coins will be needed to pay his debt.</p>
-<p>Rake the rubbish up and then burn it.</p>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause.</p>
+<p>Trample the spark, else the flames will spread.</p>
+<p>The chair looked strong but had no bottom.</p>
+<p>She called his name many times.</p>
+<p>Dip the pail once and let it settle.</p>
 </div>
 <div id="blank-lines" class="section level3">
 <h3>4.9 Blank lines</h3>
 <blockquote>
-<p>Blank lines between block-level elements are ignored, except for the role they play in determining whether a list is tight or loose.</p>
-<p>Blank lines at the beginning and end of the document are also ignored.</p>
+<p>Blank lines between block-level elements are ignored, except for the
+role they play in determining whether a list is tight or loose.</p>
+<p>Blank lines at the beginning and end of the document are also
+ignored.</p>
 </blockquote>
-<p>Blank lines are, well, not super useful… but you can create them with <code>md_blank()</code>!</p>
+<p>Blank lines are, well, not super useful… but you can create them with
+<code>md_blank()</code>!</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_blank</span>()</span></code></pre></div>
 </div>
 <div id="tables-extension" class="section level3">
 <h3>4.10 Tables (extension)</h3>
 <blockquote>
-<p>GFM enables the <code>table</code> extension, where an additional leaf block type is available.</p>
-<p>A table is an arrangement of data with rows and columns, consisting of a single header row, a delimiter row separating the header from the data, and zero or more data rows.</p>
-<p>Each row consists of cells containing arbitrary text, in which inlines are parsed, separated by pipes (<code>|</code>). A leading and trailing pipe is also recommended for clarity of reading, and if there’s otherwise parsing ambiguity. Spaces between pipes and cell content are trimmed. Block-level elements cannot be inserted in a table.</p>
-<p>The delimiter row consists of cells whose only content are hyphens (<code>-</code>), and optionally, a leading or trailing colon (<code>:</code>), or both, to indicate left, right, or center alignment respectively.</p>
+<p>GFM enables the <code>table</code> extension, where an additional
+leaf block type is available.</p>
+<p>A table is an arrangement of data with rows and columns, consisting
+of a single header row, a delimiter row separating the header from the
+data, and zero or more data rows.</p>
+<p>Each row consists of cells containing arbitrary text, in which
+inlines are parsed, separated by pipes (<code>|</code>). A leading and
+trailing pipe is also recommended for clarity of reading, and if there’s
+otherwise parsing ambiguity. Spaces between pipes and cell content are
+trimmed. Block-level elements cannot be inserted in a table.</p>
+<p>The delimiter row consists of cells whose only content are hyphens
+(<code>-</code>), and optionally, a leading or trailing colon
+(<code>:</code>), or both, to indicate left, right, or center alignment
+respectively.</p>
 </blockquote>
-<p>The <code>md_table()</code> function wraps around <code>knitr::kable()</code> to return R objects (Typically data frames or matrices) as markdown tables. This is useful for presenting data created using R in a format that’s more readable than a plain-text data frame (or tibble) printout.</p>
+<p>The <code>md_table()</code> function wraps around
+<code>knitr::kable()</code> to return R objects (Typically data frames
+or matrices) as markdown tables. This is useful for presenting data
+created using R in a format that’s more readable than a plain-text data
+frame (or tibble) printout.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">head</span>(state.x77)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(states)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            Population Income Illiteracy Life Exp Murder HS Grad Frost   Area</span></span>
@@ -421,6 +752,17 @@ _world_.
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |California |   21198    |  5114  |    1.1     |  71.71   |  10.3  |  62.6   |  20   | 156361 |</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |Colorado   |    2541    |  4884  |    0.7     |  72.06   |  6.8   |  63.9   |  166  | 103766 |</span></span></code></pre></div>
 <table>
+<colgroup>
+<col width="12%" />
+<col width="14%" />
+<col width="9%" />
+<col width="14%" />
+<col width="11%" />
+<col width="9%" />
+<col width="10%" />
+<col width="8%" />
+<col width="9%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -508,42 +850,52 @@ _world_.
 <div id="container-blocks" class="section level2">
 <h2>5 Container Blocks</h2>
 <blockquote>
-<p>A container block is a block that has other blocks as its contents. There are two basic kinds of container blocks: block quotes and list items. Lists are meta-containers for list items.</p>
+<p>A container block is a block that has other blocks as its contents.
+There are two basic kinds of container blocks: block quotes and list
+items. Lists are meta-containers for list items.</p>
 </blockquote>
 <div id="block-quotes" class="section level3">
 <h3>5.1 Block quotes</h3>
 <blockquote>
-<p>A block quote marker consists of 0-3 spaces of initial indent, plus (a) the character &gt; together with a following space, or (b) a single character &gt; not followed by a space.</p>
+<p>A block quote marker consists of 0-3 spaces of initial indent, plus
+(a) the character &gt; together with a following space, or (b) a single
+character &gt; not followed by a space.</p>
 </blockquote>
-<p>I’ve been copy-pasting block quotes from the GFM spec in this vignette, but we can also use <code>md_quote()</code> to grammatically create or manipulate strings and print them as block quotes.</p>
+<p>I’ve been copy-pasting block quotes from the GFM spec in this
+vignette, but we can also use <code>md_quote()</code> to grammatically
+create or manipulate strings and print them as block quotes.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_html</span>(<span class="st">&quot;https://w.wiki/A58&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="st">&quot;blockquote&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">[(.*)</span><span class="sc">\\</span><span class="st">]&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_quote</span>()</span></code></pre></div>
 <blockquote>
-<p>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
+<p>We the People of the United States, in Order to form a more perfect
+Union, establish Justice, insure domestic Tranquility, provide for the
+common defence, promote the general Welfare, and secure the Blessings of
+Liberty to ourselves and our Posterity, do ordain and establish this
+Constitution for the United States of America.</p>
 </blockquote>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_quote</span>(sentences)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The wide road shimmered in the hot sun.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; A force equal to that would move the earth.</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Breathe deep and smell the piny air.</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; These coins will be needed to pay his debt.</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Trample the spark, else the flames will spread.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The chair looked strong but had no bottom.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; She called his name many times.</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Dip the pail once and let it settle.</span></span></code></pre></div>
 <blockquote>
-<p>The wide road shimmered in the hot sun.</p>
+<p>Plead with the lawyer to drop the lost cause.</p>
 </blockquote>
 <blockquote>
-<p>A force equal to that would move the earth.</p>
+<p>Trample the spark, else the flames will spread.</p>
 </blockquote>
 <blockquote>
-<p>Breathe deep and smell the piny air.</p>
+<p>The chair looked strong but had no bottom.</p>
 </blockquote>
 <blockquote>
-<p>These coins will be needed to pay his debt.</p>
+<p>She called his name many times.</p>
 </blockquote>
 <blockquote>
-<p>Rake the rubbish up and then burn it.</p>
+<p>Dip the pail once and let it settle.</p>
 </blockquote>
 </div>
 <div id="list-items" class="section level3">
@@ -551,98 +903,136 @@ _world_.
 <blockquote>
 <p>A list marker is a bullet list marker or an ordered list marker.</p>
 <p>A bullet list marker is a -, +, or * character.</p>
-<p>An ordered list marker is a sequence of 1–9 arabic digits (<code>0-9</code>), followed by either a <code>.</code> character or a <code>)</code> character. (The reason for the length limit is that with 10 digits we start seeing integer overflows in some browsers.)</p>
+<p>An ordered list marker is a sequence of 1–9 arabic digits
+(<code>0-9</code>), followed by either a <code>.</code> character or a
+<code>)</code> character. (The reason for the length limit is that with
+10 digits we start seeing integer overflows in some browsers.)</p>
 </blockquote>
-<p>List items are automatically created in list blocks (section 5.4) via <code>md_order()</code> and <code>md_bullet()</code>.</p>
+<p>List items are automatically created in list blocks (section 5.4) via
+<code>md_order()</code> and <code>md_bullet()</code>.</p>
 </div>
 <div id="task-list-items-extension" class="section level3">
 <h3>5.3 Task list items (extension)</h3>
 <blockquote>
-<p>GFM enables the <code>tasklist</code> extension, where an additional processing step is performed on list items.</p>
-<p>A task list item is a list item where the first block in it is a paragraph which begins with a task list item marker and at least one whitespace character before any other content.</p>
-<p>A task list item marker consists of an optional number of spaces, a left bracket (<code>[</code>), either a whitespace character or the letter x in either lowercase or uppercase, and then a right bracket (<code>]</code>).</p>
-<p>When rendered, the task list item marker is replaced with a semantic checkbox element; in an HTML output, this would be an <code>&lt;input type=&quot;checkbox&quot;&gt;</code> element.</p>
-<p>If the character between the brackets is a whitespace character, the checkbox is unchecked. Otherwise, the checkbox is checked.</p>
+<p>GFM enables the <code>tasklist</code> extension, where an additional
+processing step is performed on list items.</p>
+<p>A task list item is a list item where the first block in it is a
+paragraph which begins with a task list item marker and at least one
+whitespace character before any other content.</p>
+<p>A task list item marker consists of an optional number of spaces, a
+left bracket (<code>[</code>), either a whitespace character or the
+letter x in either lowercase or uppercase, and then a right bracket
+(<code>]</code>).</p>
+<p>When rendered, the task list item marker is replaced with a semantic
+checkbox element; in an HTML output, this would be an
+<code>&lt;input type=&quot;checkbox&quot;&gt;</code> element.</p>
+<p>If the character between the brackets is a whitespace character, the
+checkbox is unchecked. Otherwise, the checkbox is checked.</p>
 </blockquote>
-<p>Markdown extensions like this one are optionally supported on different venues. On GitHub (in <code>README.md</code> files, issues, or comments, etc.) these tasks list are rendered as check boxes, sometimes even interactable. On other venues, like this very HTML vignette, these check boxes just render are bullet lists with weird bracket boxes on each line.</p>
+<p>Markdown extensions like this one are optionally supported on
+different venues. On GitHub (in <code>README.md</code> files, issues, or
+comments, etc.) these tasks list are rendered as check boxes, sometimes
+even interactable. On other venues, like this very HTML vignette, these
+check boxes just render are bullet lists with weird bracket boxes on
+each line.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_task</span>(sentences, <span class="at">check =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] The wide road shimmered in the hot sun.</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] A force equal to that would move the earth.</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] Breathe deep and smell the piny air.</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] These coins will be needed to pay his debt.</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Rake the rubbish up and then burn it.</span></span></code></pre></div>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Trample the spark, else the flames will spread.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] The chair looked strong but had no bottom.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] She called his name many times.</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Dip the pail once and let it settle.</span></span></code></pre></div>
 <ul class="task-list">
 <li><input type="checkbox" disabled></input>
-The wide road shimmered in the hot sun.</li>
+Plead with the lawyer to drop the lost cause.</li>
 <li><input type="checkbox" disabled></input>
-A force equal to that would move the earth.</li>
+Trample the spark, else the flames will spread.</li>
 <li><input type="checkbox" disabled checked></input>
-Breathe deep and smell the piny air.</li>
+The chair looked strong but had no bottom.</li>
 <li><input type="checkbox" disabled checked></input>
-These coins will be needed to pay his debt.</li>
+She called his name many times.</li>
 <li><input type="checkbox" disabled></input>
-Rake the rubbish up and then burn it.</li>
+Dip the pail once and let it settle.</li>
 </ul>
 </div>
 <div id="lists" class="section level3">
 <h3>5.4 Lists</h3>
 <blockquote>
-<p>A list is a sequence of one or more list items of the same type. The list items may be separated by any number of blank lines.</p>
-<p>Two list items are of the same type if they begin with a list marker of the same type. Two list &gt; markers are of the same type if (a) they are bullet list markers using the same character (<code>-</code>, <code>+</code>, or <code>*</code>) or (b) they are ordered list numbers with the same delimiter (either <code>.</code> or <code>)</code>).</p>
-<p>A list is an ordered list if its constituent list items begin with ordered list markers, and a &gt; bullet list if its constituent list items begin with bullet list markers.</p>
-<p>The start number of an ordered list is determined by the list number of its initial list item. The numbers of subsequent list items are disregarded.</p>
+<p>A list is a sequence of one or more list items of the same type. The
+list items may be separated by any number of blank lines.</p>
+<p>Two list items are of the same type if they begin with a list marker
+of the same type. Two list &gt; markers are of the same type if (a) they
+are bullet list markers using the same character (<code>-</code>,
+<code>+</code>, or <code>*</code>) or (b) they are ordered list numbers
+with the same delimiter (either <code>.</code> or <code>)</code>).</p>
+<p>A list is an ordered list if its constituent list items begin with
+ordered list markers, and a &gt; bullet list if its constituent list
+items begin with bullet list markers.</p>
+<p>The start number of an ordered list is determined by the list number
+of its initial list item. The numbers of subsequent list items are
+disregarded.</p>
 </blockquote>
-<p>The <code>md_order()</code> and <code>md_bullet()</code> functions let users display character vectors as list blocks. The functions let users adjust the which list item markets are used, but all the options are rendered as the same <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> tags in the rendered <code>.html</code> file.</p>
+<p>The <code>md_order()</code> and <code>md_bullet()</code> functions
+let users display character vectors as list blocks. The functions let
+users adjust the which list item markets are used, but all the options
+are rendered as the same <code>&lt;ul&gt;</code> or
+<code>&lt;ol&gt;</code> tags in the rendered <code>.html</code>
+file.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">sample</span>(state.name, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Idaho</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Colorado</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Tennessee</span></span></code></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Alabama</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Massachusetts</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Louisiana</span></span></code></pre></div>
 <ul>
-<li>Idaho</li>
-<li>Colorado</li>
-<li>Tennessee</li>
+<li>Alabama</li>
+<li>Massachusetts</li>
+<li>Louisiana</li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states, <span class="at">marker =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Idaho</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Colorado</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Tennessee</span></span></code></pre></div>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Alabama</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Massachusetts</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Louisiana</span></span></code></pre></div>
 <ul>
-<li>Idaho</li>
-<li>Colorado</li>
-<li>Tennessee</li>
+<li>Alabama</li>
+<li>Massachusetts</li>
+<li>Louisiana</li>
 </ul>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Idaho</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Colorado</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Tennessee</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Alabama</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Massachusetts</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Louisiana</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Idaho</li>
-<li>Colorado</li>
-<li>Tennessee</li>
+<li>Alabama</li>
+<li>Massachusetts</li>
+<li>Louisiana</li>
 </ol>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states, <span class="at">seq =</span> <span class="cn">FALSE</span>, <span class="at">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Idaho</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Colorado</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Tennessee</span></span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Alabama</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Massachusetts</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Louisiana</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Idaho</li>
-<li>Colorado</li>
-<li>Tennessee</li>
+<li>Alabama</li>
+<li>Massachusetts</li>
+<li>Louisiana</li>
 </ol>
 </div>
 </div>
 <div id="inlines" class="section level2">
 <h2>6 Inlines</h2>
 <blockquote>
-<p>Inlines are parsed sequentially from the beginning of the character stream to the end (left to right, in left-to-right languages). Thus, for example, in</p>
+<p>Inlines are parsed sequentially from the beginning of the character
+stream to the end (left to right, in left-to-right languages). Thus, for
+example, in</p>
 </blockquote>
 <div id="backslash-escapes" class="section level3">
 <h3>6.1 Backslash escapes</h3>
 <blockquote>
-<p>Any ASCII punctuation character may be backslash-escaped… Escaped characters are treated as regular characters and do not have their usual Markdown meanings:</p>
+<p>Any ASCII punctuation character may be backslash-escaped… Escaped
+characters are treated as regular characters and do not have their usual
+Markdown meanings:</p>
 </blockquote>
-<p>If you want to display markdown syntax without rendering as the corresponding HTML tags, <code>md_escape()</code> can prepend a backslash (actually, two) before every ASCII punctuation character.</p>
+<p>If you want to display markdown syntax without rendering as the
+corresponding HTML tags, <code>md_escape()</code> can prepend a
+backslash (actually, two) before every ASCII punctuation character.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>inline <span class="ot">&lt;-</span> <span class="fu">md_bold</span>(<span class="st">&quot;example&quot;</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_escape</span>(inline)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \*\*example\*\*</span></span></code></pre></div>
@@ -650,7 +1040,8 @@ Rake the rubbish up and then burn it.</li>
 </div>
 <div id="simple-inlines" class="section level3">
 <h3>6.3 - 6.8 Simple inlines</h3>
-<p>Here we are going to demonstrate how various simple inline block functions are used to create text <em>within</em> a container block.</p>
+<p>Here we are going to demonstrate how various simple inline block
+functions are used to create text <em>within</em> a container block.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>inlines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_code</span>(<span class="st">&quot;6.3 Code spans&quot;</span>),</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_italic</span>(<span class="st">&quot;6.4 Emphasis&quot;</span>),</span>
@@ -678,7 +1069,13 @@ Rake the rubbish up and then burn it.</li>
 <div id="images" class="section level3">
 <h3>6.7 Images</h3>
 <blockquote>
-<p>Syntax for images is like the syntax for links, with one difference. Instead of link text, we have an image description. The rules for this are the same as for link text, except that (a) an image description starts with <code>![</code> rather than <code>[</code>, and (b) an image description may contain links. An image description has inline elements as its contents. When an image is rendered to HTML, this is standardly used as the image’s <code>alt</code> attribute.</p>
+<p>Syntax for images is like the syntax for links, with one difference.
+Instead of link text, we have an image description. The rules for this
+are the same as for link text, except that (a) an image description
+starts with <code>![</code> rather than <code>[</code>, and (b) an image
+description may contain links. An image description has inline elements
+as its contents. When an image is rendered to HTML, this is standardly
+used as the image’s <code>alt</code> attribute.</p>
 </blockquote>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_image</span>(<span class="st">&quot;https://www.r-project.org/Rlogo.png&quot;</span>, <span class="at">alt =</span> <span class="st">&quot;R logo&quot;</span>)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ![R logo](https://www.r-project.org/Rlogo.png)</span></span></code></pre></div>
@@ -690,7 +1087,8 @@ Rake the rubbish up and then burn it.</li>
 <div id="disallowed-raw-html-extension" class="section level3">
 <h3>6.11 Disallowed Raw HTML (extension)</h3>
 <blockquote>
-<p>GFM enables the tagfilter extension, where the following HTML tags will be filtered when rendering HTML output:</p>
+<p>GFM enables the tagfilter extension, where the following HTML tags
+will be filtered when rendering HTML output:</p>
 <ul>
 <li><code>&lt;title&gt;</code></li>
 <li><code>&lt;textarea&gt;</code></li>
@@ -702,7 +1100,11 @@ Rake the rubbish up and then burn it.</li>
 <li><code>&lt;script&gt;</code></li>
 <li><code>&lt;plaintext&gt;</code></li>
 </ul>
-<p>Filtering is done by replacing the leading &lt; with the entity &lt;. These tags are chosen in particular as they change how HTML is interpreted in a way unique to them (i.e. nested HTML is interpreted differently), and this is usually undesireable in the context of other rendered Markdown content.</p>
+<p>Filtering is done by replacing the leading &lt; with the entity &lt;.
+These tags are chosen in particular as they change how HTML is
+interpreted in a way unique to them (i.e. nested HTML is interpreted
+differently), and this is usually undesireable in the context of other
+rendered Markdown content.</p>
 </blockquote>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;&lt;blockquote&gt;&quot;</span>,</span>
@@ -720,82 +1122,109 @@ Rake the rubbish up and then burn it.</li>
 </div>
 <div id="line-breaks" class="section level3">
 <h3>6.12 - 6.13 Line breaks</h3>
-<p>The difference between <em>hard</em> line breaks, <em>soft</em> line breaks, paragraphs, and regular text can be confusing. New markdown users often struggle with knowing exactly how many invisible newlines or spaces are needed to present each line in the way they want. The line break functions below make it easier.</p>
+<p>The difference between <em>hard</em> line breaks, <em>soft</em> line
+breaks, paragraphs, and regular text can be confusing. New markdown
+users often struggle with knowing exactly how many invisible newlines or
+spaces are needed to present each line in the way they want. The line
+break functions below make it easier.</p>
 <blockquote>
-<p>A line break (not in a code span or HTML tag) that is preceded by two or more spaces and does not occur at the end of a block is parsed as a hard line break (rendered in HTML as a <code>&lt;br /&gt;</code> tag):</p>
+<p>A line break (not in a code span or HTML tag) that is preceded by two
+or more spaces and does not occur at the end of a block is parsed as a
+hard line break (rendered in HTML as a <code>&lt;br /&gt;</code>
+tag):</p>
 </blockquote>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.12 Hard line breaks</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_hardline</span>(sentences)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.  </span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.  </span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.  </span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.  </span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun.<br />
-A force equal to that would move the earth.<br />
-Breathe deep and smell the piny air.<br />
-These coins will be needed to pay his debt.<br />
-Rake the rubbish up and then burn it.</p>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.  </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.  </span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.  </span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.  </span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause.<br />
+Trample the spark, else the flames will spread.<br />
+The chair looked strong but had no bottom.<br />
+She called his name many times.<br />
+Dip the pail once and let it settle.</p>
 <hr />
 <blockquote>
-<p>A regular line break (not in a code span or HTML tag) that is not preceded by two or more spaces or a backslash is parsed as a softbreak. (A softbreak may be rendered in HTML either as a line ending or as a space. The result will be the same in browsers. In the examples here, a line ending will be used.)</p>
+<p>A regular line break (not in a code span or HTML tag) that is not
+preceded by two or more spaces or a backslash is parsed as a softbreak.
+(A softbreak may be rendered in HTML either as a line ending or as a
+space. The result will be the same in browsers. In the examples here, a
+line ending will be used.)</p>
 </blockquote>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.13 Soft line breaks</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_softline</span>(sentences)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
+the flames will spread. The chair looked strong but had no bottom. She
+called his name many times. Dip the pail once and let it settle.</p>
 <hr />
-<p>You can see how both hard line and soft line breaks are different from the paragraphs as created using <code>md_paragraph()</code></p>
+<p>You can see how both hard line and soft line breaks are different
+from the paragraphs as created using <code>md_paragraph()</code></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun.</p>
-<p>A force equal to that would move the earth.</p>
-<p>Breathe deep and smell the piny air.</p>
-<p>These coins will be needed to pay his debt.</p>
-<p>Rake the rubbish up and then burn it.</p>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause.</p>
+<p>Trample the spark, else the flames will spread.</p>
+<p>The chair looked strong but had no bottom.</p>
+<p>She called his name many times.</p>
+<p>Dip the pail once and let it settle.</p>
 </div>
 <div id="textual-content" class="section level3">
 <h3>6.14 Textual content</h3>
 <blockquote>
-<p>Any characters not given an interpretation by the above rules will be parsed as plain textual content.</p>
+<p>Any characters not given an interpretation by the above rules will be
+parsed as plain textual content.</p>
 </blockquote>
-<p>The <code>md_text()</code> function is a catch-all wrapper around <code>glue::as_glue()</code> with simply converts any character string into a <code>glue</code> object, which when used in an <code>.Rmd.</code> document alongside the <code>results=&#39;asis&#39;</code> allows users to simply print text to the body of the document.</p>
+<p>The <code>md_text()</code> function is a catch-all wrapper around
+<code>glue::as_glue()</code> with simply converts any character string
+into a <code>glue</code> object, which when used in an
+<code>.Rmd.</code> document alongside the <code>results=&#39;asis&#39;</code>
+allows users to simply print text to the body of the document.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.14 Textual content</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_text</span>(sentences)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun.</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A force equal to that would move the earth.</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Breathe deep and smell the piny air.</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; These coins will be needed to pay his debt.</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
+the flames will spread. The chair looked strong but had no bottom. She
+called his name many times. Dip the pail once and let it settle.</p>
 <hr />
 <p>Compare this to the regular handling of character strings.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sentences)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The wide road shimmered in the hot sun.&quot;    </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;A force equal to that would move the earth.&quot;</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;Breathe deep and smell the piny air.&quot;       </span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;These coins will be needed to pay his debt.&quot;</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;Rake the rubbish up and then burn it.&quot;</span></span></code></pre></div>
-<p>[1] “The wide road shimmered in the hot sun.”<br />
-[2] “A force equal to that would move the earth.” [3] “Breathe deep and smell the piny air.”<br />
-[4] “These coins will be needed to pay his debt.” [5] “Rake the rubbish up and then burn it.”</p>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Plead with the lawyer to drop the lost cause.&quot;  </span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Trample the spark, else the flames will spread.&quot;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;The chair looked strong but had no bottom.&quot;     </span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;She called his name many times.&quot;                </span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;Dip the pail once and let it settle.&quot;</span></span></code></pre></div>
+<p>[1] “Plead with the lawyer to drop the lost cause.”<br />
+[2] “Trample the spark, else the flames will spread.” [3] “The chair
+looked strong but had no bottom.”<br />
+[4] “She called his name many times.”<br />
+[5] “Dip the pail once and let it settle.”</p>
 <hr />
-<p>The <code>md_text()</code> function creates strings with the <code>glue</code> S3 class. This class works in the same way as the <code>cat()</code> functions.</p>
+<p>The <code>md_text()</code> function creates strings with the
+<code>glue</code> S3 class. This class works in the same way as the
+<code>cat()</code> functions.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sentences)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</span></span></code></pre></div>
-<p>The wide road shimmered in the hot sun. A force equal to that would move the earth. Breathe deep and smell the piny air. These coins will be needed to pay his debt. Rake the rubbish up and then burn it.</p>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause. Trample the spark, else the flames will spread. The chair looked strong but had no bottom. She called his name many times. Dip the pail once and let it settle.</span></span></code></pre></div>
+<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
+the flames will spread. The chair looked strong but had no bottom. She
+called his name many times. Dip the pail once and let it settle.</p>
 </div>
 </div>
 

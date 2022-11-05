@@ -1,3 +1,7 @@
+# gluedown 1.0.5
+
+* Update tests for new markdown package functionality (#29).
+
 # gluedown 1.0.4
 
 * Remove `LazyData` from DESCRIPTION per new CRAN rules. Package has no data.
