@@ -1,6 +1,6 @@
-124d35ffc4dcf6063a60303b7a56381b *DESCRIPTION
+151958813f10ec4cf33e4f3203cf037d *DESCRIPTION
 dde793bcb3585f5180ad528cdda45fa2 *NAMESPACE
-7e7434c2ba2bb56505bdbdead7c50dd2 *NEWS.md
+fd687da5b8e10e44947c9db98c2f4394 *NEWS.md
 ce1acce4bfb22afaf02f9e8c55f1ae17 *R/gluedown.R
 96fbb4625edbf8285bce3e95e99fff77 *R/md-autolink.R
 bb7e36a6452127e1c395d3d45ea28f12 *R/md-chunk.R
@@ -17,15 +17,15 @@ fbdfabd31a56b925200ee57a59b191a6 *R/md-rule.R
 c0e37657368130b3cd3239adc73e7421 *R/md-table.R
 4945dbe119d082a5ba5667870732a19c *R/md-text.R
 d7c64d31ad5a8609914cc1167921087c *R/utils.R
-da23c2b50e9e77750cec0a4e8c9730cf *README.md
+6877eb4a71dd89beee2fa7c1e55b7609 *README.md
 d01f1d3585e853e2f82500acb41ccb1b *build/vignette.rds
 3d933d8cf932c2c6a8b03eb9a7f47377 *inst/WORDLIST
 ec48c5d24e1616c4bad01f65cb7a291a *inst/doc/github-spec.R
 6bc43bdced1ba0b512b419abdb10df4d *inst/doc/github-spec.Rmd
-ae3cf759b401e0379012ac96930bf5b5 *inst/doc/github-spec.html
+3ba40fb2be8285951ac79a17bfd60a6c *inst/doc/github-spec.html
 c0dcedb2265efc219412b86263db6eb2 *inst/doc/literal-programming.R
 fbc2320fd52782f999f74250425f0f94 *inst/doc/literal-programming.Rmd
-76e0d9a150a77d50b09b99177fb2716d *inst/doc/literal-programming.html
+0e80fe2f763e9f0d8205afb25b867c94 *inst/doc/literal-programming.html
 2073022c675272041471b30ad421735d *man/figures/logo.png
 b5c2a1e578a0156879fe6d45a6010076 *man/gluedown.Rd
 9a4cffb2bcd3695120fb17c4a657e3c4 *man/has_knitr.Rd

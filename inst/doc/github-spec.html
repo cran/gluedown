@@ -682,20 +682,20 @@ text and output <em>distinct</em> paragraphs.</p>
 <code>md_paragraph()</code> with the other line break functions.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sentences <span class="ot">&lt;-</span> <span class="fu">sample</span>(stringr<span class="sc">::</span>sentences, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired.</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Even the worst will beat his low score.</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The odor of spring makes young hearts jump.</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bail the boat, to stop it from sinking.</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause.</p>
-<p>Trample the spark, else the flames will spread.</p>
-<p>The chair looked strong but had no bottom.</p>
-<p>She called his name many times.</p>
-<p>Dip the pail once and let it settle.</p>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired.</p>
+<p>Even the worst will beat his low score.</p>
+<p>The odor of spring makes young hearts jump.</p>
+<p>Bail the boat, to stop it from sinking.</p>
+<p>The shelves were bare of both jam or crackers.</p>
 </div>
 <div id="blank-lines" class="section level3">
 <h3>4.9 Blank lines</h3>
@@ -877,25 +877,25 @@ Liberty to ourselves and our Posterity, do ordain and establish this
 Constitution for the United States of America.</p>
 </blockquote>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_quote</span>(sentences)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Plead with the lawyer to drop the lost cause.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Trample the spark, else the flames will spread.</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The chair looked strong but had no bottom.</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; She called his name many times.</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Dip the pail once and let it settle.</span></span></code></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; He put his last cartridge into the gun and fired.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Even the worst will beat his low score.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The odor of spring makes young hearts jump.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; Bail the boat, to stop it from sinking.</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
 <blockquote>
-<p>Plead with the lawyer to drop the lost cause.</p>
+<p>He put his last cartridge into the gun and fired.</p>
 </blockquote>
 <blockquote>
-<p>Trample the spark, else the flames will spread.</p>
+<p>Even the worst will beat his low score.</p>
 </blockquote>
 <blockquote>
-<p>The chair looked strong but had no bottom.</p>
+<p>The odor of spring makes young hearts jump.</p>
 </blockquote>
 <blockquote>
-<p>She called his name many times.</p>
+<p>Bail the boat, to stop it from sinking.</p>
 </blockquote>
 <blockquote>
-<p>Dip the pail once and let it settle.</p>
+<p>The shelves were bare of both jam or crackers.</p>
 </blockquote>
 </div>
 <div id="list-items" class="section level3">
@@ -936,22 +936,22 @@ even interactable. On other venues, like this very HTML vignette, these
 check boxes just render are bullet lists with weird bracket boxes on
 each line.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_task</span>(sentences, <span class="at">check =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Plead with the lawyer to drop the lost cause.</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Trample the spark, else the flames will spread.</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] The chair looked strong but had no bottom.</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] She called his name many times.</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Dip the pail once and let it settle.</span></span></code></pre></div>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] He put his last cartridge into the gun and fired.</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] Even the worst will beat his low score.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] The odor of spring makes young hearts jump.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [x] Bail the boat, to stop it from sinking.</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * [ ] The shelves were bare of both jam or crackers.</span></span></code></pre></div>
 <ul class="task-list">
 <li><input type="checkbox" disabled></input>
-Plead with the lawyer to drop the lost cause.</li>
+He put his last cartridge into the gun and fired.</li>
 <li><input type="checkbox" disabled></input>
-Trample the spark, else the flames will spread.</li>
+Even the worst will beat his low score.</li>
 <li><input type="checkbox" disabled checked></input>
-The chair looked strong but had no bottom.</li>
+The odor of spring makes young hearts jump.</li>
 <li><input type="checkbox" disabled checked></input>
-She called his name many times.</li>
+Bail the boat, to stop it from sinking.</li>
 <li><input type="checkbox" disabled></input>
-Dip the pail once and let it settle.</li>
+The shelves were bare of both jam or crackers.</li>
 </ul>
 </div>
 <div id="lists" class="section level3">
@@ -979,40 +979,40 @@ are rendered as the same <code>&lt;ul&gt;</code> or
 file.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">sample</span>(state.name, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Alabama</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Massachusetts</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Louisiana</span></span></code></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * West Virginia</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Iowa</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Massachusetts</span></span></code></pre></div>
 <ul>
-<li>Alabama</li>
+<li>West Virginia</li>
+<li>Iowa</li>
 <li>Massachusetts</li>
-<li>Louisiana</li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_bullet</span>(states, <span class="at">marker =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Alabama</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Massachusetts</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Louisiana</span></span></code></pre></div>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + West Virginia</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Iowa</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; + Massachusetts</span></span></code></pre></div>
 <ul>
-<li>Alabama</li>
+<li>West Virginia</li>
+<li>Iowa</li>
 <li>Massachusetts</li>
-<li>Louisiana</li>
 </ul>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Alabama</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Massachusetts</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Louisiana</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. West Virginia</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Iowa</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3. Massachusetts</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Alabama</li>
+<li>West Virginia</li>
+<li>Iowa</li>
 <li>Massachusetts</li>
-<li>Louisiana</li>
 </ol>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_order</span>(states, <span class="at">seq =</span> <span class="cn">FALSE</span>, <span class="at">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Alabama</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Massachusetts</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Louisiana</span></span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) West Virginia</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Iowa</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1) Massachusetts</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Alabama</li>
+<li>West Virginia</li>
+<li>Iowa</li>
 <li>Massachusetts</li>
-<li>Louisiana</li>
 </ol>
 </div>
 </div>
@@ -1135,16 +1135,16 @@ tag):</p>
 </blockquote>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.12 Hard line breaks</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_hardline</span>(sentences)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.  </span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.  </span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.  </span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.  </span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause.<br />
-Trample the spark, else the flames will spread.<br />
-The chair looked strong but had no bottom.<br />
-She called his name many times.<br />
-Dip the pail once and let it settle.</p>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired.  </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Even the worst will beat his low score.  </span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The odor of spring makes young hearts jump.  </span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bail the boat, to stop it from sinking.  </span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired.<br />
+Even the worst will beat his low score.<br />
+The odor of spring makes young hearts jump.<br />
+Bail the boat, to stop it from sinking.<br />
+The shelves were bare of both jam or crackers.</p>
 <hr />
 <blockquote>
 <p>A regular line break (not in a code span or HTML tag) that is not
@@ -1155,32 +1155,33 @@ line ending will be used.)</p>
 </blockquote>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.13 Soft line breaks</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_softline</span>(sentences)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
-the flames will spread. The chair looked strong but had no bottom. She
-called his name many times. Dip the pail once and let it settle.</p>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired.</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Even the worst will beat his low score.</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The odor of spring makes young hearts jump.</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bail the boat, to stop it from sinking.</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired. Even the worst will
+beat his low score. The odor of spring makes young hearts jump. Bail the
+boat, to stop it from sinking. The shelves were bare of both jam or
+crackers.</p>
 <hr />
 <p>You can see how both hard line and soft line breaks are different
 from the paragraphs as created using <code>md_paragraph()</code></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired.</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Even the worst will beat his low score.</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The odor of spring makes young hearts jump.</span></span>
 <span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bail the boat, to stop it from sinking.</span></span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause.</p>
-<p>Trample the spark, else the flames will spread.</p>
-<p>The chair looked strong but had no bottom.</p>
-<p>She called his name many times.</p>
-<p>Dip the pail once and let it settle.</p>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired.</p>
+<p>Even the worst will beat his low score.</p>
+<p>The odor of spring makes young hearts jump.</p>
+<p>Bail the boat, to stop it from sinking.</p>
+<p>The shelves were bare of both jam or crackers.</p>
 </div>
 <div id="textual-content" class="section level3">
 <h3>6.14 Textual content</h3>
@@ -1195,36 +1196,38 @@ into a <code>glue</code> object, which when used in an
 allows users to simply print text to the body of the document.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.14 Textual content</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">md_text</span>(sentences)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause.</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Trample the spark, else the flames will spread.</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The chair looked strong but had no bottom.</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; She called his name many times.</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
-the flames will spread. The chair looked strong but had no bottom. She
-called his name many times. Dip the pail once and let it settle.</p>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired.</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Even the worst will beat his low score.</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The odor of spring makes young hearts jump.</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bail the boat, to stop it from sinking.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired. Even the worst will
+beat his low score. The odor of spring makes young hearts jump. Bail the
+boat, to stop it from sinking. The shelves were bare of both jam or
+crackers.</p>
 <hr />
 <p>Compare this to the regular handling of character strings.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sentences)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Plead with the lawyer to drop the lost cause.&quot;  </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Trample the spark, else the flames will spread.&quot;</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;The chair looked strong but had no bottom.&quot;     </span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;She called his name many times.&quot;                </span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;Dip the pail once and let it settle.&quot;</span></span></code></pre></div>
-<p>[1] “Plead with the lawyer to drop the lost cause.”<br />
-[2] “Trample the spark, else the flames will spread.” [3] “The chair
-looked strong but had no bottom.”<br />
-[4] “She called his name many times.”<br />
-[5] “Dip the pail once and let it settle.”</p>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;He put his last cartridge into the gun and fired.&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Even the worst will beat his low score.&quot;          </span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] &quot;The odor of spring makes young hearts jump.&quot;      </span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;Bail the boat, to stop it from sinking.&quot;          </span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] &quot;The shelves were bare of both jam or crackers.&quot;</span></span></code></pre></div>
+<p>[1] “He put his last cartridge into the gun and fired.” [2] “Even the
+worst will beat his low score.”<br />
+[3] “The odor of spring makes young hearts jump.”<br />
+[4] “Bail the boat, to stop it from sinking.”<br />
+[5] “The shelves were bare of both jam or crackers.”</p>
 <hr />
 <p>The <code>md_text()</code> function creates strings with the
 <code>glue</code> S3 class. This class works in the same way as the
 <code>cat()</code> functions.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sentences)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Plead with the lawyer to drop the lost cause. Trample the spark, else the flames will spread. The chair looked strong but had no bottom. She called his name many times. Dip the pail once and let it settle.</span></span></code></pre></div>
-<p>Plead with the lawyer to drop the lost cause. Trample the spark, else
-the flames will spread. The chair looked strong but had no bottom. She
-called his name many times. Dip the pail once and let it settle.</p>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; He put his last cartridge into the gun and fired. Even the worst will beat his low score. The odor of spring makes young hearts jump. Bail the boat, to stop it from sinking. The shelves were bare of both jam or crackers.</span></span></code></pre></div>
+<p>He put his last cartridge into the gun and fired. Even the worst will
+beat his low score. The odor of spring makes young hearts jump. Bail the
+boat, to stop it from sinking. The shelves were bare of both jam or
+crackers.</p>
 </div>
 </div>
 
