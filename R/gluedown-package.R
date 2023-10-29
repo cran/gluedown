@@ -18,6 +18,9 @@
 #' and [markdown::markdownToHTML()] respectively. The later allows users to
 #' convert `md_*()` outputs to HTML fragments.
 #'
-#' @docType package
-#' @name gluedown
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
