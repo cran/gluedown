@@ -681,20 +681,20 @@ text and output <em>distinct</em> paragraphs.</p>
 <code>md_paragraph()</code> with the other line break functions.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>sentences <span class="ot">&lt;-</span> <span class="fu">sample</span>(stringr<span class="sc">::</span>sentences, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans.</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side.</span></span>
 <span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt; Both lost their lives in the raging storm.</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt; Crouch before you jump or miss the mark.</span></span>
 <span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co">#&gt; Split the log with a quick, sharp blow.</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co">#&gt; The bill was paid every third week.</span></span>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="co">#&gt; The rise to fame of a person takes luck.</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="co">#&gt; Send the stuff in a thick paper bag.</span></span>
 <span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co">#&gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans.</p>
-<p>Both lost their lives in the raging storm.</p>
-<p>Split the log with a quick, sharp blow.</p>
-<p>The rise to fame of a person takes luck.</p>
-<p>A large size in stockings is hard to sell.</p>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co">#&gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side.</p>
+<p>Crouch before you jump or miss the mark.</p>
+<p>The bill was paid every third week.</p>
+<p>Send the stuff in a thick paper bag.</p>
+<p>Seed is needed to plant the spring corn.</p>
 </div>
 <div id="blank-lines" class="section level3">
 <h3>4.9 Blank lines</h3>
@@ -876,25 +876,25 @@ Liberty to ourselves and our Posterity, do ordain and establish this
 Constitution for the United States of America.</p>
 </blockquote>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">md_quote</span>(sentences)</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co">#&gt; &gt; The peace league met to discuss their plans.</span></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="co">#&gt; &gt; Both lost their lives in the raging storm.</span></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; &gt; Split the log with a quick, sharp blow.</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co">#&gt; &gt; The rise to fame of a person takes luck.</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; &gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co">#&gt; &gt; Weave the carpet on the right hand side.</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="co">#&gt; &gt; Crouch before you jump or miss the mark.</span></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; &gt; The bill was paid every third week.</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co">#&gt; &gt; Send the stuff in a thick paper bag.</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; &gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
 <blockquote>
-<p>The peace league met to discuss their plans.</p>
+<p>Weave the carpet on the right hand side.</p>
 </blockquote>
 <blockquote>
-<p>Both lost their lives in the raging storm.</p>
+<p>Crouch before you jump or miss the mark.</p>
 </blockquote>
 <blockquote>
-<p>Split the log with a quick, sharp blow.</p>
+<p>The bill was paid every third week.</p>
 </blockquote>
 <blockquote>
-<p>The rise to fame of a person takes luck.</p>
+<p>Send the stuff in a thick paper bag.</p>
 </blockquote>
 <blockquote>
-<p>A large size in stockings is hard to sell.</p>
+<p>Seed is needed to plant the spring corn.</p>
 </blockquote>
 </div>
 <div id="list-items" class="section level3">
@@ -935,22 +935,22 @@ even interactable. On other venues, like this very HTML vignette, these
 check boxes just render are bullet lists with weird bracket boxes on
 each line.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">md_task</span>(sentences, <span class="at">check =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co">#&gt; * [ ] The peace league met to discuss their plans.</span></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co">#&gt; * [ ] Both lost their lives in the raging storm.</span></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; * [x] Split the log with a quick, sharp blow.</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="co">#&gt; * [x] The rise to fame of a person takes luck.</span></span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; * [ ] A large size in stockings is hard to sell.</span></span></code></pre></div>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co">#&gt; * [ ] Weave the carpet on the right hand side.</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co">#&gt; * [ ] Crouch before you jump or miss the mark.</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; * [x] The bill was paid every third week.</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="co">#&gt; * [x] Send the stuff in a thick paper bag.</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; * [ ] Seed is needed to plant the spring corn.</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox"></input>The peace league met to discuss their
-plans.</li>
-<li><input type="checkbox"></input>Both lost their lives in the raging
-storm.</li>
-<li><input type="checkbox" checked></input>Split the log with a quick,
-sharp blow.</li>
-<li><input type="checkbox" checked></input>The rise to fame of a person
-takes luck.</li>
-<li><input type="checkbox"></input>A large size in stockings is hard to
-sell.</li>
+<li><input type="checkbox"></input>Weave the carpet on the right hand
+side.</li>
+<li><input type="checkbox"></input>Crouch before you jump or miss the
+mark.</li>
+<li><input type="checkbox" checked></input>The bill was paid every third
+week.</li>
+<li><input type="checkbox" checked></input>Send the stuff in a thick paper
+bag.</li>
+<li><input type="checkbox"></input>Seed is needed to plant the spring
+corn.</li>
 </ul>
 </div>
 <div id="lists" class="section level3">
@@ -978,40 +978,40 @@ are rendered as the same <code>&lt;ul&gt;</code> or
 file.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">sample</span>(state.name, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">md_bullet</span>(states)</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="co">#&gt; * Missouri</span></span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co">#&gt; * Idaho</span></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co">#&gt; * Oklahoma</span></span></code></pre></div>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="co">#&gt; * Nevada</span></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co">#&gt; * South Carolina</span></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co">#&gt; * New Mexico</span></span></code></pre></div>
 <ul>
-<li>Missouri</li>
-<li>Idaho</li>
-<li>Oklahoma</li>
+<li>Nevada</li>
+<li>South Carolina</li>
+<li>New Mexico</li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">md_bullet</span>(states, <span class="at">marker =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="co">#&gt; + Missouri</span></span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#&gt; + Idaho</span></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co">#&gt; + Oklahoma</span></span></code></pre></div>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="co">#&gt; + Nevada</span></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#&gt; + South Carolina</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co">#&gt; + New Mexico</span></span></code></pre></div>
 <ul>
-<li>Missouri</li>
-<li>Idaho</li>
-<li>Oklahoma</li>
+<li>Nevada</li>
+<li>South Carolina</li>
+<li>New Mexico</li>
 </ul>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">md_order</span>(states)</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="co">#&gt; 1. Missouri</span></span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co">#&gt; 2. Idaho</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; 3. Oklahoma</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="co">#&gt; 1. Nevada</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co">#&gt; 2. South Carolina</span></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; 3. New Mexico</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Missouri</li>
-<li>Idaho</li>
-<li>Oklahoma</li>
+<li>Nevada</li>
+<li>South Carolina</li>
+<li>New Mexico</li>
 </ol>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">md_order</span>(states, <span class="at">seq =</span> <span class="cn">FALSE</span>, <span class="at">marker =</span> <span class="st">&quot;)&quot;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="co">#&gt; 1) Missouri</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#&gt; 1) Idaho</span></span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co">#&gt; 1) Oklahoma</span></span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="co">#&gt; 1) Nevada</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#&gt; 1) South Carolina</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co">#&gt; 1) New Mexico</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li>Missouri</li>
-<li>Idaho</li>
-<li>Oklahoma</li>
+<li>Nevada</li>
+<li>South Carolina</li>
+<li>New Mexico</li>
 </ol>
 </div>
 </div>
@@ -1134,16 +1134,16 @@ tag):</p>
 </blockquote>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co"># 6.12 Hard line breaks</span></span>
 <span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu">md_hardline</span>(sentences)</span>
-<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans.  </span></span>
-<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co">#&gt; Both lost their lives in the raging storm.  </span></span>
-<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="co">#&gt; Split the log with a quick, sharp blow.  </span></span>
-<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="co">#&gt; The rise to fame of a person takes luck.  </span></span>
-<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans.<br />
-Both lost their lives in the raging storm.<br />
-Split the log with a quick, sharp blow.<br />
-The rise to fame of a person takes luck.<br />
-A large size in stockings is hard to sell.</p>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side.  </span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co">#&gt; Crouch before you jump or miss the mark.  </span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="co">#&gt; The bill was paid every third week.  </span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="co">#&gt; Send the stuff in a thick paper bag.  </span></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side.<br />
+Crouch before you jump or miss the mark.<br />
+The bill was paid every third week.<br />
+Send the stuff in a thick paper bag.<br />
+Seed is needed to plant the spring corn.</p>
 <hr />
 <blockquote>
 <p>A regular line break (not in a code span or HTML tag) that is not
@@ -1154,33 +1154,32 @@ line ending will be used.)</p>
 </blockquote>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="co"># 6.13 Soft line breaks</span></span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="fu">md_softline</span>(sentences)</span>
-<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans.</span></span>
-<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a><span class="co">#&gt; Both lost their lives in the raging storm.</span></span>
-<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a><span class="co">#&gt; Split the log with a quick, sharp blow.</span></span>
-<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a><span class="co">#&gt; The rise to fame of a person takes luck.</span></span>
-<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a><span class="co">#&gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans. Both lost their lives in
-the raging storm. Split the log with a quick, sharp blow. The rise to
-fame of a person takes luck. A large size in stockings is hard to
-sell.</p>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side.</span></span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a><span class="co">#&gt; Crouch before you jump or miss the mark.</span></span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a><span class="co">#&gt; The bill was paid every third week.</span></span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a><span class="co">#&gt; Send the stuff in a thick paper bag.</span></span>
+<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a><span class="co">#&gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side. Crouch before you jump or
+miss the mark. The bill was paid every third week. Send the stuff in a
+thick paper bag. Seed is needed to plant the spring corn.</p>
 <hr />
 <p>You can see how both hard line and soft line breaks are different
 from the paragraphs as created using <code>md_paragraph()</code></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">md_paragraph</span>(sentences)</span>
-<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans.</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side.</span></span>
 <span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co">#&gt; Both lost their lives in the raging storm.</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co">#&gt; Crouch before you jump or miss the mark.</span></span>
 <span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="co">#&gt; Split the log with a quick, sharp blow.</span></span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="co">#&gt; The bill was paid every third week.</span></span>
 <span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="co">#&gt; The rise to fame of a person takes luck.</span></span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="co">#&gt; Send the stuff in a thick paper bag.</span></span>
 <span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="co">#&gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans.</p>
-<p>Both lost their lives in the raging storm.</p>
-<p>Split the log with a quick, sharp blow.</p>
-<p>The rise to fame of a person takes luck.</p>
-<p>A large size in stockings is hard to sell.</p>
+<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="co">#&gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side.</p>
+<p>Crouch before you jump or miss the mark.</p>
+<p>The bill was paid every third week.</p>
+<p>Send the stuff in a thick paper bag.</p>
+<p>Seed is needed to plant the spring corn.</p>
 </div>
 <div id="textual-content" class="section level3">
 <h3>6.14 Textual content</h3>
@@ -1195,38 +1194,35 @@ into a <code>glue</code> object, which when used in an
 allows users to simply print text to the body of the document.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># 6.14 Textual content</span></span>
 <span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="fu">md_text</span>(sentences)</span>
-<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans.</span></span>
-<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="co">#&gt; Both lost their lives in the raging storm.</span></span>
-<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="co">#&gt; Split the log with a quick, sharp blow.</span></span>
-<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a><span class="co">#&gt; The rise to fame of a person takes luck.</span></span>
-<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="co">#&gt; A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans. Both lost their lives in
-the raging storm. Split the log with a quick, sharp blow. The rise to
-fame of a person takes luck. A large size in stockings is hard to
-sell.</p>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side.</span></span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="co">#&gt; Crouch before you jump or miss the mark.</span></span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="co">#&gt; The bill was paid every third week.</span></span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a><span class="co">#&gt; Send the stuff in a thick paper bag.</span></span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="co">#&gt; Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side. Crouch before you jump or
+miss the mark. The bill was paid every third week. Send the stuff in a
+thick paper bag. Seed is needed to plant the spring corn.</p>
 <hr />
 <p>Compare this to the regular handling of character strings.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="fu">print</span>(sentences)</span>
-<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The peace league met to discuss their plans.&quot;</span></span>
-<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Both lost their lives in the raging storm.&quot;  </span></span>
-<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a><span class="co">#&gt; [3] &quot;Split the log with a quick, sharp blow.&quot;     </span></span>
-<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a><span class="co">#&gt; [4] &quot;The rise to fame of a person takes luck.&quot;    </span></span>
-<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a><span class="co">#&gt; [5] &quot;A large size in stockings is hard to sell.&quot;</span></span></code></pre></div>
-<p>[1] “The peace league met to discuss their plans.” [2] “Both lost
-their lives in the raging storm.”<br />
-[3] “Split the log with a quick, sharp blow.”<br />
-[4] “The rise to fame of a person takes luck.”<br />
-[5] “A large size in stockings is hard to sell.”</p>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Weave the carpet on the right hand side.&quot;</span></span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="co">#&gt; [2] &quot;Crouch before you jump or miss the mark.&quot;</span></span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a><span class="co">#&gt; [3] &quot;The bill was paid every third week.&quot;     </span></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a><span class="co">#&gt; [4] &quot;Send the stuff in a thick paper bag.&quot;    </span></span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a><span class="co">#&gt; [5] &quot;Seed is needed to plant the spring corn.&quot;</span></span></code></pre></div>
+<p>[1] “Weave the carpet on the right hand side.” [2] “Crouch before you
+jump or miss the mark.” [3] “The bill was paid every third week.”<br />
+[4] “Send the stuff in a thick paper bag.”<br />
+[5] “Seed is needed to plant the spring corn.”</p>
 <hr />
 <p>The <code>md_text()</code> function creates strings with the
 <code>glue</code> S3 class. This class works in the same way as the
 <code>cat()</code> functions.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">cat</span>(sentences)</span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="co">#&gt; The peace league met to discuss their plans. Both lost their lives in the raging storm. Split the log with a quick, sharp blow. The rise to fame of a person takes luck. A large size in stockings is hard to sell.</span></span></code></pre></div>
-<p>The peace league met to discuss their plans. Both lost their lives in
-the raging storm. Split the log with a quick, sharp blow. The rise to
-fame of a person takes luck. A large size in stockings is hard to
-sell.</p>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="co">#&gt; Weave the carpet on the right hand side. Crouch before you jump or miss the mark. The bill was paid every third week. Send the stuff in a thick paper bag. Seed is needed to plant the spring corn.</span></span></code></pre></div>
+<p>Weave the carpet on the right hand side. Crouch before you jump or
+miss the mark. The bill was paid every third week. Send the stuff in a
+thick paper bag. Seed is needed to plant the spring corn.</p>
 </div>
 </div>
 

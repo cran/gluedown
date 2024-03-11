@@ -1,3 +1,7 @@
+# gluedown 1.0.9
+
+* Update maintainer email, website URL, and GitHub URL.
+
 # gluedown 1.0.8
 
 * Merge pull request #31 from yihui/patch-1
